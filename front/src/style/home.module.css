@@ -9,7 +9,7 @@
 .encart {
     display: flex;
     justify-content: space-between;
-    background-color: rgb(216, 181, 93);
+    background-color: rgb(221, 198, 154);
     height: 20px;
     padding-top: 2px;
 }
@@ -32,24 +32,23 @@
 /*montrer que c'ets un bouton*/
 .log:hover {
     cursor: pointer;
+    color: white;
 }
 
 /*centrer le bandeau*/
 .bandeau {
     display: flex;
     justify-content: center;
-    margin-left: 120px;
-    margin-right: 120px;
 }
 
 /*taille du bandeau et position*/
 .contener_slideshow {
     margin-top: 15px;
-    width: 1400px;
-    height: 600px;
+    width: 1900px;
+    height: 400px;
     overflow: hidden;
     position: relative;
-    border: 1px solid rgb(216, 181, 93);
+    border: 1px solid rgb(221, 198, 154);
 }
 
 /*display des images*/
@@ -61,8 +60,8 @@
 
 /*taille des images*/
 .img_bandeau {
-    width: 1400px;
-    height: 600px;
+    width: 1900px;
+    height: 400px;
 }
 
 /*animer*/
@@ -88,18 +87,74 @@
     }
 
     35% {
-        left: -1400px;
+        left: -1900px;
     }
 
     65% {
-        left: -1400px;
+        left: -1900px;
     }
 
     85% {
-        left: -2800px;
+        left: -3800px;
     }
 
     100% {
-        left: -2800px;
+        left: -3800px;
     }
+}
+
+/*centrer*/
+.atout {
+    margin: 30px 230px 0px 230px;
+    display: flex;
+    justify-content: space-around;
+    color: rgb(93, 88, 88);
+}
+
+/*mettre en page*/
+.garantie_1 {
+    border-right: 1px solid rgb(93, 88, 88);
+    border-left: 1px solid rgb(93, 88, 88);
+    padding: 0px 60px 0px 60px;
+}
+
+.presentation {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: rgb(93, 88, 88);
+    margin: 20px 230px 10px 230px;
+}
+
+.title {
+    justify-content: left;
+    margin-bottom: 15px;
+    font-size: 19px;
+    font-style: italic;
+    color: rgb(63, 62, 62);
+}
+
+.contact {
+    display: flex;
+    flex-direction: row;
+    color: rgb(63, 62, 62);
+    justify-content: space-around;
+    margin: 30px 0px 20px 0px;
+    border-top: 1px solid rgb(221, 198, 154);
+    border-bottom: 1px solid rgb(221, 198, 154);
+}
+
+.tel {
+    display: flex;
+    margin: 9px 0px 9px 10px;
+}
+
+.img {
+    height: 30px;
+    width: 30px;
+    padding: 4px 15px 0px 50px;
+}
+
+.client {
+    margin: 9px 0px 9px 0px;
 }
