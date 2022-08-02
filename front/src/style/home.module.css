@@ -1,0 +1,105 @@
+/**/
+/*prendre toute la page*/
+.container {
+    height: 100%;
+    width: 100%;
+}
+
+/*haut de page*/
+.encart {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(216, 181, 93);
+    height: 20px;
+    padding-top: 2px;
+}
+
+/*police et style du haut de page*/
+.devis {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    margin-left: 75px;
+    font-weight: 300;
+}
+
+/*connexion/deconnexion*/
+.log {
+    padding-right: 10px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+/*montrer que c'ets un bouton*/
+.log:hover {
+    cursor: pointer;
+}
+
+/*centrer le bandeau*/
+.bandeau {
+    display: flex;
+    justify-content: center;
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+/*taille du bandeau et position*/
+.contener_slideshow {
+    margin-top: 15px;
+    width: 1400px;
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgb(216, 181, 93);
+}
+
+/*display des images*/
+.slid_1,
+.slid_2,
+.slid_3 {
+    display: table-cell;
+}
+
+/*taille des images*/
+.img_bandeau {
+    width: 1400px;
+    height: 600px;
+}
+
+/*animer*/
+.contener_slide {
+    position: absolute;
+    display: table;
+    animation: anim_slide 9s infinite alternate;
+}
+
+/*montrer que les images sont clicables*/
+.contener_slide:hover {
+    cursor: pointer;
+}
+
+/*gérer les slides*/
+@keyframes anim_slide {
+    0% {
+        left: 0px;
+    }
+
+    15% {
+        left: 0px;
+    }
+
+    35% {
+        left: -1400px;
+    }
+
+    65% {
+        left: -1400px;
+    }
+
+    85% {
+        left: -2800px;
+    }
+
+    100% {
+        left: -2800px;
+    }
+}
