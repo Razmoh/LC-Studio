@@ -103,7 +103,7 @@
     }
 }
 
-/*centrer*/
+/*centrer fabrication et design*/
 .atout {
     margin: 30px 230px 0px 230px;
     display: flex;
@@ -111,13 +111,28 @@
     color: rgb(93, 88, 88);
 }
 
-/*mettre en page*/
-.garantie_1 {
-    border-right: 1px solid rgb(93, 88, 88);
-    border-left: 1px solid rgb(93, 88, 88);
-    padding: 0px 60px 0px 60px;
+.bloc {
+    display: flex;
 }
 
+.bloc1 {
+    display: flex;
+    border-right: 1px solid rgb(169, 163, 163);
+    border-left: 1px solid rgb(169, 163, 163);
+    padding-right: 60px;
+    padding-left: 20px;
+}
+
+.bloc2 {
+    display: flex;
+    margin-left: -50px;
+}
+
+.garantie {
+    padding: 9px 0px 0px 10px;
+}
+
+/*mise en page du texte*/
 .presentation {
     display: flex;
     flex-direction: column;
@@ -137,6 +152,7 @@
     margin-bottom: 60px;
 }
 
+/*mise en page du bandeau coloré de service client*/
 .contact {
     display: flex;
     flex-direction: row;
@@ -161,7 +177,8 @@
     margin: 20px 0px 20px 0px;
 }
 
-.footer{
+/*mise en page du pied de page*/
+.footer {
     display: flex;
     justify-content: space-around;
     margin: 50px 0px 50px 0px;
@@ -179,5 +196,3 @@
     display: flex;
     flex-direction: column;
 }
-
-

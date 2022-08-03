@@ -12,12 +12,16 @@ function Home() {
     const boutique = () => {
         navigate('/boutique')
     }
+
+    const login = () => {
+        navigate('/login')
+    }
     return (
         <main className={style.container}>
             <div className={style.encart}>
                 <span />
                 <div className={style.devis}>DEVIS GRATUIT !</div>
-                {token === null ? <div className={style.log}>Connexion</div> : <div className={style.log}>Se déconnecter</div>}
+                {token === null ? <div className={style.log} onClick={login}>Connexion</div> : <div className={style.log}>Se déconnecter</div>}
             </div>
             <Navbar />
             <div className={style.bandeau}>
@@ -30,18 +34,27 @@ function Home() {
                 </div>
             </div>
             <div className={style.atout}>
-                <div className={style.garantie}>Design de qualité à prix éthique</div>
-                <div className={style.garantie_1}>Fabrication et impression française</div>
-                <div className={style.garantie}>Je ne sais pas encore le texte</div>
+                <div className={style.bloc}>
+                    <img className={style.img} src={'/images/tel.jpg'} alt="" />
+                    <div className={style.garantie}>Design de qualité à prix éthique</div>
+                </div>
+                <div className={style.bloc1}>
+                    <img className={style.img} src={'/images/tel.jpg'} alt="" />
+                    <div className={style.garantie}>Fabrication et impression française</div>
+                </div>
+                <div className={style.bloc2}>
+                    <img className={style.img} src={'/images/tel.jpg'} alt="" />
+                    <div className={style.garantie}>Je ne sais pas encore le texte</div>
+                </div>
             </div><br />
             <div className={style.presentation}>
-                <div className={style.title}>UN FAIRE-PART UNIQUE POUR CHAQUE EVENEMENT DE VOTRE VIE !</div><br /><br /><br/>
+                <div className={style.title}>UN FAIRE-PART UNIQUE POUR CHAQUE EVENEMENT DE VOTRE VIE !</div><br /><br /><br />
                 <div className={style.text}>Vous souhaitez organiser un événement sur un thème « non commun », qui sort de l'ordinaire ? Vous êtes au bon endroit !<br /><br />
                     Ici, vous allez pouvoir trouver des visuels d’événement (mariage, baptême, gender-reveal…) sur des thèmes tel que le baroque, le steampunk en passant par du World of Warcraft ou encore Marvel.<br /><br />
                     Vous trouverez également toute la déclinaison de ces thèmes : faire-part, save the date, coupon réponse, étiquette pour enveloppe, plan de table, marque place, menu.<br /><br />
                     Plus besoin de faire appel à plusieurs prestataires, vous avez tout au même endroit, et vous êtes sûr que tous les visuels concordent.</div><br /><br />
                 <div className={style.title}>COMMENT CELA FONCTIONNE ?</div><br /><br />
-                <div className={style.text}>Ajoutez dans votre panier les visuels de votre choix, en y indiquant le nombre d’exemplaire par article et validez. Un devis sous 24h, jours ouvrables, vous sera alors envoyé.<br /><br />
+                <div className={style.text}>Ajoutez dans votre panier les visuels de votre choix (vous devez être identifiés), en y indiquant le nombre d’exemplaire par article et validez. Un devis sous 24h, jours ouvrables, vous sera alors envoyé.<br /><br />
                     Après confirmation de votre part, nous échangerons sur les informations dont nous aurions besoin afin de personnaliser vos visuels, tel que la date, vos prénoms, le lieu, l’heure… Une fois toutes les données envoyées, les visuels vous seront communiqués sous 48h (jours ouvrables).<br /><br />
                     Il nous faudra alors votre validation afin d’envoyer les visuels à la fabrication.<br /><br />
                     La fabrication peut prendre plus ou moins de temps. Ce délai vous sera communiqué sur le devis. Mais en moyenne, il faudra compter entre 6 et 10 jours afin que vous receviez votre commande.</div>
