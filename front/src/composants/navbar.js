@@ -1,7 +1,16 @@
 import style from '../style/navbar.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
 
 function Navbar() {
+     const navigate = useNavigate()
+     const token = localStorage.getItem('Token')
+
+     const profil = () => {
+        if((token !== null)){
+            navigate('/profil')
+        }
+    }
     return (
         <>
             <div className={style.wrapper}>
@@ -22,7 +31,7 @@ function Navbar() {
                         </div>
                     </Link>
                     <Link to={"/about"}>
-                        <div className={style.btn}>
+                        <div className={style.btn_lc}>
                             Qui suis-je ?
                         </div>
                     </Link>
@@ -36,9 +45,7 @@ function Navbar() {
                         <a target="blank" href="mailto:lc.studiographique@gmail.com">
                             <img className={style.images} src={'/images/mail.jpg'} alt="message" />
                         </a>&nbsp;
-                        <Link to={'/profil'}>
-                            <img className={style.images} src={'/images/profil.jpg'} alt="profil" />
-                        </Link>
+                        <img className={style.images} src={'/images/profil.jpg'} alt="profil" onClick={profil} />
                     </div>
                 </div>
             </div>

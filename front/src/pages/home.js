@@ -34,7 +34,7 @@ function Home() {
                 <div className={style.contener_slideshow}>
                     <div className={style.contener_slide} onClick={boutique}>
                         <div className={style.slid_1}><img className={style.img_bandeau} src={'/images/annonce.jpg'} alt="" /></div>
-                        <div className={style.slid_2}><img className={style.img_bandeau} src={'/images/flyer.jpg'} alt="" /></div>
+                        <div className={style.slid_2}><img className={style.img_bandeau} src={'/images/bandeau1.jpg'} alt="" /></div>
                         <div className={style.slid_3}><img className={style.img_bandeau} src={'/images/visite.jpg'} alt="" /></div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@ function Home() {
                     <Link to={'/infoproduit'}>Papiers et finitions</Link>
                     <Link to={'/infoproduit'}>Nos valeurs</Link>
                 </div>
-                <div className={style.information}>
+                <div className={style.information_r}>
                     <div><i>INFORMATIONS LÉGALES</i></div><br /><br />
                     <Link to={'/infolegale'}>Mentions légales</Link>
                     <Link to={'/infolegale'}>Conditions générales de vente</Link>

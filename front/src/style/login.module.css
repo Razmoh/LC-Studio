@@ -26,7 +26,6 @@
     border-radius: 16px;
     border:1px solid  rgb(221, 198, 154);
     color: rgb(93, 88, 88);
-    background-color: rgb(242, 241, 239);
     margin-bottom: 20px;
   }
   
@@ -35,7 +34,6 @@
     font-weight: 300;
     letter-spacing: 0.2em;
     margin-bottom: 50px;
-    margin-left: 33px;
   }
   
   .container label,
@@ -54,11 +52,9 @@
   }
   
   .container input {
-    width: 80%;
+    width: 70%;
     border: none;
     border-bottom: 1px solid rgb(221, 198, 154);
-    border-radius: 10px;
-    margin-left: -6px;
     padding: 8px 50px 0px 0px;
     font-size: 18px;
     color: rgb(89, 89, 89);

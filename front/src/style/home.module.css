@@ -44,7 +44,7 @@
 /*taille du bandeau et position*/
 .contener_slideshow {
     margin-top: 15px;
-    width: 1900px;
+    width: 1400px;
     height: 400px;
     overflow: hidden;
     position: relative;
@@ -60,7 +60,7 @@
 
 /*taille des images*/
 .img_bandeau {
-    width: 1900px;
+    width: 1400px;
     height: 400px;
 }
 
@@ -87,19 +87,19 @@
     }
 
     35% {
-        left: -1900px;
+        left: -1400px;
     }
 
     65% {
-        left: -1900px;
+        left: -1400px;
     }
 
     85% {
-        left: -3800px;
+        left: -2800px;
     }
 
     100% {
-        left: -3800px;
+        left: -2800px;
     }
 }
 
@@ -199,7 +199,7 @@
 
 }
 
-.information {
+.information, .information_r {
     display: flex;
     flex-direction: column;
 }
@@ -207,23 +207,18 @@
 /*RESPONSIVE*/
 
 @media screen and (max-width: 800px) {
-    .bandeau, .atout, .img_tel, .information {
-display: none;    }
-  }
-  
 
-  @media screen and (max-width: 800px) {
-    .atout {
-display: none;    }
-  }
+    .bandeau,
+    .atout,
+    .img_tel,
+    .information,
+    .client {
+        display: none;
+    }
 
-  @media screen and (max-width: 800px) {
-    .presentation, .devis {
+    .presentation,
+    .devis {
         margin-left: 1%;
         margin-right: 1%;
-   }
-  }
-
-
-  
-  
+    }
+}
