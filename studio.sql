@@ -83,8 +83,5 @@ CREATE TABLE `theme` (
 TRUNCATE TABLE `users`;
 
 INSERT INTO `users` (`id`, `nom`, `prenom`, `email`, `password`, `phone`, `creation_date`,  `admin`) VALUES
-(1, 'Chazot', 'Laetitia', 'laetitia.chazot@gmail.com', '$2b$10$TeVmXMxIAopqutmwjPhBB.fbrb039jgybYK9ucRelRH9MitVtlI4q', '06 47 72 01 12', '24/05/2022', 1);
+(1, 'Chazot', 'Laetitia', 'laetitia.chazot@gmail.com', '$2b$10$yT0iY1vmHvFkQuFnImFgYeVaFf/Cm89FcQdcFnJ7L66lKEcquxjAK', '06 47 72 01 12', '24/05/2022', 1);
 
-TRUNCATE TABLE `theme`;
-
-INSERT INTO `theme` (`id`,`title`, `image`) VALUES (1, 'Mariage', 'https://scontent.fcdg3-1.fna.fbcdn.net/v/t39.30808-6/218722924_302428234591962_4531353470822243372_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=730e14&_nc_ohc=6zuz1-JXXn0AX9-45xI&tn=wYmkeC_J9yNgq1QJ&_nc_ht=scontent.fcdg3-1.fna&oh=00_AT8-MJsU6ougQrA_q9OtKGUlyOD1CSL5qp7ujLKCnV4vMg&oe=62D3F861');

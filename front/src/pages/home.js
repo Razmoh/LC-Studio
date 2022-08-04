@@ -3,10 +3,10 @@ import { useNavigate, Link } from 'react-router-dom'
 
 import Navbar from '../composants/navbar'
 
-
 function Home() {
 
     const token = localStorage.getItem('Token')
+
     const navigate = useNavigate()
 
     const boutique = () => {
@@ -16,12 +16,18 @@ function Home() {
     const login = () => {
         navigate('/login')
     }
+
+    const logout = () => {
+        localStorage.removeItem('Token')
+        navigate('/login')
+    }
+
     return (
         <main className={style.container}>
             <div className={style.encart}>
                 <span />
                 <div className={style.devis}>DEVIS GRATUIT !</div>
-                {token === null ? <div className={style.log} onClick={login}>Connexion</div> : <div className={style.log}>Se déconnecter</div>}
+                {token === null ? <div className={style.log} onClick={login}>Connexion</div> : <div className={style.log} onClick={logout}>Se déconnecter</div>}
             </div>
             <Navbar />
             <div className={style.bandeau}>
@@ -35,16 +41,16 @@ function Home() {
             </div>
             <div className={style.atout}>
                 <div className={style.bloc}>
-                    <img className={style.img} src={'/images/tel.jpg'} alt="" />
+                    <img className={style.img} src={'/images/p-ethique.png'} alt="" />
                     <div className={style.garantie}>Design de qualité à prix éthique</div>
                 </div>
                 <div className={style.bloc1}>
-                    <img className={style.img} src={'/images/tel.jpg'} alt="" />
+                    <img className={style.img} src={'/images/origine-f.png'} alt="" />
                     <div className={style.garantie}>Fabrication et impression française</div>
                 </div>
                 <div className={style.bloc2}>
-                    <img className={style.img} src={'/images/tel.jpg'} alt="" />
-                    <div className={style.garantie}>Je ne sais pas encore le texte</div>
+                    <img className={style.img} src={'/images/imprimvert.png'} alt="" />
+                    <div className={style.garantie}>Production écologique</div>
                 </div>
             </div><br />
             <div className={style.presentation}>
@@ -62,7 +68,7 @@ function Home() {
             <div className={style.contact}>
                 <span></span>
                 <div className={style.tel}>
-                    <img className={style.img} src={'/images/tel.jpg'} alt="" />
+                    <img className={style.img_tel} src={'/images/tel.png'} alt="" />
                     < div className={style.tel_text}> 06.47.72.01.12 <br /> Du lundi au vendredi de 9h à 17h</div>
                 </div>
                 <div className={style.client}>

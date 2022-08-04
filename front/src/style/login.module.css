@@ -14,6 +14,10 @@
     justify-content: center;
   }
 
+  .bcontainer h1 {
+    text-align: center;
+  }
+
   .container {
     display: flex;
     flex-direction: column;
@@ -23,6 +27,7 @@
     border:1px solid  rgb(221, 198, 154);
     color: rgb(93, 88, 88);
     background-color: rgb(242, 241, 239);
+    margin-bottom: 20px;
   }
   
   .container h1 {
@@ -50,9 +55,13 @@
   
   .container input {
     width: 80%;
-    border: 1px solid rgb(221, 198, 154);
+    border: none;
+    border-bottom: 1px solid rgb(221, 198, 154);
     border-radius: 10px;
-    padding: 16px 50px 0px 0px;
+    margin-left: -6px;
+    padding: 8px 50px 0px 0px;
+    font-size: 18px;
+    color: rgb(89, 89, 89);
   }
   
   .container input:focus {
@@ -73,12 +82,13 @@
   
   .container .btn:hover {
     background-color: rgb(221, 198, 154);
-    color: white;
+    color: rgb(89, 89, 89);
   }
   
   .container .more {
     font-size: 14px;
     font-family:Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
   }
   
    .more .link {

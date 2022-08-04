@@ -65,3 +65,18 @@ a {
     display: flex;
     justify-content: space-around;
 }
+
+/*RESPONSIVE*/
+
+@media screen and (max-width: 800px) {
+    .container {
+        margin-left: 2%;
+        margin-right: 2%;
+   }
+  }
+
+  @media screen and (max-width: 800px) {
+    .logos {
+       display: none;
+   }
+  }

@@ -54,7 +54,7 @@ function Login() {
             </div>
             <div className={style.bcontainer}>
                 <div className={style.container}>
-                    <h1>CONNEXION</h1>
+                    <h1>Connexion</h1>
                     <label name="email">Email :</label>
                     <input
                         type="text"

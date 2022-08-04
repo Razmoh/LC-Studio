@@ -1,11 +1,7 @@
 import style from '../style/navbar.module.css'
-
 import { Link } from 'react-router-dom'
 
 function Navbar() {
-
-    const token = localStorage.getItem('token')
-
     return (
         <>
             <div className={style.wrapper}>
