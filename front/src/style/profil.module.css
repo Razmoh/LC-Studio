@@ -1,0 +1,55 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+}
+
+.info {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 420px;
+}
+
+.container label {
+    display: block;
+    text-align: left;
+    font-size: 17px;
+    padding-bottom: 5px;
+    padding-top: 12px;
+}
+
+.field {
+    color: rgb(79, 75, 75);
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    margin-left: 30px;
+    /* border-bottom: 1px solid rgb(228, 228, 228); */
+    padding-bottom: 3px;
+}
+
+.update {
+    border: none;
+    background-color: white; 
+    border: 1px solid rgb(221, 198, 154);
+    border-radius: 4px;
+    width: 70px;
+}
+
+.update:hover {
+background-color: rgb(221, 198, 154);
+}
+
+.champ {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 3px;
+}
+
+.change {
+    border-radius: 4px;
+    border: 1px solid rgb(221, 198, 154);
+    padding-bottom: 3px;
+}
