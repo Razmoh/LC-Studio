@@ -5,7 +5,6 @@ async function updateInfo(body, id) {
         con.execute(`UPDATE users SET ${property}= ? where id= ?`, [body[property], id])
     }
     const [rows, field] = await con.promise().execute('SELECT * from users WHERE id = ?', [id])
-    console.log(rows[0])
     return rows[0]
 }
 

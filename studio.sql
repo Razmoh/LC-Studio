@@ -53,10 +53,10 @@ DROP TABLE IF EXISTS `produits`;
 CREATE TABLE `produits` (
   `id` int(11) NOT NULL UNIQUE AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `description` varchar(455) NOT NULL,
   `price` int(11) NOT NULL,
-  `categorie_id` int(11) NOT NULL,
-  `theme_id` int (11) NOT NULL,
+  `categorie` varchar(255) NOT NULL,
+  `theme` varchar(255) NOT NULL,
   PRIMARY KEY(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
