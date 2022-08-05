@@ -13,8 +13,16 @@ router.get('/:email', async function (req, res) {
 
 //UPDATE 
 router.put('/:id', async function (req, res) {
-    const update = await profil.updateInfo(req.body, req.params.id)
-    return res.status(200).json(update)
+    const email = req.body.email
+    const [rows, field] = await con.promise().execute('SELECT * FROM users WHERE email =?', [email])
+    if (rows[0]) {
+        return res.status(400).json({ message: 'Cette adresse email est déjà utilisée' })
+    }
+    else {
+        const update = await profil.updateInfo(req.body, req.params.id)
+        return res.status(200).json(update)
+    }
 })
+
 
 module.exports = router

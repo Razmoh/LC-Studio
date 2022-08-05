@@ -1,8 +1,6 @@
 var express = require('express')
 var router = express.Router()
 var con = require('../config')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
 const authentication = require('../services/service_auth')
 const res = require('express/lib/response')
 

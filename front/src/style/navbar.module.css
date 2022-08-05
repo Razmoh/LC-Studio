@@ -50,7 +50,7 @@ a {
 
 
 /*mettre le bouton en surbrillance*/
-.btn:hover {
+.btn:hover, .btn_lc:hover {
     background-color: rgb(221, 198, 154);
     color: white;
     font-weight: 300;
