@@ -1,13 +1,36 @@
 import AdminNav from "../composants/adminNav"
 import style from '../style/a_boutique.module.css'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function AdminBoutique() {
 
     const [product, setProduct] = useState({})
     const [image, setImage] = useState({ image1: "" })
     const [preview, setPreview] = useState({ une: "" })
+    const [update, setUpdate] = useState({})
+    const [modify, setModify] = useState({})
+    const [result, setResult] = useState([])
+
+    useEffect(() => {
+        getProducts()
+    }, [])
+
+    //RECHERCHER TOUS LES PRODUITS
+
+    async function getProducts() {
+        var myHeaders = new Headers()
+        // myHeaders.append("Authorization", "Bearer " + token);
+        myHeaders.append("Content-Type", "application/json");
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        let result = await fetch("http://localhost:8000/create_product", requestOptions)
+        let data = await result.json();
+        setResult(data)
+    }
 
     const input = (file) => {
         setImage({ ...image, image1: file })
@@ -44,6 +67,51 @@ function AdminBoutique() {
             redirect: 'follow'
         };
         await fetch("http://localhost:8000/image/" + Id, Options)
+    }
+
+    async function Update(id) {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        // myHeaders.append("Authorization", "Bearer " + token);
+        var property = JSON.stringify({
+            "title": update.title,
+            "ref": update.ref,
+            "description": update.description,
+            "price": update.price,
+            "theme": update.theme,
+            "categorie": update.categorie
+        });
+        var requestOptions = {
+            method: 'PUT',
+            headers: myHeaders,
+            body: property,
+            redirect: 'follow'
+        };
+        await fetch("http://localhost:8000/create_product/" + id, requestOptions)
+    }
+
+    async function Supprimer(id) {
+        var myHeaders = new Headers();
+        var requestOptions = {
+            method: 'DELETE',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        let result = await fetch("http://localhost:8000/delete/" + id, requestOptions)
+        let data = await result;
+        if (data.status === 200) {
+            var params = JSON.stringify({
+                "id": id
+            });
+            var requestOption = {
+                method: 'DELETE',
+                headers: myHeaders,
+                body: params,
+                redirect: 'follow'
+            };
+            await fetch("http://localhost:8000/create_product/" + id, requestOption)
+            setResult(old => old.filter(e => e.id !== id))
+        }
     }
     return (
         <>
@@ -99,7 +167,40 @@ function AdminBoutique() {
                         <div>{product.price}</div>
                     </div>
                 </div>
-
+                <div className={style.tableau}>
+                    <div className={style.tableau2}>
+                        <table className={style.see}>
+                            <thead>
+                                <tr>
+                                    <th className={style.id}>ID</th>
+                                    <th >Référence</th>
+                                    <th >Titre</th>
+                                    <th >Description</th>
+                                    <th >Prix</th>
+                                    <th >Catégorie</th>
+                                    <th >Thème</th>
+                                    <th className={style.gestion}>Gestion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {result.map((value, key) =>
+                                    <tr key={key}>
+                                        <td><p>{value.id}</p></td>
+                                        <td>{modify === value.id ? <div><input value={update.ref} onInput={e => setUpdate({ ...update, ref: e.target.value })}></input></div> : <div><p>{value.ref}</p></div>}</td>
+                                        <td>{modify === value.id ? <div><input value={update.title} onInput={e => setUpdate({ ...update, title: e.target.value })}></input></div> : <div><p>{value.title}</p></div>}</td>
+                                        <td>{modify === value.id ? <div><input value={update.description} onInput={e => setUpdate({ ...update, description: e.target.value })}></input></div> : <div><p>{value.description}</p></div>}</td>
+                                        <td>{modify === value.id ? <div><input value={update.price} onInput={e => setUpdate({ ...update, price: e.target.value })}></input></div> : <div><p>{value.price}</p></div>}</td>
+                                        <td>{modify === value.id ? <div><p>{value.categorie}</p></div> : <div><p>{value.categorie}</p></div>}</td>
+                                        <td>{modify === value.id ? <div><p>{value.theme}</p></div> : <div><p>{value.theme}</p></div>}</td>
+                                        <td>
+                                            {modify === value.id ? <button className={style.button} onClick={() => { Update(value.id); setModify(null) }}>✓</button> : <button className={style.button} onClick={() => { setModify(value.id); setUpdate(value) }}>Edit</button>}
+                                            {modify === value.id ? <button className={style.button} onClick={() => setModify(null)}>X</button> : <button className={style.button} onClick={() => { Supprimer(value.id) }}>Supr</button>}
+                                        </td>
+                                    </tr>)}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </>
 

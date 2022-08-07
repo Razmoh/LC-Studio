@@ -1,7 +1,9 @@
 .wrapper {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    margin-left: 6%;
 }
 
 .container {
@@ -27,6 +29,11 @@
     padding-right: 1%;
     display: flex;
     flex-direction: column;
+}
+
+.create button, select {
+    background-color: transparent;
+    border-radius: 4px;
 }
 
 .display {
@@ -101,9 +108,11 @@
 
 .button {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     margin-bottom: 10px;
+    background-color: white;
 }
+
 .create button {
     width: 50px;
     height: 25px;
@@ -114,3 +123,126 @@
     background-color: rgb(221, 198, 154);
 }
 
+/*TABLEAU DES PRDOUITS*/
+
+.tableau {
+    width: 90%;
+    padding: 10px 20px;
+    margin: 0 auto;
+    margin-top: 20px;
+    color: rgb(93, 88, 88);
+  }
+  
+  .tableau .tableau2{
+    display: inline-block;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0px auto 30px auto;
+    max-width: 80%;
+    /* background-color: rgb(253, 253, 253); */
+    filter: drop-shadow(3px 3px 10px rgba(0, 0, 0, 0.05));
+  }
+  
+  .tableau table {
+    table-layout: fixed;
+    width: 100%;
+    margin: -5px auto;
+    text-align: left;
+    font-weight: 300;
+    font-size: 16px;
+    border-spacing: 0px 3px;
+  }
+
+  .tableau thead {
+    background-color: white;
+  }
+  
+  .tableau tbody {
+    margin-bottom: 10px;
+  }
+  
+  .tableau tbody tr {
+    background-color:white;
+    color: rgb(37, 37, 37);
+    font-size: 14px;
+  }
+  
+  .tableau .see tbody tr:hover {
+    box-shadow: inset 3px 0px 0px 0px var(--blue3);
+    background-color: rgb(249, 249, 249);
+    color: rgb(37, 37, 37);
+  }
+    
+  .tableau th,
+  .tableau td {
+    padding: 7px 10px;
+    overflow: auto;
+    text-overflow: ellipsis;
+    border-top: 1px solid rgb(221, 198, 154);
+  }
+    
+.tableau .button {
+  margin: 0 3px;
+  padding: 5px;
+  border-radius: 8px;
+  border: solid 1px rgb(216, 181, 93);;
+  background-color: white;
+}
+
+
+  .tableau ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .tableau .see input {
+    background-color: var(--grey0);
+    border-radius: 5px;
+    padding: 5px;
+    width: 95%;
+  }
+  
+  .tableau .create input {
+      background-color:  var(--grey0);
+      padding: 5px;
+      border-radius: 5px;
+      width: 95%;
+  }
+  
+  .tableau label {
+    margin: 5px 25px 0 5px;
+  }
+  
+  .tableau tr input{
+    border: solid 1px rgb(216, 181, 93);
+    border-radius: 15px;
+    width: 90%;
+  }
+
+  .tableau .radio{
+    display: flex;
+  }
+  .tableau .editing{
+    padding: 5px;
+    width: 40px;
+  }
+  .tableau .radio input{
+    width: 20px;
+  }
+
+
+
+  .id {
+      width: 40px;
+  }
+
+  .gestion {
+      width: 100px;
+  }
+
+  .message {
+    margin-bottom: 15px;
+    font-weight: 300;
+    color: rgb(194, 3, 3);
+  }
+  
