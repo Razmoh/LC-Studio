@@ -1,8 +1,8 @@
 var con = require("../config");
 
 async function createProduct(body, id) {
-    const [rows, field] = await con.promise().execute('INSERT INTO produits (`title`, `description`, `price`, `categorie`, `theme`) VALUES (?, ?, ?, ?, ?)',
-    [body.title, body.description, body.price, body.categorie, body.theme])
+    const [rows, field] = await con.promise().execute('INSERT INTO produits (`title`,`ref`, `description`, `price`, `categorie`, `theme`) VALUES (?, ?, ?, ?, ?, ?)',
+    [body.title,  body.ref, body.description, body.price, body.categorie, body.theme])
     .catch(err => {
         console.log("erreur", err)
     })

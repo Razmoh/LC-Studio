@@ -6,7 +6,7 @@ import { useState } from 'react'
 function AdminBoutique() {
 
     const [product, setProduct] = useState({})
-    const [image, setImage] = useState({ image1: ""})
+    const [image, setImage] = useState({ image1: "" })
     const [preview, setPreview] = useState({ une: "" })
 
     const input = (file) => {
@@ -20,8 +20,9 @@ function AdminBoutique() {
         // myHeaders.append("Authorization", "Bearer " + token);
         var body = JSON.stringify({
             "title": product.title,
+            "ref": product.ref,
             "description": product.description,
-            "price": parseInt(product.price),
+            "price": product.price,
             "categorie": product.categorie,
             "theme": product.theme
         })
@@ -70,17 +71,32 @@ function AdminBoutique() {
                         </div>
                         <div className={style.titre}>
                             <label>TItre du produit :</label>
-                            <input onInput={e => setProduct({ ...product, title: e.target.value })}></input>
+                            <input className={style.input} onInput={e => setProduct({ ...product, title: e.target.value })}></input>
                         </div>
-                        <textarea onInput={e => setProduct({ ...product, description: e.target.value })}></textarea>
-                        <input onInput={e => setProduct({ ...product, price: e.target.value })}></input>
-                        <div></div>
-                        <input type="file" onChange={(e) => input(e.target.files[0])} />
-                        <button onClick={createProduct}>Créer</button>
+                        <div className={style.titre}>
+                            <label >Référence</label>
+                            <input className={style.input} onInput={e => setProduct({ ...product, ref: e.target.value })}></input>
+                        </div>
+                        <label className={style.titre}>Description :</label>
+                        <textarea className={style.description} onInput={e => setProduct({ ...product, description: e.target.value })}></textarea>
+                        <div className={style.titre}>
+                            <label >Prix à l'unité :</label>
+                            <input className={style.input} onInput={e => setProduct({ ...product, price: e.target.value })}></input>
+                        </div>
+                        <label className={style.titre}>Choisir une image :</label>
+                        <input className={style.picture} type="file" onChange={(e) => input(e.target.files[0])} />
+                        <div className={style.button}>
+                            <button onClick={createProduct}>Créer</button>
+                        </div>
                     </div>
                     <div className={style.display}>
                         <div className={style.title}>Preview</div>
-                        <img src={preview.une} alt="" />
+                        <div>{product.theme}</div>
+                        <div>{product.categorie}</div>
+                        <div>{product.title}</div>
+                        <img className={style.preview} src={preview.une} alt="" />
+                        <div>{product.description}</div>
+                        <div>{product.price}</div>
                     </div>
                 </div>
 
