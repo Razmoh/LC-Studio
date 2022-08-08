@@ -1,0 +1,121 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 6%;
+
+  }
+  
+  .container {
+    margin-top: 2%;
+    width: 88%;
+    display: flex;
+    justify-content: space-between;
+    color: rgb(93, 88, 88);
+  }
+
+  
+  /*TABLEAU DES PRDOUITS*/
+  
+  .tableau {
+    width: 93%;
+    margin-top: 2%;
+    margin-left: 3%;
+      color: rgb(93, 88, 88);
+  }
+  
+  .tableau .tableau2 {
+    display: inline-block;
+    max-width: 100%;
+  }
+  
+  .tableau2 table {
+    table-layout:fixed;
+    width: 100%;
+    font-weight: 300;
+    font-size: 16px;
+    border-spacing: 0px 3px;
+  }
+  
+  .tableau thead {
+    background-color: white;
+  }
+  
+  .tableau tbody tr {
+    background-color: white;
+    color: rgb(37, 37, 37);
+    font-size: 14px;
+  }
+  
+  .tableau .see tbody tr:hover {
+    box-shadow: inset 3px 0px 0px 0px var(--blue3);
+    background-color: rgb(249, 249, 249);
+    color: rgb(37, 37, 37);
+  }
+  
+  .tableau th,
+  .tableau td {
+    padding: 5px 10px;
+    overflow: auto;
+    text-overflow: ellipsis;
+    text-align: center;
+    border-top: 1px solid rgb(221, 198, 154);
+  }
+  
+  .tableau .button {
+    margin: 9px 3px;
+    padding: 5px;
+    border-radius: 8px;
+    border: solid 1px rgb(221, 198, 154);
+    background-color: white;
+    color: rgb(93, 88, 88);
+  }
+  
+  .tableau .button:hover {
+    background-color: rgb(221, 198, 154);
+  }
+  
+  .tableau .see input {
+    border-radius: 5px;
+    padding: 5px;
+    width: 90%;
+  }
+  
+  .tableau .create input {
+    background-color: var(--grey0);
+    padding: 5px;
+    border-radius: 5px;
+    width: 95%;
+  }
+  
+  .tableau label {
+    margin: 5px 25px 0 5px;
+  }
+  
+  .tableau tr input {
+    border: solid 1px rgb(216, 181, 93);
+    border-radius: 15px;
+    width: 90%;
+  }
+  
+  .id {
+    width: 2%;
+  }
+  
+  .cell {
+    width: 5%;
+  }
+  
+  .gestion {
+    width: 100px;
+    display: flex;
+    flex-direction: row;
+    ;
+  }
+  
+  .message {
+    font-weight: 300;
+    font-style: italic;
+    color: rgb(194, 3, 3);
+  }

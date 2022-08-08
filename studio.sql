@@ -86,3 +86,6 @@ TRUNCATE TABLE `users`;
 INSERT INTO `users` (`id`, `nom`, `prenom`, `email`, `password`, `phone`, `creation_date`,  `admin`) VALUES
 (1, 'Chazot', 'Laetitia', 'laetitia.chazot@gmail.com', '$2b$10$yT0iY1vmHvFkQuFnImFgYeVaFf/Cm89FcQdcFnJ7L66lKEcquxjAK', '06 47 72 01 12', '24/05/2022', 1);
 
+TRUNCATE TABLE `categorie`;
+
+INSERT INTO `categorie`(`id`,`title`) VALUES (1,'Mariage'), (2,'Naissance'), (3,'Baby-Shower');

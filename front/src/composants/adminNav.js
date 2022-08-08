@@ -11,11 +11,6 @@ function AdminNav() {
                 </Link>
             </div>
             <div className={style.container}>
-                <Link to={'/admin'}>
-                    <div className={style.btn}>
-                        Gérer les visuels
-                    </div>
-                </Link>
                 <Link to={"/admin_boutique"}>
                     <div className={style.btn}>
                         Gérer la boutique
@@ -24,6 +19,11 @@ function AdminNav() {
                 <Link to={'/admin_user'}>
                     <div className={style.btn}>
                         Gérer les utilisateurs
+                    </div>
+                </Link>
+                <Link to={'/admin'}>
+                    <div className={style.btn}>
+                        Gérer les demandes de devis
                     </div>
                 </Link>
             </div>

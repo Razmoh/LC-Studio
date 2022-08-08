@@ -11,11 +11,12 @@ function AdminBoutique() {
     const [update, setUpdate] = useState({})
     const [modify, setModify] = useState({})
     const [result, setResult] = useState([])
+    const [message, setMessage] = useState("")
 
     useEffect(() => {
         getProducts()
-    }, [])
-
+        // eslint-disable-next-line
+    }, [message])
     //RECHERCHER TOUS LES PRODUITS
 
     async function getProducts() {
@@ -38,35 +39,41 @@ function AdminBoutique() {
     }
 
     async function createProduct() {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        // myHeaders.append("Authorization", "Bearer " + token);
-        var body = JSON.stringify({
-            "title": product.title,
-            "ref": product.ref,
-            "description": product.description,
-            "price": product.price,
-            "categorie": product.categorie,
-            "theme": product.theme
-        })
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: body,
-            redirect: 'follow'
-        };
-        let data = await fetch("http://localhost:8000/create_product", requestOptions)
-        const result = await data.json()
-        const Id = result.id
+        if (image.image1 === "") {
+            setMessage("Ajouter une image")
+        }
+        else {
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            // myHeaders.append("Authorization", "Bearer " + token);
+            var body = JSON.stringify({
+                "title": product.title,
+                "ref": product.ref,
+                "description": product.description,
+                "price": product.price,
+                "categorie": product.categorie,
+                "theme": product.theme
+            })
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: body,
+                redirect: 'follow'
+            };
+            let data = await fetch("http://localhost:8000/create_product", requestOptions)
+            const result = await data.json()
+            const Id = result.id
 
-        var formdata = new FormData();
-        formdata.append("image", image.image1);
-        var Options = {
-            method: 'POST',
-            body: formdata,
-            redirect: 'follow'
-        };
-        await fetch("http://localhost:8000/image/" + Id, Options)
+            var formdata = new FormData();
+            formdata.append("image", image.image1);
+            var Options = {
+                method: 'POST',
+                body: formdata,
+                redirect: 'follow'
+            };
+            await fetch("http://localhost:8000/image/" + Id, Options)
+            setMessage("Le produit a été ajouté")
+        }
     }
 
     async function Update(id) {
@@ -88,6 +95,7 @@ function AdminBoutique() {
             redirect: 'follow'
         };
         await fetch("http://localhost:8000/create_product/" + id, requestOptions)
+        setMessage("Le produit a été mis à jour.")
     }
 
     async function Supprimer(id) {
@@ -111,15 +119,21 @@ function AdminBoutique() {
             };
             await fetch("http://localhost:8000/create_product/" + id, requestOption)
             setResult(old => old.filter(e => e.id !== id))
+            setMessage("Le produit a été supprimé.")
         }
     }
     return (
         <>
             <AdminNav />
             <div className={style.wrapper}>
+                <div className={style.message}>{message}</div>
                 <div className={style.container}>
                     <div className={style.categorie}>
                         <div className={style.title}>Gérer les catégories :</div>
+                        <div className={style.add}>
+                            <input></input>
+                            <button>+</button>
+                        </div>
                     </div>
                     <div className={style.create}>
                         <div className={style.title}>Ajouter un article :</div>
@@ -173,12 +187,12 @@ function AdminBoutique() {
                             <thead>
                                 <tr>
                                     <th className={style.id}>ID</th>
-                                    <th >Référence</th>
+                                    <th className={style.cell}>Référence</th>
                                     <th >Titre</th>
                                     <th >Description</th>
-                                    <th >Prix</th>
-                                    <th >Catégorie</th>
-                                    <th >Thème</th>
+                                    <th className={style.cell}>Prix</th>
+                                    <th className={style.cell}>Catégorie</th>
+                                    <th className={style.cell}>Thème</th>
                                     <th className={style.gestion}>Gestion</th>
                                 </tr>
                             </thead>
@@ -192,7 +206,7 @@ function AdminBoutique() {
                                         <td>{modify === value.id ? <div><input value={update.price} onInput={e => setUpdate({ ...update, price: e.target.value })}></input></div> : <div><p>{value.price}</p></div>}</td>
                                         <td>{modify === value.id ? <div><p>{value.categorie}</p></div> : <div><p>{value.categorie}</p></div>}</td>
                                         <td>{modify === value.id ? <div><p>{value.theme}</p></div> : <div><p>{value.theme}</p></div>}</td>
-                                        <td>
+                                        <td className={style.gestion}>
                                             {modify === value.id ? <button className={style.button} onClick={() => { Update(value.id); setModify(null) }}>✓</button> : <button className={style.button} onClick={() => { setModify(value.id); setUpdate(value) }}>Edit</button>}
                                             {modify === value.id ? <button className={style.button} onClick={() => setModify(null)}>X</button> : <button className={style.button} onClick={() => { Supprimer(value.id) }}>Supr</button>}
                                         </td>

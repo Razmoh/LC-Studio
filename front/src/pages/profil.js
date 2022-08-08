@@ -16,6 +16,7 @@ function Profil() {
 
     useEffect(() => {
         getInfo(email)
+        // eslint-disable-next-line
     }, [])
 
     const profil = () => {
@@ -67,7 +68,7 @@ function Profil() {
             <Navbar />
             <div className={style.container}>
                 <div className={style.info}>
-                    {user.email === "laetitia.chazot@gmail.com" ? <Link to={'/admin'}><button className={style.update}>Admin</button></Link> : <div></div>}
+                    {user.email === "laetitia.chazot@gmail.com" ? <Link to={'/admin_boutique'}><button className={style.update}>Admin</button></Link> : <div></div>}
                     <label name="nom">Nom :</label>
                     <div className={style.champ}>
                         {update.nom === "" ? <div className={style.field}>{user.nom}</div> : <input className={style.change} onInput={e => setUpdate({ ...update, nom: e.target.value })}></input>}

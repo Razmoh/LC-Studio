@@ -5,8 +5,8 @@ import Home from './pages/home'
 import Login from './pages/login'
 import Register from './pages/register'
 import Profil from './pages/profil';
-import Admin from './pages/admin';
 import AdminBoutique from './pages/admin_boutique';
+import AdminUser from './pages/admin_user';
 
 function App() {
   return (
@@ -17,8 +17,8 @@ function App() {
           <Route exact path='/login' element={<Login />}></Route>
           <Route exact path='/register' element={<Register />}></Route>
           <Route exact path='/profil' element={<Profil />}></Route>
-          <Route exact path='/admin' element={<Admin />}></Route>
           <Route exact path={'/admin_boutique'} element={<AdminBoutique />}></Route>
+          <Route exact path={'/admin_user'} element={<AdminUser />}></Route>
         </Routes>
       </Router>
     </div>
