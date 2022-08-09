@@ -1,5 +1,6 @@
 import AdminNav from "../composants/adminNav"
 import style from '../style/a_boutique.module.css'
+import styles from '../style/card.module.css'
 
 import { useState, useEffect } from 'react'
 
@@ -80,7 +81,7 @@ function AdminBoutique() {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         // myHeaders.append("Authorization", "Bearer " + token);
-        var property = JSON.stringify({
+        var producterty = JSON.stringify({
             "title": update.title,
             "ref": update.ref,
             "description": update.description,
@@ -91,7 +92,7 @@ function AdminBoutique() {
         var requestOptions = {
             method: 'PUT',
             headers: myHeaders,
-            body: property,
+            body: producterty,
             redirect: 'follow'
         };
         await fetch("http://localhost:8000/create_product/" + id, requestOptions)
@@ -128,28 +129,15 @@ function AdminBoutique() {
             <div className={style.wrapper}>
                 <div className={style.message}>{message}</div>
                 <div className={style.container}>
-                    <div className={style.categorie}>
-                        <div className={style.title}>Gérer les catégories :</div>
-                        <div className={style.add}>
-                            <input></input>
-                            <button>+</button>
-                        </div>
-                    </div>
                     <div className={style.create}>
                         <div className={style.title}>Ajouter un article :</div>
                         <div className={style.theme}>
                             <div >Thème :</div>
-                            <select className={style.select} onClick={e => setProduct({ ...product, theme: e.target.value })}>
-                                <option value="Mariage">Mariage</option>
-                                <option value="Naissance">Naissance</option>
-                            </select>
+                            <input className={style.input} onInput={e => setProduct({ ...product, theme: e.target.value })}></input>
                         </div>
                         <div className={style.theme}>
                             <div >Catégorie :</div>
-                            <select className={style.select} onClick={e => setProduct({ ...product, categorie: e.target.value })}>
-                                <option value="Marvel">Marvel</option>
-                                <option value="Pokemon">Pokémon</option>
-                            </select>
+                            <input className={style.input} onInput={e => setProduct({ ...product, categorie: e.target.value })}></input>
                         </div>
                         <div className={style.titre}>
                             <label>TItre du produit :</label>
@@ -171,14 +159,22 @@ function AdminBoutique() {
                             <button onClick={createProduct}>Créer</button>
                         </div>
                     </div>
-                    <div className={style.display}>
-                        <div className={style.title}>Preview</div>
-                        <div>{product.theme}</div>
-                        <div>{product.categorie}</div>
-                        <div>{product.title}</div>
-                        <img className={style.preview} src={preview.une} alt="" />
-                        <div>{product.description}</div>
-                        <div>{product.price}</div>
+                    <div className={styles.card_wrapper}>
+                        <div className={styles.container}>
+                            <div className={styles.title}>{product.title}</div>
+                            <div className={styles.image}>
+                                <img className={styles.img_src} src={preview.une} alt="" />
+                            </div>
+                            <div className={styles.cat}>
+                                <div className={styles.theme}>{product.theme}</div>
+                                <div className={styles.categorie}>{product.categorie}</div>
+                            </div>
+                            <div className={styles.description}>{product.description}</div>
+                            <div className={styles.footer}>
+                                <div className={styles.price}>{product.ref}</div>
+                                <div className={styles.price}>{product.price}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className={style.tableau}>

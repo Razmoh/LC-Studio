@@ -3,14 +3,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 6%;
+  /* margin-left: 6%; */
 }
 
 .container {
   margin-top: 2%;
+  margin-left: 6%;
   width: 88%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   color: rgb(93, 88, 88);
 }
 
@@ -99,7 +100,7 @@ select {
 
 .input {
   border: none;
-  border-bottom: 1px solid rgb(118, 114, 110);
+  border-bottom: 1px solid rgb(206, 206, 206);
 }
 
 .description {
@@ -113,8 +114,13 @@ select {
 }
 
 .preview {
-  height: 200px;
-  width: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.preview2 {
+  height: 220px;
+  width: 350px;
   border: 1px solid rgb(189, 188, 188);
   border-radius: 4px;
 }
@@ -146,9 +152,9 @@ select {
 /*TABLEAU DES PRDOUITS*/
 
 .tableau {
-  width: 100%;
+  width: 80%;
   margin-top: 2%;
-  margin-left: 3%;
+  margin-left: 10%;
     color: rgb(93, 88, 88);
 }
 

@@ -81,6 +81,17 @@ CREATE TABLE `theme` (
   PRIMARY KEY(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `devis`;
+
+CREATE TABLE `devis` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`email` varchar(255) NOT NULL,
+`ref` varchar(255) NOT NULL,
+`quantity` varchar(255) NOT NULL,
+`date` varchar(255) NOT NULL,
+  PRIMARY KEY(`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 TRUNCATE TABLE `users`;
 
 INSERT INTO `users` (`id`, `nom`, `prenom`, `email`, `password`, `phone`, `creation_date`,  `admin`) VALUES

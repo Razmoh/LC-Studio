@@ -1,6 +1,7 @@
 import style from '../style/a_user.module.css'
 import AdminNav from '../composants/adminNav';
 import { useState, useEffect } from "react";
+import Popup from 'reactjs-popup';
 
 function Admin() {
     const [users, setUsers] = useState([])
@@ -96,8 +97,9 @@ function Admin() {
                                         <td>{modify === value.id ? <div><input value={update.phone} onInput={e => setUpdate({ ...update, phone: e.target.value })}></input></div> : <div><p>{value.phone}</p></div>}</td>
                                         <td>{modify === value.id ? <div><p>{value.creation_date}</p></div> : <div><p>{value.creation_date}</p></div>}</td>
                                         <td className={style.gestion}>
-                                            {modify === value.id ? <button className={style.button} onClick={() => { Update(value.id); setModify(null) }}>Ok</button> : <button className={style.button} onClick={() => { setModify(value.id); setUpdate(value); setMessage("") }}>Edit</button>}
-                                            {modify === value.id ? <button className={style.button} onClick={() => setModify(null)}>Stop</button> : <button className={style.button} onClick={() => { Supprimer(value.id) }}>Supr</button>}
+                                            {modify === value.id ? <button className={style.button} onClick={() => setModify(null)}>Stop</button> : <div></div>}
+                                            {modify === value.id ? <button className={style.button} onClick={() => { Update(value.id); setModify(null) }}>MàJ</button> : <button className={style.button} onClick={() => { setModify(value.id); setUpdate(value); setMessage("") }}>Edit</button>}
+                                            {modify === value.id ? <Popup trigger ={<button className={style.button_del}>X</button>} position ="right"><button className={style.button_del} onClick={() => Supprimer(value.id)}>Suppr</button></Popup>  : <div></div>}
                                         </td>
                                     </tr>)}
                             </tbody>

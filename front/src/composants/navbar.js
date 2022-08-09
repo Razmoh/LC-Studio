@@ -30,7 +30,7 @@ function Navbar() {
                             Boutique
                         </div>
                     </Link>
-                    <Link to={"/about"}>
+                    <Link to={"/aboutme"}>
                         <div className={style.btn_lc}>
                             Qui suis-je ?
                         </div>

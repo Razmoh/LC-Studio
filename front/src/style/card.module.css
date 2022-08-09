@@ -1,0 +1,69 @@
+.card_wrapper {
+    width: 18%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid rgb(221, 198, 154);
+    margin: 1%;
+}
+
+.title {
+    text-align: center;
+    margin-top: 3%;
+    font-size: 19px;
+    font-style: italic;
+    color: rgb(68, 63, 63);
+    font-weight: 300;
+}
+
+.image {
+    margin: 2% 2% 2% 2%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.cat {
+    display: flex;
+    justify-content: space-around;
+}
+
+.img_src {
+    height: 250px;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.categorie,
+.theme {
+    color: rgb(68, 63, 63);
+    font-style: italic;
+    font-size: 15px;
+    text-align: justify;
+    margin: 1% 2% 2% 2%;
+}
+
+.description {
+    color: rgb(68, 63, 63);
+    font-size: 16px;
+    margin: 6% 2% 2% 6%;
+    text-align: left;
+    font-weight: 300;
+
+}
+
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price {
+    text-align: end;
+    margin: 20% 5% 2% 6%;
+    color: rgb(68, 63, 63);
+    font-size: 16px;
+    font-style: italic;
+    font-size: 14px;
+    font-weight: 300;
+
+}
