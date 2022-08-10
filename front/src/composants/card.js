@@ -9,18 +9,26 @@ function Card(prop) {
         <>
             <div className={styles.card_wrapper}>
                 <Link to={`/boutique/${data.ref}`}>
-                    <div className={styles.title}>{data.title}</div>
-                    <div className={styles.image}>
-                        <img className={styles.img_src} src={`http://localhost:8000/static/images/${data.id}/image.jpg`} alt="" />
-                    </div>
-                    <div className={styles.cat}>
-                        <div className={styles.theme}>{data.theme}</div>
-                        <div className={styles.categorie}>{data.categorie}</div>
-                    </div>
-                    <div className={styles.description}>{data.description}</div>
-                    <div className={styles.price}>{data.price}</div>
-                </Link>
+                    <div className={styles.card_container}>
+                        <img className={styles.image} src={`http://localhost:8000/static/images/${data.id}/image.jpg`} alt="" />
+                        <div className={styles.info}>
+                            <div className={styles.title}>
+                                {data.title}
+                            </div>
+                            <div className={styles.text}>
+                                Référence n° :  {data.ref}
+                            </div>
+                            <div className={styles.text}>
+                                A partir de {data.price} / pièce.
+                            </div>
+                            <div className={styles.description}>
+                                {data.description}
+                            </div>
+                            <div className={styles.theme}>{data.theme} / {data.categorie}</div>
 
+                        </div>
+                    </div>
+                </Link>
             </div>
         </>
     )

@@ -37,6 +37,7 @@ function Boutique() {
                     <Card key={key} {...{ value: value }}></Card>
                 )}
             </div>
+            
         </>
     )
 }

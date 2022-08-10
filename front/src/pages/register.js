@@ -10,16 +10,16 @@ function Register() {
 
     function Register() {
         if (user.nom === "" || user.prenom === "" || user.email === "" || user.password === "" || user.confirm_password === "") {
-            return setError("Vérifier que vous avez remplis tout les champs obligatoires")
+            return setError("Champ(s) manquant(s)")
         }
         if (user.password !== user.confirm_password) {
             return setError("Les mots de passe ne correspondent pas")
         }
         if (user.password.length < 5 && user.confirm_password.length < 5) {
-            return setError("Le mot de passe doit contenir 6 caractères minimum")
+            return setError("Mot de passe : 6 caractères min.")
         }
         if (user.phone.length !== 10) {
-            return setError("Veuillez renseigner un téléphone valide (10 chiffres)")
+            return setError("Téléphone invalide.")
         }
         else {
             var myHeaders = new Headers();

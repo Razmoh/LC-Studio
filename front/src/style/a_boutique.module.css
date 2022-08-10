@@ -26,7 +26,7 @@
 .add {
   display: flex;
   justify-content: space-between;
-/* margin-right: 20%; */
+  /* margin-right: 20%; */
 }
 
 .add input {
@@ -37,7 +37,8 @@
 .add button {
   border: none;
   background-color: white;
-  font-size: 30px;;
+  font-size: 30px;
+  ;
 }
 
 
@@ -149,13 +150,22 @@ select {
   background-color: rgb(221, 198, 154);
 }
 
+.card_wrapper {
+  width:  40%;
+  height: 280px;
+  border : 1px solid rgb(221, 198, 154);
+  margin: 2%;
+  border-radius: 10px;
+}
+
 /*TABLEAU DES PRDOUITS*/
 
 .tableau {
-  width: 80%;
-  margin-top: 2%;
-  margin-left: 10%;
-    color: rgb(93, 88, 88);
+  width: 91%;
+  margin-top: 2%; 
+  margin-left: 9%;
+  color: rgb(93, 88, 88);
+  justify-content: center;
 }
 
 .tableau .tableau2 {
@@ -164,7 +174,7 @@ select {
 }
 
 .tableau2 table {
-  table-layout:fixed;
+  table-layout: fixed;
   width: 100%;
   font-weight: 300;
   font-size: 16px;
@@ -182,7 +192,7 @@ select {
 }
 
 .tableau .see tbody tr:hover {
-  box-shadow: inset 3px 0px 0px 0px var(--blue3);
+  /* box-shadow: inset 3px 0px 0px 0px var(--blue3); */
   background-color: rgb(249, 249, 249);
   color: rgb(37, 37, 37);
 }
@@ -250,4 +260,19 @@ select {
 .message {
   font-weight: 300;
   color: rgb(194, 3, 3);
+  margin-left: 8%;
+}
+
+.button_del {
+  margin: 9px 3px;
+  padding: 5px;
+  border-radius: 8px;
+  border: solid 1px rgb(190, 25, 27);
+  background-color: white;
+  color: rgb(220, 26, 26);
+}
+
+.button_del:hover {
+  background-color: red;
+  color: white;
 }
