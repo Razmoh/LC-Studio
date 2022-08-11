@@ -1,6 +1,6 @@
 import AdminNav from "../composants/adminNav"
 import style from '../style/a_boutique.module.css'
-import styles from '../style/card.module.css'
+import styles from '../style/shop.module.css'
 import Popup from 'reactjs-popup';
 import { useState, useEffect } from 'react'
 
@@ -20,7 +20,7 @@ function AdminBoutique() {
     }, [message])
     //RECHERCHER TOUS LES PRODUITS
 
-    async function getProducts() {
+    async function getProducts(param) {
         var myHeaders = new Headers()
         // myHeaders.append("Authorization", "Bearer " + token);
         myHeaders.append("Content-Type", "application/json");
@@ -163,24 +163,14 @@ function AdminBoutique() {
                             <button onClick={createProduct}>Créer</button>
                         </div>
                     </div>
-                    <div className={style.card_wrapper}>
-                        <div className={styles.card_container}>
-                            <img className={styles.image} src={preview.une} alt="" />
-                            <div className={styles.info}>
-                                <div className={styles.title}>
-                                    {product.title}
-                                </div>
-                                <div className={styles.text}>
-                                    Référence n° :  {product.ref}
-                                </div>
-                                <div className={styles.text}>
-                                    A partir de {product.price} / pièce.
-                                </div>
-                                <div className={styles.description}>
-                                    {product.description}
-                                </div>
-                                <div className={styles.theme}>{product.theme} / {product.categorie}</div>
+                    <div className={styles.wrapper}>
+                        <img className={styles.image} src={preview.une} alt="" />
+                        <div className={styles.info}>
+                            <div className={styles.ref}>
+                                <div>Reférence n° {product.ref}</div>
+                                <div className={styles.price}>A partir de {product.price}</div>
                             </div>
+                            <div className={styles.title}>{product.title}</div>
                         </div>
                     </div>
                 </div>

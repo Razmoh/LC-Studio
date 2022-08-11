@@ -98,7 +98,7 @@ function Admin() {
                                         <td>{modify === value.id ? <div><p>{value.creation_date}</p></div> : <div><p>{value.creation_date}</p></div>}</td>
                                         <td className={style.gestion}>
                                             {modify === value.id ? <button className={style.button} onClick={() => setModify(null)}>Stop</button> : <div></div>}
-                                            {modify === value.id ? <button className={style.button} onClick={() => { Update(value.id); setModify(null) }}>MàJ</button> : <button className={style.button} onClick={() => { setModify(value.id); setUpdate(value); setMessage("") }}>Edit</button>}
+                                            {modify === value.id ? <button className={style.button} onClick={() => { Update(value.id); setModify(null) }}>MàJ</button> : <button className={style.button} onClick={() => { setModify(value.id); setUpdate(value); setMessage("") }}>Gérer</button>}
                                             {modify === value.id ? <Popup trigger ={<button className={style.button_del}>X</button>} position ="right"><button className={style.button_del} onClick={() => Supprimer(value.id)}>Suppr</button></Popup>  : <div></div>}
                                         </td>
                                     </tr>)}

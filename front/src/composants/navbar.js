@@ -20,11 +20,6 @@ function Navbar() {
                     </Link>
                 </div>
                 <div className={style.container}>
-                    <Link to={'/visuel'}>
-                        <div className={style.btn}>
-                            Visuels
-                        </div>
-                    </Link>
                     <Link to={'/boutique'}>
                         <div className={style.btn}>
                             Boutique
@@ -33,6 +28,11 @@ function Navbar() {
                     <Link to={"/aboutme"}>
                         <div className={style.btn_lc}>
                             Qui suis-je ?
+                        </div>
+                    </Link>
+                    <Link to={'/visuel'}>
+                        <div className={style.btn}>
+                            Mes  autres créations
                         </div>
                     </Link>
                     <div className={style.logos}>

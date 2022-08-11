@@ -8,7 +8,7 @@ function Card(prop) {
     return (
         <>
             <div className={styles.card_wrapper}>
-                <Link to={`/boutique/${data.ref}`}>
+                <Link to={`/boutique/${data.id}`}>
                     <div className={styles.card_container}>
                         <img className={styles.image} src={`http://localhost:8000/static/images/${data.id}/image.jpg`} alt="" />
                         <div className={styles.info}>

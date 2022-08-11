@@ -33,7 +33,7 @@
     font-size: 28px;
     font-weight: 300;
     letter-spacing: 0.2em;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
   }
   
   .container label,
@@ -46,7 +46,7 @@
   }
   
   .error {
-    margin: 10px 0px 0px 0px;
+    /* margin: 10px 0px 0px 0px; */
     color: rgb(219, 35, 35);
     font-weight: 300;
   }

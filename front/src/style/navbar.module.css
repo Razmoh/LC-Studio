@@ -1,10 +1,5 @@
 /**/
 
-.wrapper {
-    z-index: 100;
-    /* position: fixed; */
-}
-
 /*positionner le logo au centre*/
 .navbar {
     display: flex;
@@ -22,7 +17,7 @@
 .container {
     display: flex;
     justify-content: space-between;
-    height: 40px;
+    height: auto;
     border-top: 1px solid rgb(227, 226, 226);
     border-bottom: 1px solid rgb(221, 198, 154);
     border-top: 1px solid rgb(221, 198, 154);
@@ -45,22 +40,20 @@ a {
     width: auto;
     border-radius: 4px;
     margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid white;
 }
-
-
 
 /*mettre le bouton en surbrillance*/
 .btn:hover, .btn_lc:hover {
-    background-color: rgb(221, 198, 154);
-    color: white;
-    font-weight: 300;
+    border:1px solid rgb(221, 198, 154);
 }
 
 /*dimensionner les logos*/
 .images {
     height: 25px;
     width: 25px;
-    margin-top: 8px;
+    margin-top: 9px;
 }
 
 /*ordonner les logos*/

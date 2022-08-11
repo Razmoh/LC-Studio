@@ -16,7 +16,7 @@ function AboutMe() {
 
                     Les visuels seront disponibles à la personnalisation, changement de texte, prénom, date.
 
-                    Pour plus d’information sur le fonctionnement des commandes, veuillez cliquer <b>ICI</b>.
+                    Pour plus d’information sur le fonctionnement des commandes, veuillez cliquer <a href="/#fonctionnement"><b>ICI</b></a>.
                 </div>
 
 

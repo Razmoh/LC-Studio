@@ -1,0 +1,48 @@
+.wrapper {
+    height: 490px;
+    width: 26%;
+    margin: 2% 2% 2% 2%;
+    border: 1px solid rgb(236, 236, 236);
+}
+
+.wrapper:hover {
+    border: 1px solid rgb(221, 198, 154);
+}
+
+.image {
+    width: 100%;
+    height: 430px;
+}
+
+.info {
+    height: 60px;
+    padding: 1%;
+    color: rgb(79, 75, 75);
+}
+
+.ref {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    font-style: italic;
+    font-size: 13px;
+}
+
+.title {
+    width: 100%;
+    height: 30px;
+    font-size: 19px;
+    /* font-weight: 300; */
+}
+
+@media screen and (max-width: 800px) {
+    .wrapper {
+        width: 96%;
+        }
+
+        .image {
+            height: 320px;
+        }
+
+}

@@ -1,7 +1,9 @@
 .cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
+    margin: 0% 4% 0% 4%;
+    width: 92%;
 }
 
 @media screen and (max-width: 800px) {

@@ -1,7 +1,7 @@
 import Navbar from "../composants/navbar"
 import { useState, useEffect } from 'react'
-import Card from "../composants/card"
 import style from '../style/boutique.module.css'
+import Shop from '../composants/shop_card'
 
 
 function Boutique() {
@@ -34,10 +34,10 @@ function Boutique() {
             <Navbar />
             <div className={style.cards}>
                 {product.map((value, key) =>
-                    <Card key={key} {...{ value: value }}></Card>
+                    <Shop key={key} {...{ value: value }}></Shop>
                 )}
             </div>
-            
+
         </>
     )
 }

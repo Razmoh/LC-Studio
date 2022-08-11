@@ -10,10 +10,10 @@ function Register() {
 
     function Register() {
         if (user.nom === "" || user.prenom === "" || user.email === "" || user.password === "" || user.confirm_password === "") {
-            return setError("Champ(s) manquant(s)")
+            return setError("Champ(s) manquant(s).")
         }
         if (user.password !== user.confirm_password) {
-            return setError("Les mots de passe ne correspondent pas")
+            return setError("Les mots de passe ne correspondent pas.")
         }
         if (user.password.length < 5 && user.confirm_password.length < 5) {
             return setError("Mot de passe : 6 caractères min.")
@@ -66,6 +66,7 @@ function Register() {
             <div className={style.bcontainer}>
                 <div className={style.container}>
                     <h1>Bienvenue !</h1>
+                    {error === "" ? <div></div> : <div className={style.error}>{error}</div>}
 
                     <label name="lastname">Nom :</label>
                     <input
@@ -114,8 +115,6 @@ function Register() {
                         placeholder=""
                         onInput={e => setUser({ ...user, confirm_password: e.target.value })}
                     ></input>
-
-                    <div className={style.error}>{error}</div>
 
                     <button className={style.btn} onClick={() => { setError(""); Register() }} > Créer mon compte </button>
                     <br />
