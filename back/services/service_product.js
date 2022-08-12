@@ -2,7 +2,7 @@ var con = require("../config");
 
 //AVOIR TOUS LES PRODUITS
 async function getAll() {
-    const [rows, field] = await con.promise().execute(`SELECT * FROM produits`)
+    const [rows, field] = await con.promise().execute(`SELECT * FROM produits ORDER BY id ASC`)
     return rows
 }
 

@@ -7,6 +7,7 @@ const route_profil = require('./route_profil')
 const route_product = require('./route_product')
 const route_image = require('./route_image')
 const route_delete = require('./route_delete')
+const route_filter = require('./route_filter')
 
 router.get('/', function (req, res) {
     res.send("index");
@@ -18,6 +19,7 @@ router.use('/profil', route_profil)
 router.use('/create_product', route_product)
 router.use('/image', route_image)
 router.use('/delete', route_delete)
+router.use('/filter', route_filter)
 
 
 

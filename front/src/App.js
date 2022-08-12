@@ -11,6 +11,7 @@ import Admin from './pages/admin';
 import Boutique from './pages/boutique'
 import Product from './pages/product_id';
 import AboutMe from './pages/aboutme'
+import Visuel from './pages/visuel';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route exact path={'/boutique'} element={<Boutique />}></Route>
           <Route exact path={'/aboutme'} element={<AboutMe />}></Route>
           <Route path={'/boutique/:id'} element={<Product />}></Route>
+          <Route path={'/visuel'} element={<Visuel />}></Route>
         </Routes>
       </Router>
     </div>

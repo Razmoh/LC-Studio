@@ -4,15 +4,14 @@
     margin-left: 6%;
     margin-top: 3%;
     justify-content: space-between;
-    color: rgb(52, 48, 48);
+    color: rgb(93, 88, 88);
     font-size: 17px;
-    font-weight: 300;
 }
 
 .profil_pic {
-    height: 318px;
+    height: 340px;
     width: 20%;
-    border: 1px solid rgb(137, 137, 137);
+    border: 1px solid rgb(198, 198, 198);
     border-radius: 5px;
 }
 

@@ -152,18 +152,46 @@ select {
 }
 
 .card_wrapper {
-  width:  40%;
+  width: 40%;
   height: 280px;
-  border : 1px solid rgb(221, 198, 154);
+  border: 1px solid rgb(221, 198, 154);
   margin: 2%;
   border-radius: 10px;
 }
 
 /*TABLEAU DES PRDOUITS*/
 
+.search {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+  margin: 2%
+}
+
+.filter_btn {
+  border: none;
+  background-color: white;
+  margin-top: 7px
+}
+
+.filter_btn:hover {
+  color: rgb(221, 198, 154);
+}
+
+.filter_input {
+  border: none;
+  border-bottom: 1px solid rgb(221, 198, 154);
+  /* background-color: red; */
+}
+
 .tableau {
   width: 91%;
-  margin-top: 2%; 
+  margin-top: 2%;
   margin-left: 9%;
   color: rgb(93, 88, 88);
   justify-content: center;

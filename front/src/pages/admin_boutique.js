@@ -13,16 +13,16 @@ function AdminBoutique() {
     const [modify, setModify] = useState({})
     const [result, setResult] = useState([])
     const [message, setMessage] = useState("")
+    const [filter, setFilter] = useState("")
+    console.log(filter)
 
     useEffect(() => {
         getProducts()
-        // eslint-disable-next-line
     }, [message])
     //RECHERCHER TOUS LES PRODUITS
 
-    async function getProducts(param) {
+    async function getProducts() {
         var myHeaders = new Headers()
-        // myHeaders.append("Authorization", "Bearer " + token);
         myHeaders.append("Content-Type", "application/json");
         var requestOptions = {
             method: 'GET',
@@ -49,7 +49,6 @@ function AdminBoutique() {
             } else {
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
-                // myHeaders.append("Authorization", "Bearer " + token);
                 var body = JSON.stringify({
                     "title": product.title,
                     "ref": product.ref,
@@ -84,7 +83,6 @@ function AdminBoutique() {
     async function Update(id) {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        // myHeaders.append("Authorization", "Bearer " + token);
         var producterty = JSON.stringify({
             "title": update.title,
             "ref": update.ref,
@@ -127,6 +125,32 @@ function AdminBoutique() {
             setMessage("Le produit a été supprimé.")
         }
     }
+
+    async function searchTheme(theme) {
+        var myHeaders = new Headers()
+        myHeaders.append("Content-Type", "application/json");
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        let result = await fetch("http://localhost:8000/filter/theme/" + theme, requestOptions)
+        let data = await result.json();
+        setResult(data)
+    }
+
+    async function searchCategorie(categorie) {
+        var myHeaders = new Headers()
+        myHeaders.append("Content-Type", "application/json");
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        let result = await fetch("http://localhost:8000/filter/categorie/" + categorie, requestOptions)
+        let data = await result.json();
+        setResult(data)
+    }
     return (
         <>
             <AdminNav />
@@ -140,7 +164,7 @@ function AdminBoutique() {
                             <input className={style.input} onInput={e => setProduct({ ...product, theme: e.target.value })}></input>
                         </div>
                         <div className={style.theme}>
-                            <div >Catégorie :</div>
+                            <div>Catégorie :</div>
                             <input className={style.input} onInput={e => setProduct({ ...product, categorie: e.target.value })}></input>
                         </div>
                         <div className={style.titre}>
@@ -174,7 +198,24 @@ function AdminBoutique() {
                         </div>
                     </div>
                 </div>
+
                 <div className={style.tableau}>
+                    <div className={style.search}>
+                        <div className={style.filter}>
+                            <label>Rechercher par thème :</label>
+                            <div>
+                                <input className={style.filter_input}  onInput={(e) => setFilter(e.target.value)}></input>
+                                <button className={style.filter_btn} onClick={() => searchTheme(filter)}>Rechercher</button>
+                            </div>
+                        </div>
+                        <div className={style.filter}>
+                            <label>Rechercher par catégorie :</label>
+                            <div>
+                                <input  className={style.filter_input} onInput={(e) => setFilter(e.target.value)}></input>
+                                <button className={style.filter_btn} onClick={() => searchCategorie(filter)}>Rechercher</button>
+                            </div>
+                        </div>
+                    </div>
                     <div className={style.tableau2}>
                         <table className={style.see}>
                             <thead>

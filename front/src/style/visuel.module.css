@@ -1,0 +1,38 @@
+.container {
+    margin-top: 50px;
+    color: rgb(93, 88, 88);
+}
+
+.presentation {
+    width: 86%;
+    margin-left: 7%;
+    font-size: 18px;
+}
+
+.visuel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 86%;
+    margin-left: 7%;
+    margin-top: 20px;
+}
+
+.image {
+    height: 280px;
+    width:17.5%;
+    margin: 2%;
+    border: 1px solid rgb(208, 208, 208);
+    border-radius: 10px;
+}
+
+.image:hover {
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 10px;
+}
+
+.popup {
+    height: 600px;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 6px;
+}

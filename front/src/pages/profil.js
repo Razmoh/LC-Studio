@@ -2,10 +2,9 @@ import Navbar from '../composants/navbar'
 import style from '../style/profil.module.css'
 import { useState, useEffect } from 'react'
 import jwt_decode from "jwt-decode"
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function Profil() {
-    const navigate = useNavigate()
     const [user, setUser] = useState([])
     const [update, setUpdate] = useState({ nom: "", prenom: "", phone: "", email: "" })
     const [message, setMessage] = useState("")
@@ -13,16 +12,10 @@ function Profil() {
     const decoded = jwt_decode(token);
     const email = decoded.email
 
-
     useEffect(() => {
         getInfo(email)
         // eslint-disable-next-line
-    }, [])
-
-    const profil = () => {
-        localStorage.removeItem('Token')
-        navigate('/login')
-    }
+    }, [message])
 
     async function getInfo() {
         var myHeaders = new Headers()
@@ -45,7 +38,6 @@ function Profil() {
             "nom": update.nom,
             "prenom": update.prenom,
             "phone": update.phone,
-            "email": update.email
         });
         var requestOptions = {
             method: 'PUT',
@@ -55,12 +47,7 @@ function Profil() {
         };
         let result = await fetch('http://localhost:8000/profil/' + id, requestOptions)
         let data = await result.json()
-        if (data.email !== email && data.email !== undefined) {
-            profil()
-        }
-        else {
-            setMessage("Cette adresse email est déjà utilisée !")
-        }
+        setMessage("Profil modifié avec succès !")
     }
 
     return (
@@ -83,13 +70,13 @@ function Profil() {
                     </div>
                     <label name="email">Email :</label>
                     <div className={style.champ}>
-                        {update.email === "" ? <div className={style.field}>{user.email}</div> : <input className={style.change} onInput={e => setUpdate({ ...update, email: e.target.value })}></input>}
+                        <div className={style.field}>{user.email}</div>
                     </div>
                     <div></div>
                     <div className={style.info_update}>
-                        {update.nom === "" ? <button className={style.update} onClick={() => setUpdate({ ...update, nom: user.nom, prenom: user.prenom, phone: user.phone, email: user.email })} >Editer</button> : <div className={style.edit}><button className={style.update} onClick={() => setUpdate({ ...update, nom: "", prenom: "", phone: "", email: "" })}>Annuler</button><button className={style.update} onClick={() => updateInfo(user.id)}>Modifier</button></div>}
+                        {update.nom === "" ? <button className={style.update} onClick={() => setUpdate({ ...update, nom: user.nom, prenom: user.prenom, phone: user.phone, email: user.email })} >Editer</button> : <div className={style.edit}><button className={style.update} onClick={() => { setUpdate({ ...update, nom: "", prenom: "", phone: "", email: "" }); setMessage("") }}>Annuler</button><button className={style.update} onClick={() => updateInfo(user.id)}>Modifier</button></div>}
                     </div>
-                    <div>{message}</div>
+                    <label>{message}</label>
                 </div>
             </div>
         </>
