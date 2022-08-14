@@ -6,17 +6,17 @@ import Navbar from '../composants/navbar'
 function Home() {
 
     const token = localStorage.getItem('Token')
-
     const navigate = useNavigate()
 
+//ALLER A LA BOUTIQUE
     const boutique = () => {
         navigate('/boutique')
     }
-
+//ALLER AU LOGIN
     const login = () => {
         navigate('/login')
     }
-
+//SE DECONNECTER
     const logout = () => {
         localStorage.removeItem('Token')
         navigate('/login')
@@ -60,7 +60,7 @@ function Home() {
                     Vous trouverez également toute la déclinaison de ces thèmes : faire-part, save the date, coupon réponse, étiquette pour enveloppe, plan de table, marque place, menu.<br /><br />
                     Plus besoin de faire appel à plusieurs prestataires, vous avez tout au même endroit, et vous êtes sûr que tous les visuels concordent.</div><br /><br />
                 <div className={style.title} id="fonctionnement">COMMENT CELA FONCTIONNE ?</div><br /><br />
-                <div className={style.text}>Tout d'abord, vous devez posséder un compte et être identifié. Ajoutez dans votre panier les visuels de votre choix, en y indiquant le nombre d’exemplaire par article. Une fois le panier rempli, il vous faudra le valider afin de me faire parvenir le devis, qui vous sera retourné sous 24h (jours ouvrables).<br /><br />
+                <div className={style.text}>Tout d'abord, vous devez posséder un compte et être identifié. Ajoutez dans votre panier les visuels de votre choix, en y indiquant le nombre d’exemplaire par article. Le prix indiqué n'est qu'à titre informatif et évoluera suivant la quantité de produits séléctionnés. Une fois le panier rempli, il vous faudra le valider afin de me faire parvenir le devis, qui vous sera retourné sous 24h (jours ouvrables).<br /><br />
                     Après confirmation du devis, nous échangerons sur les informations dont nous aurions besoin afin de personnaliser vos visuels, telles que date, prénoms, lieu, heure… Une fois toutes les données envoyées, les visuels vous seront communiqués sous 48h (jours ouvrables).<br /><br />
                     Il vous faudra de nouveau valider les visuels, afin que je puisse les envoyer à la fabrication.<br /><br />
                     La fabrication peut prendre plus ou moins de temps. Ce délai vous sera communiqué sur le devis. En moyenne, il faut compter entre 6 et 10 jours pour reçevoir votre commande.</div>

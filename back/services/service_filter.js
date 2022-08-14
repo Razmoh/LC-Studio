@@ -5,7 +5,10 @@ async function findTheme(theme) {
         .catch(err => {
             console.log("erreur", err)
         })
-        return rows
+    if (rows[0] === undefined) {
+        return "aucun produit"
+    }
+    return rows
 }
 
 async function findCategorie(categorie) {
@@ -13,7 +16,10 @@ async function findCategorie(categorie) {
         .catch(err => {
             console.log("erreur", err)
         })
-        return rows
+    if (rows[0] === undefined) {
+        return "aucun produit"
+    }
+    return rows
 }
 
 module.exports = { findTheme, findCategorie };

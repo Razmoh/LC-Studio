@@ -1,4 +1,5 @@
-var express = require('express')
+var express = require('express');
+const { createPool } = require('mysql2');
 var router = express.Router()
 var con = require('../config')
 const user = require("../services/service_user");
@@ -13,6 +14,18 @@ router.get('/', async function (req, res) {
   }
   return res.status(200).json(getAll)
 })
+
+//CHERCHER UN UTILISATEUR
+router.get('/:email', async function (req, res) {
+  const getOne = await user.getOne(req.params.email)
+  if (getOne === "Bad request") {
+    return res.status(400).json(getOne)
+  }
+  else {
+    return res.status(200).json(getOne)
+  }
+}
+)
 
 
 //SUPPRIMER UN UTILISATEUR(ADMIN)

@@ -1,26 +1,30 @@
+//PAGE ADMIN POUR GERER LA BOUTIQUE
+
 import AdminNav from "../composants/adminNav"
 import style from '../style/a_boutique.module.css'
 import styles from '../style/shop.module.css'
 import Popup from 'reactjs-popup';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 function AdminBoutique() {
 
+    //CREER LE PRODUIT
     const [product, setProduct] = useState({ title: "", price: "", description: "", theme: "", categorie: "", ref: "" })
     const [image, setImage] = useState({ image1: "" })
+    //PREVIEW PRODUIT
     const [preview, setPreview] = useState({ une: "" })
+    //METTRE LE PRODUIT A JOUR
     const [update, setUpdate] = useState({})
+    //TERNAIRE
     const [modify, setModify] = useState({})
+    //RESULTAT DES FETCH
     const [result, setResult] = useState([])
+    //SET LE MESSAGE (SUCCES/ERREUR)
     const [message, setMessage] = useState("")
+    //UTILISER LES FILTRES
     const [filter, setFilter] = useState("")
-    console.log(filter)
 
-    useEffect(() => {
-        getProducts()
-    }, [message])
     //RECHERCHER TOUS LES PRODUITS
-
     async function getProducts() {
         var myHeaders = new Headers()
         myHeaders.append("Content-Type", "application/json");
@@ -33,12 +37,12 @@ function AdminBoutique() {
         let data = await result.json();
         setResult(data)
     }
-
+    //RECUPERER L'IMAGE
     const input = (file) => {
         setImage({ ...image, image1: file })
         setPreview({ ...preview, une: URL.createObjectURL(file) });
     }
-
+    //CREER LE PRODUIT
     async function createProduct() {
         if (image.image1 === "") {
             setMessage("Ajouter une image !")
@@ -79,7 +83,7 @@ function AdminBoutique() {
             }
         }
     }
-
+    //METTRE UN PRODUIT A JOUR
     async function Update(id) {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -100,7 +104,7 @@ function AdminBoutique() {
         await fetch("http://localhost:8000/create_product/" + id, requestOptions)
         setMessage("Le produit a été mit à jour.")
     }
-
+    //SUPPRIMER UN PRODUIT
     async function Supprimer(id) {
         var myHeaders = new Headers();
         var requestOptions = {
@@ -125,7 +129,7 @@ function AdminBoutique() {
             setMessage("Le produit a été supprimé.")
         }
     }
-
+    //RECHERCHER PAR THEME
     async function searchTheme(theme) {
         var myHeaders = new Headers()
         myHeaders.append("Content-Type", "application/json");
@@ -136,9 +140,14 @@ function AdminBoutique() {
         };
         let result = await fetch("http://localhost:8000/filter/theme/" + theme, requestOptions)
         let data = await result.json();
-        setResult(data)
+        if (data === "aucun produit") {
+            setMessage("Aucun produit !")
+        }
+        else {
+            setResult(data)
+        }
     }
-
+    //RECHERCHER PAR CATEGORIE
     async function searchCategorie(categorie) {
         var myHeaders = new Headers()
         myHeaders.append("Content-Type", "application/json");
@@ -149,13 +158,17 @@ function AdminBoutique() {
         };
         let result = await fetch("http://localhost:8000/filter/categorie/" + categorie, requestOptions)
         let data = await result.json();
-        setResult(data)
+        if (data === "aucun produit") {
+            setMessage("Aucun produit !")
+        }
+        else {
+            setResult(data)
+        }
     }
     return (
         <>
             <AdminNav />
             <div className={style.wrapper}>
-                <div className={style.message}>{message}</div>
                 <div className={style.container}>
                     <div className={style.create}>
                         <div className={style.title}>Ajouter un article :</div>
@@ -198,20 +211,23 @@ function AdminBoutique() {
                         </div>
                     </div>
                 </div>
-
+                <div className={style.message}>{message}</div>
                 <div className={style.tableau}>
                     <div className={style.search}>
                         <div className={style.filter}>
+                            <label onClick={getProducts}>Tous les produits</label>
+                        </div>
+                        <div className={style.filter}>
                             <label>Rechercher par thème :</label>
                             <div>
-                                <input className={style.filter_input}  onInput={(e) => setFilter(e.target.value)}></input>
+                                <input className={style.filter_input} onInput={(e) => setFilter(e.target.value)}></input>
                                 <button className={style.filter_btn} onClick={() => searchTheme(filter)}>Rechercher</button>
                             </div>
                         </div>
                         <div className={style.filter}>
                             <label>Rechercher par catégorie :</label>
                             <div>
-                                <input  className={style.filter_input} onInput={(e) => setFilter(e.target.value)}></input>
+                                <input className={style.filter_input} onInput={(e) => setFilter(e.target.value)}></input>
                                 <button className={style.filter_btn} onClick={() => searchCategorie(filter)}>Rechercher</button>
                             </div>
                         </div>
@@ -251,7 +267,6 @@ function AdminBoutique() {
                 </div>
             </div>
         </>
-
     )
 }
 

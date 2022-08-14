@@ -1,5 +1,7 @@
+//PAGE QUI SUIS JE ?
 import Navbar from "../composants/navbar"
 import style from '../style/aboutme.module.css'
+
 function AboutMe() {
     return (
         <>
@@ -13,13 +15,9 @@ function AboutMe() {
                     Aujourd’hui en 2022, il est plus facile de réaliser un événement sur un thème dit « décalé », il est plus facilement possible de trouver de la décoration à moindre coût, ainsi que quelques idées de faire-part sur internet. Mais la plupart des visuels sont faits à l’étranger a des prix abusifs, et encore faut il trouver le reste (plan de table…), ou bien le faire dessiner par un graphiste. Tout cela engendre un cout rapidement élevé, sans parler de l'impression.
                     <br /><br />
                     J’ai donc décidé de diversifier mon offre et proposer des visuels avec gamme complète, faire-part, marque place, plan de table, save the date, sur des thèmes qui sortent de l'ordinaire, tel que Steampunk, World of Warcraft, Studio Ghibli et plus encore !
-
                     Les visuels seront disponibles à la personnalisation, changement de texte, prénom, date.
-
                     Pour plus d’information sur le fonctionnement des commandes, veuillez cliquer <a href="/#fonctionnement">ICI</a>.
                 </div>
-
-
             </div>
         </>
     )

@@ -140,3 +140,7 @@
   font-style: italic;
   color: rgb(194, 3, 3);
 }
+
+.search {
+  display: flex
+}

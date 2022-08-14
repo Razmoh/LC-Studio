@@ -1,20 +1,23 @@
 import style from '../style/a_user.module.css'
 import AdminNav from '../composants/adminNav';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Popup from 'reactjs-popup';
 
 function Admin() {
+    //STOCKER TOUS LES UTILISATEURS
     const [users, setUsers] = useState([])
+    //TERNAIRE
     const [modify, setModify] = useState()
+    //METTRE A JOUR
     const [update, setUpdate] = useState()
+    //MESSAGE (ERREUR/SUCCES)
     const [message, setMessage] = useState("")
+    //SET LE FILTRE
+    const [filter, setFilter] = useState()
+    //AVOIR LE TOKEN
     const token = localStorage.getItem("Token")
 
-    useEffect(() => {
-        getUsers()
-        // eslint-disable-next-line
-    }, [message])
-
+    //TOUS LES UTILISATEURS
     async function getUsers() {
         var myHeaders = new Headers()
         myHeaders.append("Authorization", "Bearer " + token);
@@ -28,7 +31,7 @@ function Admin() {
         let data = await result.json();
         setUsers(data)
     }
-
+    //METTRE UN UTILISATEUR A JOUR
     async function Update(id) {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -48,7 +51,7 @@ function Admin() {
         await fetch("http://localhost:8000/user/" + id, requestOptions)
         setMessage("L'utilisateur a été mis à jour")
     }
-
+    //SUPPRIMER UN UTILISATEUR
     async function Supprimer(id) {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -67,6 +70,31 @@ function Admin() {
         setUsers(old => old.filter(e => e.id !== id))
         setMessage("L'utilisateur a été supprimé")
     }
+//RECHERCHER UN UTILISATEUR
+    async function searchMail(param) {
+        if (filter === undefined) {
+            setMessage("aucune adresse email renseignée")
+        }
+        else {
+            var myHeaders = new Headers()
+            // myHeaders.append("Authorization", "Bearer " + token);
+            myHeaders.append("Content-Type", "application/json");
+            var requestOptions = {
+                method: 'GET',
+                headers: myHeaders,
+                redirect: 'follow'
+            };
+            let result = await fetch("http://localhost:8000/user/" + param, requestOptions)
+            let data = await result.json();
+            if (data === "Aucun utilisateur") {
+                setMessage("Aucun utilisateur !")
+                setUsers([])
+            }
+            else {
+                setUsers(data)
+            }
+        }
+    }
 
     return (
         <>
@@ -74,6 +102,14 @@ function Admin() {
             <div className={style.wrapper}>
                 <div className={style.message}>{message}</div>
                 <div className={style.tableau}>
+                    <div className={style.search}>
+                        <button onClick={() => { (getUsers()); setMessage("") }}>Tous les utilisateurs</button>
+                        <div className={style.filter}>
+                            <label>Rechercher un utilisateur : </label>
+                            <input placeholder="email" onInput={(e) => { setFilter(e.target.value) }}></input>
+                            <button onClick={() => { searchMail(filter); setMessage("") }}>Ok</button>
+                        </div>
+                    </div>
                     <div className={style.tableau2}>
                         <table className={style.see}>
                             <thead>
@@ -99,7 +135,7 @@ function Admin() {
                                         <td className={style.gestion}>
                                             {modify === value.id ? <button className={style.button} onClick={() => setModify(null)}>Stop</button> : <div></div>}
                                             {modify === value.id ? <button className={style.button} onClick={() => { Update(value.id); setModify(null) }}>MàJ</button> : <button className={style.button} onClick={() => { setModify(value.id); setUpdate(value); setMessage("") }}>Gérer</button>}
-                                            {modify === value.id ? <Popup trigger ={<button className={style.button_del}>X</button>} position ="right"><button className={style.button_del} onClick={() => Supprimer(value.id)}>Suppr</button></Popup>  : <div></div>}
+                                            {modify === value.id ? <Popup trigger={<button className={style.button_del}>X</button>} position="right"><button className={style.button_del} onClick={() => Supprimer(value.id)}>Suppr</button></Popup> : <div></div>}
                                         </td>
                                     </tr>)}
                             </tbody>

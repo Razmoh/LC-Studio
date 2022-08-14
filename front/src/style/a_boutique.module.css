@@ -109,7 +109,7 @@ select {
   width: 90%;
   margin-left: 7.1%;
   resize: none;
-  border: 1px solid rgb(221, 198, 154);
+  border: 1px solid rgb(206, 206, 206);
   height: 100px;
   margin-bottom: 10px;
 
@@ -286,9 +286,9 @@ select {
 }
 
 .message {
-  font-weight: 300;
   color: rgb(194, 3, 3);
-  margin-left: 8%;
+  margin-left: 10%;
+  margin-top: 2%;
 }
 
 .button_del {

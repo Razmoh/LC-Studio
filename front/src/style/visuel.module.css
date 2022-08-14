@@ -27,6 +27,10 @@
 }
 
 .image:hover {
+    cursor: pointer;
+}
+
+.image:hover {
     border: 1px solid rgb(187, 187, 187);
     border-radius: 10px;
 }
