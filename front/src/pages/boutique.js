@@ -8,14 +8,15 @@ function Boutique() {
 
     const [product, setProduct] = useState([])
     const [filter, setFilter] = useState()
+    const [filter2, setFilter2] = useState()
     const [message, setMessage] = useState()
     const [theme, setTheme] = useState([])
     const [categorie, setCategorie] = useState([])
     useEffect(() => {
         getProducts()
         // eslint-disable-next-line
-    }, [])
- console.log(categorie)
+    }, [message])
+
     async function getProducts() {
         var myHeaders = new Headers()
         // myHeaders.append("Authorization", "Bearer " + token);
@@ -70,6 +71,7 @@ function Boutique() {
             setMessage("Aucun produit !")
         }
         else {
+            setMessage("toto")
             setProduct(data)
         }
     }
@@ -97,19 +99,22 @@ function Boutique() {
             <div className={style.container}>
                 <div className={style.search}>
                     <div className={style.filter}>
-                        <label onClick={getTheme}>Rechercher par thème :</label>
-                        <div>
-                            <input className={style.filter_input} onInput={(e) => setFilter(e.target.value)}></input>
-                            <button className={style.filter_btn} onClick={() => searchTheme(filter)}>Rechercher</button>
+                        <div className={style.label} onClick={() => { getTheme(); setCategorie([]); setFilter(); setMessage("") }}>THEME</div>
+                        <div className={style.filter_btn}>
+                            {theme.map((value, key) =>
+                                <button className={style.button} key={key} value={value.title} onClick={() => setFilter2(value.title)}>{value.title}</button>)}
+                            {filter2 === undefined ? <div></div> : <button className={style.button} onClick={() => searchTheme(filter2)}>OK</button>}
                         </div>
                     </div>
                     <div className={style.filter}>
-                        <label onClick={getCat}>Rechercher par catégorie :</label>
-                        <div>
-                            <input className={style.filter_input} onInput={(e) => setFilter(e.target.value)}></input>
-                            <button className={style.filter_btn} onClick={() => searchCategorie(filter)}>Rechercher</button>
+                        <div className={style.label} onClick={() => { getCat(); setTheme([]); setFilter2(); setMessage("") }}>CATEGORIE</div>
+                        <div className={style.filter_btn}>
+                            {categorie.map((value, key) =>
+                                <button className={style.button} key={key} value={value.title} onClick={() => setFilter(value.title)}>{value.title}</button>)}
+                            {filter === undefined ? <div></div> : <button className={style.button} onClick={() => searchCategorie(filter)}>OK</button>}
                         </div>
                     </div>
+                    <div>{message}</div>
                 </div>
             </div>
             <div className={style.cards}>

@@ -99,4 +99,7 @@ INSERT INTO `users` (`id`, `nom`, `prenom`, `email`, `password`, `phone`, `creat
 
 TRUNCATE TABLE `categorie`;
 
-INSERT INTO `categorie`(`id`,`title`) VALUES (1,'Mariage'), (2,'Naissance'), (3,'Baby-Shower');
+INSERT INTO `categorie`(`id`,`title`) VALUES (1,'Faire-part'), (2,'Save The Date'), (3,'Carton réponse'), (4,'Etiquette enveloppe'), (5,'Plan de table'), (6,'Marque place'), (7,'Numéro de table'), (8,'Menu'), (9,'Panneau directionnel'), (10,'Etiquette bouteille');
+
+TRUNCATE TABLE `theme`;
+INSERT INTO `theme` (`id`, `title`) VALUES (1, 'Steampunk'), (2, 'Baroque'), (3, 'Harry Potter'), (4, 'Marvel'), (5, 'World of Warcraft'), (6, 'Studio Ghibli'), (7, 'Cyberpunk');
