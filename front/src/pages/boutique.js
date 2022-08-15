@@ -71,7 +71,7 @@ function Boutique() {
             setMessage("Aucun produit !")
         }
         else {
-            setMessage("toto")
+            setMessage("")
             setProduct(data)
         }
     }
@@ -104,7 +104,6 @@ function Boutique() {
                             {theme.map((value, key) =>
                                 <button className={style.button} key={key} value={value.title} onClick={() => setFilter2(value.title)}>{value.title}</button>)}
                         </div>
-                        {filter2 === undefined ? <div></div> : <div className={style.confirm}><button className={style.button} onClick={() => searchTheme(filter2)}>OK</button></div>}
                     </div>
                     <div className={style.filter}>
                         <div className={style.label} onClick={() => { getCat(); setTheme([]); setFilter2(); setMessage("") }}>CATEGORIE</div>
@@ -112,8 +111,9 @@ function Boutique() {
                             {categorie.map((value, key) =>
                                 <button className={style.button} key={key} value={value.title} onClick={() => setFilter(value.title)}>{value.title}</button>)}
                         </div>
-                        {filter === undefined ? <div></div> : <div className={style.confirm}><button className={style.button} onClick={() => searchCategorie(filter)}>OK</button></div>}
                     </div>
+                    {filter === undefined ? <div></div> : <div className={style.confirm}><button className={style.gosearch} onClick={() => searchCategorie(filter)}>RECHERCHER</button></div>}
+                    {filter2 === undefined ? <div></div> : <div className={style.confirm}><button className={style.gosearch} onClick={() => searchTheme(filter2)}>RECHERCHER</button></div>}
                     <div>{message}</div>
                 </div>
             </div>

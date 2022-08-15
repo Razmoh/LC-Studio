@@ -208,7 +208,6 @@ function AdminBoutique() {
                                 {theme.map((value, key) =>
                                     <button className={style.map_btn} key={key} value={value.title} onClick={e => setProduct({ ...product, theme: e.target.value })}>{value.title}</button>)}
                             </div>
-                            {/* <input className={style.input} onInput={e => setProduct({ ...product, theme: e.target.value })}></input> */}
                         </div>
                         <div className={style.theme}>
                             <div onClick={getCat}>Catégorie :</div>
@@ -216,7 +215,6 @@ function AdminBoutique() {
                                 {categorie.map((value, key) =>
                                     <button className={style.map_btn} key={key} value={value.title} onClick={e => setProduct({ ...product, categorie: e.target.value })}>{value.title}</button>)}
                             </div>
-                            {/* <input className={style.input} onInput={e => setProduct({ ...product, categorie: e.target.value })}></input> */}
                         </div>
                         <div className={style.titre}>
                             <label>TItre du produit :</label>
@@ -234,7 +232,7 @@ function AdminBoutique() {
                         </div>
                         <label className={style.titre}>Choisir une image :</label>
                         <input className={style.picture} type="file" onChange={(e) => input(e.target.files[0])} />
-                        <div className={style.button}>
+                        <div className={style.map_create}>
                             <button onClick={createProduct}>Créer</button>
                         </div>
                     </div>
@@ -244,6 +242,11 @@ function AdminBoutique() {
                             <div className={styles.ref}>
                                 <div>Reférence n° {product.ref}</div>
                                 <div className={styles.price}>A partir de {product.price}</div>
+                            </div>
+                            <div className={styles.title}>{product.title}</div>
+                            <div className={styles.ref}>
+                                <div>{product.categorie}</div>
+                                <div className={styles.price}>{product.theme}</div>
                             </div>
                             <div className={styles.title}>{product.title}</div>
                         </div>
