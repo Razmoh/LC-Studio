@@ -23,6 +23,9 @@ function AdminBoutique() {
     const [message, setMessage] = useState("")
     //UTILISER LES FILTRES
     const [filter, setFilter] = useState("")
+    //CATEGORIE / THEME
+    const [theme, setTheme] = useState([])
+    const [categorie, setCategorie] = useState([])
 
     //RECHERCHER TOUS LES PRODUITS
     async function getProducts() {
@@ -37,6 +40,33 @@ function AdminBoutique() {
         let data = await result.json();
         setResult(data)
     }
+
+    async function getCat() {
+        var myHeaders = new Headers()
+        myHeaders.append("Content-Type", "application/json");
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        let result = await fetch("http://localhost:8000/categorie", requestOptions)
+        let data = await result.json();
+        setCategorie(data)
+    }
+
+    async function getTheme() {
+        var myHeaders = new Headers()
+        myHeaders.append("Content-Type", "application/json");
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        let result = await fetch("http://localhost:8000/theme", requestOptions)
+        let theme = await result.json();
+        setTheme(theme)
+    }
+
     //RECUPERER L'IMAGE
     const input = (file) => {
         setImage({ ...image, image1: file })
@@ -173,12 +203,20 @@ function AdminBoutique() {
                     <div className={style.create}>
                         <div className={style.title}>Ajouter un article :</div>
                         <div className={style.theme}>
-                            <div >Thème :</div>
-                            <input className={style.input} onInput={e => setProduct({ ...product, theme: e.target.value })}></input>
+                            <div onClick={getTheme} >Thème :</div>
+                            <div className={style.map}>
+                                {theme.map((value, key) =>
+                                    <button className={style.map_btn} key={key} value={value.title} onClick={e => setProduct({ ...product, theme: e.target.value })}>{value.title}</button>)}
+                            </div>
+                            {/* <input className={style.input} onInput={e => setProduct({ ...product, theme: e.target.value })}></input> */}
                         </div>
                         <div className={style.theme}>
-                            <div>Catégorie :</div>
-                            <input className={style.input} onInput={e => setProduct({ ...product, categorie: e.target.value })}></input>
+                            <div onClick={getCat}>Catégorie :</div>
+                            <div className={style.map}>
+                                {categorie.map((value, key) =>
+                                    <button className={style.map_btn} key={key} value={value.title} onClick={e => setProduct({ ...product, categorie: e.target.value })}>{value.title}</button>)}
+                            </div>
+                            {/* <input className={style.input} onInput={e => setProduct({ ...product, categorie: e.target.value })}></input> */}
                         </div>
                         <div className={style.titre}>
                             <label>TItre du produit :</label>

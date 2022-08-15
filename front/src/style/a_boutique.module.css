@@ -105,6 +105,11 @@ select {
   border-bottom: 1px solid rgb(206, 206, 206);
 }
 
+.map {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
 .description {
   width: 90%;
   margin-left: 7.1%;
@@ -134,7 +139,7 @@ select {
 }
 
 
-.button {
+.map_button {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;

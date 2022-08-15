@@ -45,8 +45,7 @@ function Profil() {
             body: property,
             redirect: 'follow'
         };
-        let result = await fetch('http://localhost:8000/profil/' + id, requestOptions)
-        let data = await result.json()
+        await fetch('http://localhost:8000/profil/' + id, requestOptions)
         setMessage("Profil modifié avec succès !")
     }
 
@@ -70,7 +69,7 @@ function Profil() {
                     </div>
                     <label name="email">Email :</label>
                     <div className={style.champ}>
-                        <div className={style.field}>{user.email}</div>
+                    {update.email === "" ? <div className={style.field}>{user.email}</div> : <label>Pour modifier votre adresse email, merci de me contacter par <a target="blank" href="mailto:lc.studiographique@gmail.com">mail</a>.</label>}
                     </div>
                     <div></div>
                     <div className={style.info_update}>
