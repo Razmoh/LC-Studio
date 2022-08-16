@@ -10,9 +10,9 @@ function AdminBoutique() {
 
     //CREER LE PRODUIT
     const [product, setProduct] = useState({ title: "", price: "", description: "", theme: "", categorie: "", ref: "" })
-    const [image, setImage] = useState({ image1: "" })
+    const [image, setImage] = useState({ image1: "", image2: "" })
     //PREVIEW PRODUIT
-    const [preview, setPreview] = useState({ une: "" })
+    const [preview, setPreview] = useState({ une: "", deux: "" })
     //METTRE LE PRODUIT A JOUR
     const [update, setUpdate] = useState({})
     //TERNAIRE
@@ -72,9 +72,14 @@ function AdminBoutique() {
         setImage({ ...image, image1: file })
         setPreview({ ...preview, une: URL.createObjectURL(file) });
     }
+
+    const input2 = (file) => {
+        setImage({...image, image2: file})
+        setPreview({ ...preview, deux: URL.createObjectURL(file) });
+    }
     //CREER LE PRODUIT
     async function createProduct() {
-        if (image.image1 === "") {
+        if (image.image1 === "" && image.image2 === "") {
             setMessage("Ajouter une image !")
         }
         else {
@@ -102,7 +107,9 @@ function AdminBoutique() {
                 const Id = result.id
 
                 var formdata = new FormData();
-                formdata.append("image", image.image1);
+                formdata.append("image1", image.image1);
+                formdata.append("image2", image.image2);
+
                 var Options = {
                     method: 'POST',
                     body: formdata,
@@ -232,6 +239,7 @@ function AdminBoutique() {
                         </div>
                         <label className={style.titre}>Choisir une image :</label>
                         <input className={style.picture} type="file" onChange={(e) => input(e.target.files[0])} />
+                        <input className={style.picture} type="file" onChange={(e) => input2(e.target.files[0])} />
                         <div className={style.map_create}>
                             <button onClick={createProduct}>Créer</button>
                         </div>

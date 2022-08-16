@@ -9,7 +9,9 @@ function ShopCard(prop) {
         <>
             <div className={styles.wrapper}>
                 <Link to={`/boutique/${data.id}`}>
-                    <img className={styles.image} src={`http://localhost:8000/static/images/${data.id}/image.jpg`} alt="" />
+                    <img className={styles.image} src={`http://localhost:8000/static/images/${data.id}/image1.jpg`} alt=""
+                      onMouseOver={e => (e.currentTarget.src =`http://localhost:8000/static/images/${data.id}/image2.jpg`)}
+                      onMouseOut={e => (e.currentTarget.src =`http://localhost:8000/static/images/${data.id}/image1.jpg`)}/>
                     <div className={styles.info}>
                         <div className={styles.ref}>
                             <div>Reférence n° {data.ref}</div>
