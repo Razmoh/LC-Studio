@@ -1,5 +1,5 @@
 import style from '../style/login.module.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 function Register() {
@@ -7,6 +7,13 @@ function Register() {
     const [user, setUser] = useState({ nom: "", prenom: "", phone: "", password: "", confirm_password: "", email: "" })
     const [error, setError] = useState("")
     const navigate = useNavigate()
+    const token = localStorage.getItem('Token')
+    
+    useEffect(() => {
+        if(token !==null){
+            navigate('/')
+        }
+    })
 
     function Register() {
         if (user.nom === "" || user.prenom === "" || user.email === "" || user.password === "" || user.confirm_password === "") {

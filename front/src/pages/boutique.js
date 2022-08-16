@@ -3,19 +3,16 @@ import { useState, useEffect } from 'react'
 import style from '../style/boutique.module.css'
 import Shop from '../composants/shop_card'
 
-
 function Boutique() {
 
     const [product, setProduct] = useState([])
-    const [filter, setFilter] = useState()
-    const [filter2, setFilter2] = useState()
     const [message, setMessage] = useState()
     const [theme, setTheme] = useState([])
     const [categorie, setCategorie] = useState([])
     useEffect(() => {
         getProducts()
         // eslint-disable-next-line
-    }, [message])
+    }, [])
 
     async function getProducts() {
         var myHeaders = new Headers()
@@ -58,6 +55,8 @@ function Boutique() {
     }
 
     async function searchTheme(theme) {
+        setMessage("")
+        setProduct([])
         var myHeaders = new Headers()
         myHeaders.append("Content-Type", "application/json");
         var requestOptions = {
@@ -77,6 +76,8 @@ function Boutique() {
     }
 
     async function searchCategorie(categorie) {
+        setMessage("")
+        setProduct([])
         var myHeaders = new Headers()
         myHeaders.append("Content-Type", "application/json");
         var requestOptions = {
@@ -93,27 +94,29 @@ function Boutique() {
             setProduct(data)
         }
     }
+
     return (
         <>
             <Navbar />
             <div className={style.container}>
                 <div className={style.search}>
                     <div className={style.filter}>
-                        <div className={style.label} onClick={() => { getTheme(); setCategorie([]); setFilter(); setMessage("") }}>THEME</div>
+                        <div className={style.label} onClick={() => { getTheme(); setCategorie([]); setMessage("") }}>THEME</div>
                         <div className={style.filter_btn}>
                             {theme.map((value, key) =>
-                                <button className={style.button} key={key} value={value.title} onClick={() => setFilter2(value.title)}>{value.title}</button>)}
+                                <button className={style.button} key={key} value={value.title} onClick={() => searchTheme(value.title)}>{value.title}</button>)}
                         </div>
                     </div>
                     <div className={style.filter}>
-                        <div className={style.label} onClick={() => { getCat(); setTheme([]); setFilter2(); setMessage("") }}>CATEGORIE</div>
+                        <div className={style.label} onClick={() => { getCat(); setTheme([]); setMessage("") }}>CATEGORIE</div>
                         <div className={style.filter_btn}>
                             {categorie.map((value, key) =>
-                                <button className={style.button} key={key} value={value.title} onClick={() => setFilter(value.title)}>{value.title}</button>)}
+                                <button className={style.button} key={key} value={value.title} onClick={() => searchCategorie(value.title)}>{value.title}</button>)}
                         </div>
                     </div>
-                    {filter === undefined ? <div></div> : <div className={style.confirm}><button className={style.gosearch} onClick={() => searchCategorie(filter)}>RECHERCHER</button></div>}
-                    {filter2 === undefined ? <div></div> : <div className={style.confirm}><button className={style.gosearch} onClick={() => searchTheme(filter2)}>RECHERCHER</button></div>}
+                    <div className={style.filter}>
+                        <div className={style.label} onClick={() => { getProducts(); setCategorie([]); setTheme([]); setMessage("") }}>TOUS LES PRODUITS</div>
+                        </div>
                     <div>{message}</div>
                 </div>
             </div>

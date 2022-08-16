@@ -1,11 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
-import { React, useState } from "react";
+import { useState, useEffect } from "react";
 import style from "../style/login.module.css";
 
 function Login() {
     const [login, setLogin] = useState({ email: "", password: "" })
     const [error, setError] = useState("")
     const navigate = useNavigate()
+    const token = localStorage.getItem('Token')
+    
+    useEffect(() => {
+        if(token !==null){
+            navigate('/')
+        }
+    })
 
     function Login() {
         if (login.email === "" || login.password === "") {

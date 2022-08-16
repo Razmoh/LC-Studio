@@ -18,7 +18,7 @@
     color: rgb(93, 88, 88);
 }
 .label {
-    width: 8%;
+    width: 10%;
     padding: 2px 2px 2px 2px;
 }
 
@@ -40,6 +40,10 @@
     padding: 2px 4px 2px 4px;
     border-radius: 3px;
     font-size: 15px;
+}
+
+.button:active {
+    border: 1px solid black;
 }
 
 .button:hover {
