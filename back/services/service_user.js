@@ -1,5 +1,5 @@
 var con = require("../config");
-
+//OBTENIR TOUS LES UTILISATEURS (ADMIN)
 async function getUsers() {
     const [rows, field] = await con.promise().execute('SELECT * FROM users')
     if (rows[0] === undefined) {
@@ -7,7 +7,7 @@ async function getUsers() {
     }
     return rows
 }
-
+//RECHERCHER PAR MAIL (ADMIN)
 async function getOne(email) {
     const [rows, field] = await con.promise().execute(`SELECT * FROM users WHERE email = "${email}"`)
         .catch(err => {
@@ -18,7 +18,7 @@ async function getOne(email) {
     }
     return rows
 }
-
+//UPDATE UN USER (ADMIN)
 async function updateUser(body, id) {
     for (const property in body) {
         con.execute(`UPDATE users SET ${property}= ? where id= ?`, [body[property], id])

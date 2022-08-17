@@ -3,18 +3,21 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 function Register() {
-
+    //STOCKER LES INPUT
     const [user, setUser] = useState({ nom: "", prenom: "", phone: "", password: "", confirm_password: "", email: "" })
+    //GERER LES ERREURS
     const [error, setError] = useState("")
+    //NAVIGUER
     const navigate = useNavigate()
+    //TOKEN
     const token = localStorage.getItem('Token')
-    
+    //EMPÊCHER L'ACCÈS A LA PAGE SI TOKEN
     useEffect(() => {
-        if(token !==null){
+        if (token !== null) {
             navigate('/')
         }
     })
-
+    //FUNCTION POUR S'ENREGISTRER
     function Register() {
         if (user.nom === "" || user.prenom === "" || user.email === "" || user.password === "" || user.confirm_password === "") {
             return setError("Champ(s) manquant(s).")

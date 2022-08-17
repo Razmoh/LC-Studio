@@ -70,7 +70,7 @@ function Admin() {
         setUsers(old => old.filter(e => e.id !== id))
         setMessage("L'utilisateur a été supprimé")
     }
-//RECHERCHER UN UTILISATEUR
+    //RECHERCHER UN UTILISATEUR
     async function searchMail(param) {
         if (filter === undefined) {
             setMessage("aucune adresse email renseignée")

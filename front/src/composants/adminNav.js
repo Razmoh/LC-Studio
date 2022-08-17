@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import style from '../style/navbar.module.css'
 
-
 function AdminNav() {
     return (
         <div className={style.wrapper}>

@@ -1,9 +1,16 @@
+const { execute } = require("../config");
 var con = require("../config");
 
 //AVOIR TOUS LES PRODUITS
 async function getAll() {
     const [rows, field] = await con.promise().execute(`SELECT * FROM produits ORDER BY id ASC`)
     return rows
+}
+
+//AVOIR UN PRODUIT
+async function getOne(id) {
+    const [rows, field] = await con.promise().execute('SELECT * FROM produits WHERE id =?', [id])
+    return(rows)
 }
 
 //AJOUTER UN PRODUIT
@@ -27,4 +34,4 @@ async function updateProduct(body, id) {
     return rows[0]
 }
 
-module.exports = { createProduct, getAll, updateProduct };
+module.exports = { createProduct, getAll, updateProduct, getOne };

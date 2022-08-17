@@ -4,19 +4,20 @@ import { useNavigate, Link } from 'react-router-dom'
 import Navbar from '../composants/navbar'
 
 function Home() {
-
+    //DEFINIR LE TOKEN
     const token = localStorage.getItem('Token')
+    //NAVIGUER ENTRE LES PAGES
     const navigate = useNavigate()
 
-//ALLER A LA BOUTIQUE
+    //ALLER A LA BOUTIQUE
     const boutique = () => {
         navigate('/boutique')
     }
-//ALLER AU LOGIN
+    //ALLER AU LOGIN
     const login = () => {
         navigate('/login')
     }
-//SE DECONNECTER
+    //SE DECONNECTER
     const logout = () => {
         localStorage.removeItem('Token')
         navigate('/login')

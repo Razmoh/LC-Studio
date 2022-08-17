@@ -2,18 +2,22 @@ import Navbar from "../composants/navbar"
 import { useState, useEffect } from 'react'
 import style from '../style/boutique.module.css'
 import Shop from '../composants/shop_card'
-
+//PAGE BOUTIQUE
 function Boutique() {
-
+    //STOCKER TOUS LES PRODUITS
     const [product, setProduct] = useState([])
+    //MESSAGE 
     const [message, setMessage] = useState()
+    //STOCKER LES THEMES
     const [theme, setTheme] = useState([])
+    //STOCKER LES CATEGORIES
     const [categorie, setCategorie] = useState([])
+    //OBTENIR TOUS LES PRODUITS AU CHARGEMENT DE LA PAGE
     useEffect(() => {
         getProducts()
         // eslint-disable-next-line
     }, [])
-
+    //OBTENIR TOUS LES PRODUITS
     async function getProducts() {
         var myHeaders = new Headers()
         // myHeaders.append("Authorization", "Bearer " + token);
@@ -27,7 +31,7 @@ function Boutique() {
         let data = await result.json();
         setProduct(data)
     }
-
+    //OBTENIR LES CATEGORIES
     async function getCat() {
         var myHeaders = new Headers()
         myHeaders.append("Content-Type", "application/json");
@@ -40,7 +44,7 @@ function Boutique() {
         let data = await result.json();
         setCategorie(data)
     }
-
+    //OBTENIR TOUS LES THEMES
     async function getTheme() {
         var myHeaders = new Headers()
         myHeaders.append("Content-Type", "application/json");
@@ -53,7 +57,7 @@ function Boutique() {
         let theme = await result.json();
         setTheme(theme)
     }
-
+    //FAIRE UNE RECHERCHE DE PRODUIT PAR THEME
     async function searchTheme(theme) {
         setMessage("")
         setProduct([])
@@ -74,7 +78,7 @@ function Boutique() {
             setProduct(data)
         }
     }
-
+    //FAIRE UNE RECHERCHE DE PRODUIT PAR CATEGORIE
     async function searchCategorie(categorie) {
         setMessage("")
         setProduct([])
@@ -116,7 +120,7 @@ function Boutique() {
                     </div>
                     <div className={style.filter}>
                         <div className={style.label} onClick={() => { setProduct([]); getProducts(); setCategorie([]); setTheme([]); setMessage("") }}>TOUS LES PRODUITS</div>
-                        </div>
+                    </div>
                     <div>{message}</div>
                 </div>
             </div>

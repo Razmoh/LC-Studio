@@ -3,17 +3,21 @@ import { useState, useEffect } from "react";
 import style from "../style/login.module.css";
 
 function Login() {
+    //STATE DES INPUTS
     const [login, setLogin] = useState({ email: "", password: "" })
+    //GERER LES ERREURS
     const [error, setError] = useState("")
+    //NAVIGUER
     const navigate = useNavigate()
+    //DEFINIR LE TOKEN
     const token = localStorage.getItem('Token')
-    
+    //EMPECHER D'ALLER SUR LE LOGIN SI IDENTIFIÉ
     useEffect(() => {
-        if(token !==null){
+        if (token !== null) {
             navigate('/')
         }
     })
-
+    //SE CONNECTER
     function Login() {
         if (login.email === "" || login.password === "") {
             setError("Merci de remplir tout les champs")

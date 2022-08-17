@@ -5,7 +5,7 @@ var con = require("../config");
 const bcrypt = require("bcrypt");
 const SECRET = "PROUT";
 const jwt = require("jsonwebtoken");
-
+//REGISTER
 async function register(body) {
     var date = new Date().toLocaleDateString("en-GB");
     const saltRounds = 10;
@@ -14,7 +14,7 @@ async function register(body) {
         const [rows2, field2] = await con.promise().execute('SELECT * FROM users WHERE email= ?', [body.email]);
         return rows2[0];
     }
-
+//LOGIN
     async function login (body) {
         const [rows, field] = await con.promise().execute('SELECT * FROM users WHERE email= ?', [body.email])
         const email = await rows[0].email

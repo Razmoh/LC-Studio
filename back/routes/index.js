@@ -14,7 +14,7 @@ const route_categorie = require ('./route_categorie')
 router.get('/', function (req, res) {
     res.send("index");
 })
-
+//REDIRIGE SUIVANT L'ADRESSE DU FETCH
 router.use('/auth', route_auth);
 router.use('/user', route_user )
 router.use('/profil', route_profil)

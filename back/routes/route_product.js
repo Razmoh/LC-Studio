@@ -11,6 +11,11 @@ router.get('/', async function (req, res) {
     return res.status(200).json(result)
 })
 
+router.get('/:id', async function(req, res){
+  const result = await product.getOne(req.params.id)
+  return res.status(200).json(result)
+})
+
 //AJOUTER UN PRODUIT
 
 router.post('/', async function (req, res) {

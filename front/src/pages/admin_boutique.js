@@ -40,7 +40,7 @@ function AdminBoutique() {
         let data = await result.json();
         setResult(data)
     }
-
+    //OBTENIR TOUTES LES CATEGORIES
     async function getCat() {
         var myHeaders = new Headers()
         myHeaders.append("Content-Type", "application/json");
@@ -53,7 +53,7 @@ function AdminBoutique() {
         let data = await result.json();
         setCategorie(data)
     }
-
+    //OBTENIR TOUS LES THEMES
     async function getTheme() {
         var myHeaders = new Headers()
         myHeaders.append("Content-Type", "application/json");
@@ -74,7 +74,7 @@ function AdminBoutique() {
     }
 
     const input2 = (file) => {
-        setImage({...image, image2: file})
+        setImage({ ...image, image2: file })
         setPreview({ ...preview, deux: URL.createObjectURL(file) });
     }
     //CREER LE PRODUIT

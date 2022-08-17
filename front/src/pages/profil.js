@@ -5,18 +5,22 @@ import jwt_decode from "jwt-decode"
 import { Link } from 'react-router-dom'
 
 function Profil() {
+    //STOCKER LES INFOS DE L'UTILISATEUR
     const [user, setUser] = useState([])
+    //STOCKER LES STATES POUR L'UPDATE
     const [update, setUpdate] = useState({ nom: "", prenom: "", phone: "", email: "" })
+    //GERER LES ERREURS
     const [message, setMessage] = useState("")
+    //DECODER LE TOKEN
     const token = localStorage.getItem('Token')
     const decoded = jwt_decode(token);
     const email = decoded.email
-
+    //OBTENIR LES INFOS VIA LE MAIL DANS LE TOKEN
     useEffect(() => {
         getInfo(email)
         // eslint-disable-next-line
     }, [message])
-
+    //OBTENIR SES INFOS PERSONNELLES
     async function getInfo() {
         var myHeaders = new Headers()
         // myHeaders.append("Authorization", "Bearer " + token);
@@ -30,7 +34,7 @@ function Profil() {
         let data = await result.json();
         setUser(data)
     }
-
+    //METTRE A JOUR SON PROFIL
     async function updateInfo(id) {
         var myHeaders = new Headers()
         myHeaders.append("Content-Type", "application/json");
@@ -69,7 +73,7 @@ function Profil() {
                     </div>
                     <label name="email">Email :</label>
                     <div className={style.champ}>
-                    {update.email === "" ? <div className={style.field}>{user.email}</div> : <label>Pour modifier votre adresse email, merci de me contacter par <a target="blank" href="mailto:lc.studiographique@gmail.com">mail</a>.</label>}
+                        {update.email === "" ? <div className={style.field}>{user.email}</div> : <label>Pour modifier votre adresse email, merci de me contacter par <a target="blank" href="mailto:lc.studiographique@gmail.com">mail</a>.</label>}
                     </div>
                     <div></div>
                     <div className={style.info_update}>

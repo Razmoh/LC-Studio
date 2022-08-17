@@ -3,7 +3,7 @@ const multer = require('multer')
 const fs = require('fs-extra')
 var router = express.Router()
 
-
+//CREER L'IMAGE SUIVANT L'ID DE L'ANNONCE
 const storage = multer.diskStorage({
   
   destination: function (req, file, cb) {
