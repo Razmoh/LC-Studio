@@ -1,5 +1,7 @@
 import style from '../style/navbar.module.css'
 import { Link, useNavigate } from 'react-router-dom'
+import Popup from 'reactjs-popup';
+import Cart from './cart';
 
 function Navbar() {
     //NAVIGUER
@@ -40,6 +42,7 @@ function Navbar() {
                         </div>
                     </Link>
                     <div className={style.logos}>
+                        {token !== null ? <Popup trigger={<img className={style.images} src={'/images/cart.png'}alt="cart" />} position="bottom"><Cart /></Popup> : <div></div>}
                         <a target='blank' href='https://www.facebook.com/Laetitia.Chazot.Monnot'>
                             <img className={style.images} src={'/images/fb.jpg'} alt="fb" />
                         </a>&nbsp;

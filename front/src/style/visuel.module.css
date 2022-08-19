@@ -24,6 +24,7 @@
     margin: 2%;
     border: 1px solid rgb(208, 208, 208);
     border-radius: 10px;
+    transition: 1s;
 }
 
 .image:hover {
@@ -40,3 +41,14 @@
     border: 1px solid rgb(187, 187, 187);
     border-radius: 6px;
 }
+
+.zoom {
+    height: 320px;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 6px;
+    z-index: 100;
+    transition: 1s;
+    margin: 0;
+    overflow: hidden;
+}
+

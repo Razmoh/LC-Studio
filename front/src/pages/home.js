@@ -1,9 +1,9 @@
 import style from '../style/home.module.css'
 import { useNavigate, Link } from 'react-router-dom'
-
 import Navbar from '../composants/navbar'
 
 function Home() {
+
     //DEFINIR LE TOKEN
     const token = localStorage.getItem('Token')
     //NAVIGUER ENTRE LES PAGES

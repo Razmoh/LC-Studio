@@ -101,5 +101,15 @@ TRUNCATE TABLE `categorie`;
 
 INSERT INTO `categorie`(`id`,`title`) VALUES (1,'Faire-part'), (2,'Save The Date'), (3,'Carton réponse'), (4,'Etiquette enveloppe'), (5,'Plan de table'), (6,'Marque place'), (7,'Numéro de table'), (8,'Menu'), (9,'Panneau directionnel'), (10,'Etiquette bouteille');
 
+TRUNCATE TABLE `produits`;
+
+INSERT INTO `produits` (`id`, `title`, `ref`, `description`, `price`, `categorie`, `theme`) VALUES
+(1, 'Faire-part World of Warcraft', '#FP001', 'Faire-part inspiré de la licence jeu vidéo World of Warcraft, au couleur de l\'Alliance. Si vous préférez la Horde, prenez le en rouge !', '1.09€', 'Faire-part', 'World of Warcraft'),
+(2, 'Faire-part Steampunk', '#FP002', 'Faire-part sur le thème Steampunk', '1.09€', 'Faire-part', 'World of Warcraft'),
+(3, 'Numéro de table', '#NT001', 'Pour numéroter les tables', '1.49€', 'Plan de table', 'Steampunk'),
+(4, 'Plan de table classique', '#PT001', 'Menu style classique pour le repas', '0.99€', 'Plan de table', 'Baroque');
+
+
 TRUNCATE TABLE `theme`;
+
 INSERT INTO `theme` (`id`, `title`) VALUES (1, 'Steampunk'), (2, 'Baroque'), (3, 'Harry Potter'), (4, 'Marvel'), (5, 'World of Warcraft'), (6, 'Studio Ghibli'), (7, 'Cyberpunk');

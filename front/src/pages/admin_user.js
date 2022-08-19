@@ -6,6 +6,7 @@ import Popup from 'reactjs-popup';
 function Admin() {
     //STOCKER TOUS LES UTILISATEURS
     const [users, setUsers] = useState([])
+    console.log(users)
     //TERNAIRE
     const [modify, setModify] = useState()
     //METTRE A JOUR

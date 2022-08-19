@@ -118,9 +118,6 @@ function Boutique() {
                                 <button className={style.button} key={key} value={value.title} onClick={() => searchCategorie(value.title)}>{value.title}</button>)}
                         </div>
                     </div>
-                    <div className={style.filter}>
-                        <div className={style.label} onClick={() => { setProduct([]); getProducts(); setCategorie([]); setTheme([]); setMessage("") }}>TOUS LES PRODUITS</div>
-                    </div>
                     <div>{message}</div>
                 </div>
             </div>

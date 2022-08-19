@@ -1,14 +1,92 @@
+.wrapper {
+    width: 100%;
+}
+
 .container {
-    border: 1px solid rgb(229, 229, 229);
-    width: 50%;
+    width: 88%;
     height: 28em;
     margin-top: 3%;
-    margin-left: 8%;
-    border-radius: 4px;
+    margin-left: 6%;
+    border-radius: 10px;
     display: flex;
 }
 
 .image {
     height: 100%;
-    width: 50%;
+    width: 35%;
+}
+
+.info {
+    width: 30%;
+    padding: 1%;
+    color: rgb(93, 88, 88);
+    font-weight: 300;
+    border: 1px solid rgb(229, 229, 229);
+}
+
+.title {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 5%;
+}
+
+.ref {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5%;
+}
+
+.description {
+    font-size: 19px;
+    height: 300px;
+}
+
+.theme {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2%;
+}
+
+.span {
+    width: 10%;
+}
+
+.cart {
+    width: 25%;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 5px;
+    color: rgb(93, 88, 88);
+    font-weight: 300;
+    padding: 1%;
+}
+
+.cart_title {
+    text-align: left;
+    font-size: 20px;
+}
+
+.cart_devis {
+    margin-top: 5%;
+    text-align: left;
+    width: 80%;
+    font-size: 16px;
+}
+
+.cart_devis input {
+    border: none;
+    width: 50px;
+    font-size: 18px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.cart_devis button {
+    background-color: white;
+    /* border: none; */
+}
+
+.message {
+    margin-top: 5%;
+    color: red;
+    font-weight: 500;
 }

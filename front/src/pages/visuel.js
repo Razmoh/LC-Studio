@@ -1,17 +1,9 @@
 import Navbar from '../composants/navbar'
 import style from '../style/visuel.module.css'
 import Popup from 'reactjs-popup';
-import React from 'react'
-
 
 function Visuel() {
-    const image = React.createRef()
-
-    function click() {
-        image.click()
-    }
-
-    return (
+        return (
         <>
             <Navbar />
             <div className={style.container}>
@@ -20,7 +12,8 @@ function Visuel() {
                     Quoi qu'il en soit, j'espère que mon travail vous plaira et, pourquoi pas, pouvoir contribuer à la réussite de votre événement.
                 </div>
                 <div className={style.visuel}>
-                    <Popup trigger={<img ref={image} onMouseEnter={click()} className={style.image} src={"/visuel/01canadgoo.jpg"} alt="" />} position="center"><img className={style.popup} src={"/visuel/01canadgoo.jpg"} alt="" /></Popup>
+                    <Popup trigger={<img className={style.image} src={"/visuel/01canadgoo.jpg"} alt="" />} position="center"><img className={style.popup} src={"/visuel/01canadgoo.jpg"} alt="" /></Popup>
+                    {/* <Popup trigger={<img onMouseOver={e => {(e.currentTarget.className="visuel_zoom__GeIEK")}} onMouseOut={e => {(e.currentTarget.className="visuel_image__DjZOo")}} className={style.image} src={"/visuel/01canadgoo.jpg"} alt="" />} position="center"><img className={style.popup} src={"/visuel/01canadgoo.jpg"} alt="" /></Popup> */}
                     <Popup trigger={<img className={style.image} src={"/visuel/02canadgoo.jpg"} alt="" />} position="center"><img className={style.popup} src={"/visuel/02canadgoo.jpg"} alt="" /></Popup>
                     <Popup trigger={<img className={style.image} src={"/visuel/03canadgoo.jpg"} alt="" />} position="center"><img className={style.popup} src={"/visuel/03canadgoo.jpg"} alt="" /></Popup>
                     <Popup trigger={<img className={style.image} src={"/visuel/04canadgoo.jpg"} alt="" />} position="center"><img className={style.popup} src={"/visuel/04canadgoo.jpg"} alt="" /></Popup>

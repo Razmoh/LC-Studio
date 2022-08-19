@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import style from '../style/product_id.module.css'
 
 function Product() {
-    //eslint-disable-next-line
     const [product, setProduct] = useState([])
-    console.log(product)
+    const [panier, setPanier] = useState({ id: "", title: "", ref: "", quantity: "" })
+    const [message, setMessage] = useState("")
+    const token = localStorage.getItem("Token")
 
     useEffect(() => {
         getProduct()
@@ -27,16 +28,78 @@ function Product() {
         setProduct(data)
     }
 
+    //GÉRER LE PANIER   
+
+    //SAUVEGARDER LE PANIER
+    function savePanier(product) {
+        localStorage.setItem("Panier", JSON.stringify(product))
+    }
+    //OBTENIR LE PANIER
+    function getPanier() {
+        let panier = localStorage.getItem("Panier")
+        if (panier == null) {
+            return []
+        } else {
+            return JSON.parse(panier)
+        }
+    }
+
+    //SAUVEGARDER UN PRODUIT
+    function addProduct(product) {
+        if (token === null) {
+            setMessage("Vous devez être identifié pour ajouter un produit")
+        } else {
+            if (product.quantity === "") {
+                setMessage("Veuillez séléctionner le nombre de produit")
+            } else {
+                let panier = getPanier()
+                let foundProduct = panier.find(p => p.ref === product.ref)
+                console.log(foundProduct)
+                if (foundProduct !== undefined) {
+                    foundProduct.quantity += product.quantity
+                } else {
+                    panier.push(product)
+                }
+                savePanier(panier)
+            }
+        }
+    }
+
+
     return (
         <>
             <Navbar />
             <div className={style.wrapper}>
                 {product.map((value, key) =>
                     <div key={key} className={style.container}>
-                        <img className={style.image} src={`http://localhost:8000/static/images/${value.id}/image1.jpg`} alt="" />
-                        <div className={style.info}></div>
+                        <img className={style.image} src={`http://localhost:8000/static/images/${value.id}/image1.jpg`} alt=""
+                            onMouseOver={e => (e.currentTarget.src = `http://localhost:8000/static/images/${value.id}/image2.jpg`)}
+                            onMouseOut={e => (e.currentTarget.src = `http://localhost:8000/static/images/${value.id}/image1.jpg`)} />
+                        <div className={style.info}>
+                            <div className={style.title}>{value.title}</div>
+                            <div className={style.ref}>
+                                <div><i>Référence n° {value.ref}</i></div>
+                                <div><i>A partir de <b>{value.price}</b> / pièce</i>.</div>
+                            </div>
+                            <div className={style.description}>{value.description}</div>
+                            <div className={style.theme}>{value.theme} / {value.categorie}</div>
+                        </div>
+                        <div className={style.span}></div>
+                        <div className={style.cart}>
+                            <div className={style.cart_title}>Ajouter cet élément au panier :</div>
+                            <div className={style.cart_devis}>
+                                <div>Nombre d'exemplaires :
+                                    {/*eslint-disable-next-line*/}
+                                    <input placeholder="?" onInput={(e) => { { setPanier({ ...panier,id: value.id, title: value.title, ref: value.ref, quantity: parseInt(e.target.value) }) } }}></input>
+                                    &nbsp;&nbsp;&nbsp;<button onClick={() => addProduct(panier)}>Ajouter</button>
+                                </div>
+                            </div>
+                            <div className={style.message}>{message}</div>
+                        </div>
+                        <div className={style.span}></div>
                     </div>
                 )}
+
             </div>
         </>
     )
