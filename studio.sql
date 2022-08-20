@@ -86,8 +86,8 @@ DROP TABLE IF EXISTS `devis`;
 CREATE TABLE `devis` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
 `email` varchar(255) NOT NULL,
-`ref` varchar(255) NOT NULL,
-`quantity` varchar(255) NOT NULL,
+`panier` varchar(455) NOT NULL,
+`status` int(11) NOT NULL DEFAULT 0,
 `date` varchar(255) NOT NULL,
   PRIMARY KEY(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -95,7 +95,8 @@ CREATE TABLE `devis` (
 TRUNCATE TABLE `users`;
 
 INSERT INTO `users` (`id`, `nom`, `prenom`, `email`, `password`, `phone`, `creation_date`,  `admin`) VALUES
-(1, 'Chazot', 'Laetitia', 'laetitia.chazot@gmail.com', '$2b$10$yT0iY1vmHvFkQuFnImFgYeVaFf/Cm89FcQdcFnJ7L66lKEcquxjAK', '06 47 72 01 12', '24/05/2022', 1);
+(1, 'Chazot', 'Laetitia', 'laetitia.chazot@gmail.com', '$2b$10$yT0iY1vmHvFkQuFnImFgYeVaFf/Cm89FcQdcFnJ7L66lKEcquxjAK', '06 47 72 01 12', '24/05/2022', 1),
+(2, 'Monnot', 'Benjamin', 'albenji@orange.fr', '$2b$10$yT0iY1vmHvFkQuFnImFgYeVaFf/Cm89FcQdcFnJ7L66lKEcquxjAK', '06 31 99 31 30', '24/05/2022', 1);
 
 TRUNCATE TABLE `categorie`;
 

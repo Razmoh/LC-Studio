@@ -15,6 +15,9 @@ function Profil() {
     const token = localStorage.getItem('Token')
     const decoded = jwt_decode(token);
     const email = decoded.email
+    //PANIER
+    const [panier, setPanier] = useState([])
+    console.log(panier)
     //OBTENIR LES INFOS VIA LE MAIL DANS LE TOKEN
     useEffect(() => {
         getInfo(email)
@@ -33,6 +36,7 @@ function Profil() {
         let result = await fetch("http://localhost:8000/profil/" + email, requestOptions)
         let data = await result.json();
         setUser(data)
+        getPanier()
     }
     //METTRE A JOUR SON PROFIL
     async function updateInfo(id) {
@@ -51,6 +55,38 @@ function Profil() {
         };
         await fetch('http://localhost:8000/profil/' + id, requestOptions)
         setMessage("Profil modifié avec succès !")
+    }
+
+    //PANIER
+
+    async function getPanier() {
+        const storage = localStorage.getItem("Panier")
+        if (storage === null) {
+            let storage = []
+            setPanier(storage)
+        } else {
+            setPanier(JSON.parse(storage))
+        }
+    }
+
+    async function confirmPanier() {
+        var myHeaders = new Headers()
+        myHeaders.append("Content-Type", "application/json");
+        var property = JSON.stringify({
+            "email": email,
+                panier
+        });
+        console.log("toto", property)
+        // return
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: property,
+            redirect: 'follow'
+        };
+        await fetch('http://localhost:8000/devis', requestOptions)
+        setMessage("Le devis a été envoyé avec succès.")
+        localStorage.removeItem('Panier')
     }
 
     return (
@@ -80,6 +116,20 @@ function Profil() {
                         {update.nom === "" ? <button className={style.update} onClick={() => setUpdate({ ...update, nom: user.nom, prenom: user.prenom, phone: user.phone, email: user.email })} >Editer</button> : <div className={style.edit}><button className={style.update} onClick={() => { setUpdate({ ...update, nom: "", prenom: "", phone: "", email: "" }); setMessage("") }}>Annuler</button><button className={style.update} onClick={() => updateInfo(user.id)}>Modifier</button></div>}
                     </div>
                     <label>{message}</label>
+                </div>
+                <div className={style.panier}>
+                    <div>Mon panier :</div>
+                    {panier.map((value, key) =>
+                        <Link to={`/boutique/${value.id}`}>
+                            <div key={key} className={style.test}>
+                                <div className={style.title}>{value.title}</div>
+                                <div className={style.quantity}>{value.quantity}</div>
+                            </div>
+                        </Link>
+                    )}
+                    <div className={style.confirm}>
+                        <button onClick={confirmPanier}>Envoyer le devis</button>
+                    </div>
                 </div>
             </div>
         </>

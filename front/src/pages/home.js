@@ -20,6 +20,7 @@ function Home() {
     //SE DECONNECTER
     const logout = () => {
         localStorage.removeItem('Token')
+        localStorage.removeItem('Panier')
         navigate('/login')
     }
 

@@ -1,4 +1,3 @@
-const { execute } = require("../config");
 var con = require("../config");
 
 //AVOIR TOUS LES PRODUITS

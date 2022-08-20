@@ -20,7 +20,7 @@ function AdminNav() {
                         Gérer les utilisateurs
                     </div>
                 </Link>
-                <Link to={'/admin'}>
+                <Link to={'/admin_devis'}>
                     <div className={style.btn}>
                         Gérer les demandes de devis
                     </div>

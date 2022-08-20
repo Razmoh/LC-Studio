@@ -11,7 +11,7 @@ import Boutique from './pages/boutique'
 import Product from './pages/product_id';
 import AboutMe from './pages/aboutme'
 import Visuel from './pages/visuel';
-
+import AdminDevis from './pages/admin_devis'
 function App() {
   return (
     <div className="App">
@@ -27,6 +27,7 @@ function App() {
           <Route exact path={'/aboutme'} element={<AboutMe />}></Route>
           <Route path={'/boutique/:id'} element={<Product />}></Route>
           <Route path={'/visuel'} element={<Visuel />}></Route>
+          <Route exact path={'/admin_devis'} element={<AdminDevis />}></Route>
         </Routes>
       </Router>
     </div>

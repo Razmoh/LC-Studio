@@ -1,0 +1,25 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 3% 6%;
+    color: rgb(93, 88, 88);
+}
+
+.section {
+    border: 1px solid rgb(218, 218, 218);
+    width: 40%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 3%;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.devis {
+    margin: 2% 2%;
+    border: 1px solid;
+}

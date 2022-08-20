@@ -10,6 +10,7 @@ const route_delete = require('./route_delete')
 const route_filter = require('./route_filter')
 const route_theme = require('./route_theme')
 const route_categorie = require ('./route_categorie')
+const route_devis = require('./route_devis')
 
 router.get('/', function (req, res) {
     res.send("index");
@@ -24,6 +25,7 @@ router.use('/delete', route_delete)
 router.use('/filter', route_filter)
 router.use('/theme', route_theme)
 router.use('/categorie', route_categorie)
+router.use('/devis', route_devis)
 
 
 
