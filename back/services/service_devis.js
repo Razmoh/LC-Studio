@@ -25,4 +25,16 @@ async function getDown() {
     return rows
 }
 
-module.exports = { createDevis, getWait, getProgress, getDown };
+async function getOne(email) {
+    const [rows, field] = await con.promise().execute(`SELECT * FROM devis WHERE email = "${email}" AND status = 2`)
+        .catch(err => {
+            console.log("erreur", err)
+        })
+    if (rows[0] === undefined) {
+        return "NONE"
+    }
+    console.log(rows)
+    return rows
+}
+
+module.exports = { createDevis, getWait, getProgress, getDown, getOne };

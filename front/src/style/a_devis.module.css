@@ -6,20 +6,32 @@
 }
 
 .section {
+    margin: 1% 6%;
+    color: rgb(93, 88, 88);
+    width: 88%;
     border: 1px solid rgb(218, 218, 218);
-    width: 40%;
-    height: auto;
-    border-radius: 5px;
 }
 
 .title {
     text-align: center;
-    margin-top: 3%;
+    margin: 1% 0%;
     font-size: 18px;
     font-weight: 300;
 }
 
 .devis {
     margin: 2% 2%;
-    border: 1px solid;
+    border: 1px solid rgb(233, 233, 233);
+    border-radius: 4px;
+    padding: 2px;
 }
+
+
+
+.find_old {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 300;
+    margin-top:1%;
+}
+

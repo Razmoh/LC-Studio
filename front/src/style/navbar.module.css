@@ -46,7 +46,7 @@ a {
 
 /*mettre le bouton en surbrillance*/
 .btn:hover, .btn_lc:hover {
-    border:1px solid rgb(221, 198, 154);
+    font-weight: 500;
 }
 
 /*dimensionner les logos*/

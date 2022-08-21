@@ -61,6 +61,7 @@ function Product() {
                     panier.push(product)
                 }
                 savePanier(panier)
+                alert("Article(s) ajouté(s) au panier ")
             }
         }
     }
