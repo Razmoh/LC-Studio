@@ -28,7 +28,6 @@ function AdminDevis() {
         let r_wait = await wait.json();
         setWait(r_wait)
         // setWait({...wait, email: r_wait.email, panier: JSON.parse(r_wait.panier)})
-
         let progress = await fetch("http://localhost:8000/devis/progress", requestOptions)
         let r_progress = await progress.json()
         setProgress(r_progress)
@@ -44,7 +43,8 @@ function AdminDevis() {
             redirect: 'follow'
         };
         let data = await fetch("http://localhost:8000/devis/progress/" + id, requestOptions)
-        if (data === "OK") {
+        let result = await data.json();
+        if (result === "OK") {
             setMessage("Le devis est maintenant en cours de traitement.")
         }
     }
@@ -59,7 +59,8 @@ function AdminDevis() {
             redirect: 'follow'
         };
         let data = await fetch("http://localhost:8000/devis/down/" + id, requestOptions)
-        if (data === "OK") {
+        let result = await data.json();
+        if (result === "OK") {
             setMessage("Le devis est maintenant terminé.")
         }
     }
@@ -75,7 +76,6 @@ function AdminDevis() {
         };
         let old = await fetch("http://localhost:8000/devis/down", requestOptions)
         let r_old = await old.json();
-        console.log(r_old)
         setOld(r_old)
     }
 
@@ -113,7 +113,7 @@ function AdminDevis() {
                         <div key={key} className={style.devis}>
                             <div className={style.mail}>{value.email} a envoyé le {value.date} :</div>
                             <div className={style.panier}>{value.panier}</div>
-                            <button onClick={() => Progress(value.id)}>Mettre a jour</button>
+                            <button onClick={() => {setMessage(""); Progress(value.id)}}>Mettre a jour</button>
                         </div>
                     )}
                 </div>
@@ -123,7 +123,7 @@ function AdminDevis() {
                         <div key={key} className={style.devis}>
                             <div className={style.mail}>{value.email} a envoyé le {value.date} :</div>
                             <div className={style.panier}>{value.panier}</div>
-                            <button onClick={() => Down(value.id)}>Mettre a jour</button>
+                            <button onClick={() => {setMessage(""); Down(value.id)}}>Mettre a jour</button>
                         </div>
                     )}
                 </div>

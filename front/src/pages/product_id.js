@@ -47,25 +47,27 @@ function Product() {
     //SAUVEGARDER UN PRODUIT
     function addProduct(product) {
         if (token === null) {
-            setMessage("Vous devez être identifié pour ajouter un produit")
+            setMessage(<a href='/login'>Vous devez vous connecter pour ajouter ce produit au panier.</a>)
         } else {
             if (product.quantity === "") {
                 setMessage("Veuillez séléctionner le nombre de produit")
             } else {
-                let panier = getPanier()
-                let foundProduct = panier.find(p => p.ref === product.ref)
-                console.log(foundProduct)
-                if (foundProduct !== undefined) {
-                    foundProduct.quantity += product.quantity
+                if (isNaN(product.quantity)) {
+                    setMessage("Entrez une donnée valide.")
                 } else {
-                    panier.push(product)
+                    let panier = getPanier()
+                    let foundProduct = panier.find(p => p.ref === product.ref)
+                    if (foundProduct !== undefined) {
+                        foundProduct.quantity += product.quantity
+                    } else {
+                        panier.push(product)
+                    }
+                    savePanier(panier)
+                    alert("Article(s) ajouté(s) au panier ")
                 }
-                savePanier(panier)
-                alert("Article(s) ajouté(s) au panier ")
             }
         }
     }
-
 
     return (
         <>
@@ -91,8 +93,8 @@ function Product() {
                             <div className={style.cart_devis}>
                                 <div>Nombre d'exemplaires :
                                     {/*eslint-disable-next-line*/}
-                                    <input placeholder="?" onInput={(e) => { { setPanier({ ...panier,id: value.id, title: value.title, ref: value.ref, quantity: parseInt(e.target.value) }) } }}></input>
-                                    &nbsp;&nbsp;&nbsp;<button onClick={() => addProduct(panier)}>Ajouter</button>
+                                    <input placeholder="?" onInput={(e) => { { setPanier({ ...panier, id: value.id, title: value.title, ref: value.ref, quantity: parseInt(e.target.value) }) }; setMessage("") }}></input>
+                                    &nbsp;&nbsp;&nbsp;<button onClick={() => {addProduct(panier)}}>Ajouter</button>
                                 </div>
                             </div>
                             <div className={style.message}>{message}</div>

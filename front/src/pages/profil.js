@@ -70,23 +70,28 @@ function Profil() {
     //PANIER
 
     //OBTENIR LE PANIER
+    // async function getPanier() {
+    //     const storage = localStorage.getItem("Panier")
+    //     if (storage === null) {
+    //         let storage = []
+    //         setPanier(storage)
+    //     } else {
+    //         setPanier(JSON.parse(storage))
+    //     }
+    // }
+
     async function getPanier() {
         const storage = localStorage.getItem("Panier")
-        if (storage === null) {
-            let storage = []
-            setPanier(storage)
-        } else {
-            setPanier(JSON.parse(storage))
-        }
+        setPanier(JSON.parse(storage))
     }
 
-  function getModifPanier() {
+    function getModifPanier() {
         const storage = localStorage.getItem("Panier")
         if (storage === null) {
             let storage = []
-           return storage
+            return storage
         } else {
-           return JSON.parse(storage)
+            return JSON.parse(storage)
         }
     }
 
@@ -114,13 +119,14 @@ function Profil() {
         let n_quantity = parseInt(quantity)
         let n_panier = getModifPanier()
         let foundProduct = n_panier.find(p => p.id === id)
-        if(foundProduct !== undefined) {
+        if (foundProduct !== undefined) {
             foundProduct.quantity = n_quantity
-            if(foundProduct.quantity <= 0){
+            if (foundProduct.quantity <= 0) {
                 Remove(id)
             }
             else {
                 savePanier(n_panier)
+                setMessage("Le panier a été modifié.")
             }
         }
     }
@@ -129,6 +135,9 @@ function Profil() {
     function Remove(id) {
         panier = panier.filter(p => p.id !== id)
         savePanier(panier)
+        if(panier.length <= 0){
+            localStorage.removeItem("Panier")
+        }
         setMessage("Article supprimé.")
     }
     //SAUVEGARDER LE NOUVEAU PANIER
@@ -141,7 +150,7 @@ function Profil() {
             <Navbar />
             <div className={style.container}>
                 <div className={style.info}>
-                    {user.email === "laetitia.chazot@gmail.com" ? <Link to={'/admin_boutique'}><button className={style.update}>Admin</button></Link> : <div></div>}
+                    {user.email === "laetitia.chazot@gmail.com" || user.email === "albenji@orange.fr" ? <Link to={'/admin_boutique'}><button className={style.update}>Admin</button></Link> : <div></div>}
                     <label name="nom">Nom :</label>
                     <div className={style.champ}>
                         {update.nom === "" ? <div className={style.field}>{user.nom}</div> : <input className={style.change} onInput={e => setUpdate({ ...update, nom: e.target.value })}></input>}
@@ -166,17 +175,23 @@ function Profil() {
                 </div>
                 <div className={style.panier}>
                     <div>Mon panier :</div>
-                    {panier.map((value, key) =>
-                        <div key={key} className={style.test}>
-                            <div className={style.title}>{value.title}</div>
-                            {modify === value.id ? <input onInput={(e) => setQuantity(e.target.value)}></input> : <div className={style.quantity}>{value.quantity}</div>}
-                            {modify === value.id ? <button onClick={() => changeQuantity(value.id, quantity)}>V</button> : <Popup trigger={<button>Supprimer</button>} position="right"><button onClick={() => Remove(value.id)}>Cliquer ici pour confirmer la suppression</button></Popup>}
-                            {modify === value.id ? <button onClick={() => setModify("un")}>Annuler</button> : <button onClick={() => setModify(value.id)}>Modif</button>}
+                    {panier === null || panier === [] ? <div> Aucun article</div> :
+                        <div>
+                            {panier.map((value, key) =>
+                                <div key={key} className={style.test}>
+                                    <div className={style.title}>{value.title}</div>
+                                    {modify === value.id ? <input onInput={(e) => setQuantity(e.target.value)}></input> : <div className={style.quantity}>{value.quantity}</div>}
+                                    {modify === value.id ? <button onClick={() => { changeQuantity(value.id, quantity); setModify() }}>V</button> : <Popup trigger={<button>Supprimer</button>} position="right"><button onClick={() => {Remove(value.id)}}>Cliquer ici pour confirmer la suppression</button></Popup>}
+                                    {modify === value.id ? <button onClick={() => setModify("un")}>Annuler</button> : <button onClick={() => setModify(value.id)}>Modif</button>}
+                                </div>
+                            )
+                            }
+                            <div className={style.confirm}>
+                                <Popup trigger ={<button>Envoyer le devis</button>} position="right"><button onClick={confirmPanier}>--> Confirmer l'envoi du devis</button></Popup> 
+                            </div>
                         </div>
-                    )}
-                    <div className={style.confirm}>
-                        <button onClick={confirmPanier}>Envoyer le devis</button>
-                    </div>
+                    }
+
                 </div>
             </div>
         </>

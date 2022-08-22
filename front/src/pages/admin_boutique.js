@@ -21,11 +21,18 @@ function AdminBoutique() {
     const [result, setResult] = useState([])
     //SET LE MESSAGE (SUCCES/ERREUR)
     const [message, setMessage] = useState("")
-    //UTILISER LES FILTRES
-    const [filter, setFilter] = useState("")
     //CATEGORIE / THEME
     const [theme, setTheme] = useState([])
+    const [togTheme, setTogTheme] = useState(false)
     const [categorie, setCategorie] = useState([])
+    const [togCat, setTogCat] = useState(false)
+
+
+
+    //TOGGLE POUR LA RECHERCHE DU TABLEAU
+    const [toggleCat, setToggleCat] = useState(false)
+    const [toggleTheme, setToggleTheme] = useState(false)
+
 
     //RECHERCHER TOUS LES PRODUITS
     async function getProducts() {
@@ -210,18 +217,20 @@ function AdminBoutique() {
                     <div className={style.create}>
                         <div className={style.title}>Ajouter un article :</div>
                         <div className={style.theme}>
-                            <div onClick={getTheme} >Thème :</div>
-                            <div className={style.map}>
-                                {theme.map((value, key) =>
-                                    <button className={style.map_btn} key={key} value={value.title} onClick={e => setProduct({ ...product, theme: e.target.value })}>{value.title}</button>)}
-                            </div>
+                            <div onClick={() => { getTheme(); setTogTheme(true) }} >Thème :</div>
+                            {togTheme === true ?
+                                <div className={style.map}>
+                                    {theme.map((value, key) =>
+                                        <button className={style.map_btn} key={key} value={value.title} onClick={e => setProduct({ ...product, theme: e.target.value })}>{value.title}</button>)}
+                                </div> : <div></div>}
                         </div>
                         <div className={style.theme}>
-                            <div onClick={getCat}>Catégorie :</div>
-                            <div className={style.map}>
-                                {categorie.map((value, key) =>
-                                    <button className={style.map_btn} key={key} value={value.title} onClick={e => setProduct({ ...product, categorie: e.target.value })}>{value.title}</button>)}
-                            </div>
+                            <div onClick={() => { getCat(); setTogCat(true) }}>Catégorie :</div>
+                            {togCat === true ?
+                                <div className={style.map}>
+                                    {categorie.map((value, key) =>
+                                        <button className={style.map_btn} key={key} value={value.title} onClick={e => setProduct({ ...product, categorie: e.target.value })}>{value.title}</button>)}
+                                </div> : <div></div>}
                         </div>
                         <div className={style.titre}>
                             <label>TItre du produit :</label>
@@ -267,18 +276,26 @@ function AdminBoutique() {
                             <label onClick={getProducts}>Tous les produits</label>
                         </div>
                         <div className={style.filter}>
-                            <label>Rechercher par thème :</label>
-                            <div>
+                            <label onClick={() => { getTheme(); setToggleTheme(prevtoggleTheme => !prevtoggleTheme); setToggleCat(false) }}>Rechercher par thème :</label>
+                            {toggleTheme === true ? <div className={style.search_btn}>
+                                {theme.map((value, key) =>
+                                    <button className={style.map_btn} key={key} value={value.title} onClick={(e) => searchTheme(e.target.value)}>{value.title}</button>)}
+                            </div> : <div></div>}
+                            {/* <div>
                                 <input className={style.filter_input} onInput={(e) => setFilter(e.target.value)}></input>
                                 <button className={style.filter_btn} onClick={() => searchTheme(filter)}>Rechercher</button>
-                            </div>
+                            </div> */}
                         </div>
                         <div className={style.filter}>
-                            <label>Rechercher par catégorie :</label>
-                            <div>
+                            <label onClick={() => { getCat(); setToggleCat(prevtoggleCat => !prevtoggleCat); setToggleTheme(false) }}>Rechercher par catégorie :</label>
+                            {toggleCat === true ? <div className={style.search_btn}>
+                                {categorie.map((value, key) =>
+                                    <button className={style.map_btn} key={key} value={value.title} onClick={(e) => searchCategorie(e.target.value)}>{value.title}</button>)}
+                            </div> : <div></div>}
+                            {/* <div>
                                 <input className={style.filter_input} onInput={(e) => setFilter(e.target.value)}></input>
                                 <button className={style.filter_btn} onClick={() => searchCategorie(filter)}>Rechercher</button>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className={style.tableau2}>

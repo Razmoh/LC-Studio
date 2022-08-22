@@ -10,8 +10,10 @@ function Boutique() {
     const [message, setMessage] = useState()
     //STOCKER LES THEMES
     const [theme, setTheme] = useState([])
+    const [toggleTheme, setToggleTheme] = useState(false)
     //STOCKER LES CATEGORIES
     const [categorie, setCategorie] = useState([])
+    const [toggleCat, setToggleCat] = useState(false)
     //OBTENIR TOUS LES PRODUITS AU CHARGEMENT DE LA PAGE
     useEffect(() => {
         getProducts()
@@ -30,6 +32,8 @@ function Boutique() {
         let result = await fetch("http://localhost:8000/create_product", requestOptions)
         let data = await result.json();
         setProduct(data)
+        getTheme()
+        getCat()
     }
     //OBTENIR LES CATEGORIES
     async function getCat() {
@@ -105,18 +109,19 @@ function Boutique() {
             <div className={style.container}>
                 <div className={style.search}>
                     <div className={style.filter}>
-                        <div className={style.label} onClick={() => { getTheme(); setCategorie([]); setMessage("") }}>THEME</div>
-                        <div className={style.filter_btn}>
+                        <div className={style.label} onClick={() => { setToggleTheme(prevtoggleTheme => !prevtoggleTheme); setToggleCat(false) }}>THEME</div>
+                        {toggleTheme === true ? <div className={style.filter_btn}>
                             {theme.map((value, key) =>
                                 <button className={style.button} key={key} value={value.title} onClick={() => searchTheme(value.title)}>{value.title}</button>)}
-                        </div>
+                        </div> : <div></div>}
                     </div>
                     <div className={style.filter}>
-                        <div className={style.label} onClick={() => { getCat(); setTheme([]); setMessage("") }}>CATEGORIE</div>
-                        <div className={style.filter_btn}>
-                            {categorie.map((value, key) =>
-                                <button className={style.button} key={key} value={value.title} onClick={() => searchCategorie(value.title)}>{value.title}</button>)}
-                        </div>
+                        <div className={style.label} onClick={() => { setToggleCat(prevtoggleCat => !prevtoggleCat); setToggleTheme(false) }}>CATÉGORIE </div>
+                        {toggleCat === true ?
+                            <div className={style.filter_btn}>
+                                {categorie.map((value, key) =>
+                                    <button className={style.button} key={key} value={value.title} onClick={() => searchCategorie(value.title)}>{value.title}</button>)}
+                            </div> : <div></div>}
                     </div>
                     <div>{message}</div>
                 </div>

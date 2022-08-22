@@ -33,7 +33,6 @@ async function getOne(email) {
     if (rows[0] === undefined) {
         return "NONE"
     }
-    console.log(rows)
     return rows
 }
 

@@ -37,14 +37,15 @@ router.get('/:email', async function (req, res) {
 router.put('/progress/:id', async function (req, res) {
     const id = req.params.id
     const [rows, field] = await con.promise().execute('UPDATE devis SET status = 1 WHERE id = ?', [id])
-    return "OK"
+    return res.status(200).json("OK")
+
     // return res.status(200).json(rows[0])
 })
 
 router.put('/down/:id', async function (req, res) {
     const id = req.params.id
     const [rows, field] = await con.promise().execute('UPDATE devis SET status = 2 WHERE id = ?', [id])
-    return "OK"
+    return res.status(200).json("OK")
     // return res.status(200).json(rows[0])
 })
 module.exports = router

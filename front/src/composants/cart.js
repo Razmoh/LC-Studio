@@ -21,16 +21,15 @@ function Cart() {
 
     return (
         <div className={style.container}>
-            {panier.map((value, key) =>
-                <Link to={`/boutique/${value.id}`}>
+            <Link to={'/profil'}>
+                {panier.map((value, key) =>
                     <div key={key} className={style.test}>
                         <div className={style.title}>{value.title}</div>
                         {/* <div className={style.quantity}></div> */}
                         <div className={style.quantity}>{value.quantity}</div>
                     </div>
-                </Link>
-            )}
-
+                )}
+            </Link>
         </div>
     )
 }
