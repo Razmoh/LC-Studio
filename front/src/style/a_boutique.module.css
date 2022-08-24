@@ -18,24 +18,17 @@
   border: 1px solid rgb(221, 198, 154);
   border-radius: 4px;
   width: 15%;
-  padding-left: 1%;
-  padding-right: 1%;
+  margin-top: 2%;
 }
 
-.add {
-  display: flex;
-  justify-content: space-between;
+.create_theme {
+  width: 100%;
+  margin: 4% 2% 8% 2%;
 }
 
-.add input {
-  border: none;
-  border-bottom: 1px solid rgb(221, 198, 154);
-}
-
-.add button {
-  border: none;
-  background-color: white;
-  font-size: 30px;
+.create_cat {
+  width: 100%;
+  margin: 2%;
 }
 
 .create {
@@ -67,6 +60,10 @@
   justify-content: space-between;
   margin-bottom: 10px;
   padding: 0% 7% 0% 7%;
+}
+
+.theme:hover {
+  cursor: pointer;
 }
 
 .titre {
@@ -282,9 +279,8 @@
 }
 
 .message {
-  color: rgb(194, 3, 3);
-  margin-left: 10%;
-  margin-top: 2%;
+ width: 20%;
+ margin: 2% 0% 0% 8%;
 }
 
 .button_del {

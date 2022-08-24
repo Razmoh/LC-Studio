@@ -4,7 +4,8 @@ import AdminNav from "../composants/adminNav"
 import style from '../style/a_boutique.module.css'
 import styles from '../style/shop.module.css'
 import Popup from 'reactjs-popup';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Alert from '../composants/alert'
 
 function AdminBoutique() {
 
@@ -26,14 +27,16 @@ function AdminBoutique() {
     const [togTheme, setTogTheme] = useState(false)
     const [categorie, setCategorie] = useState([])
     const [togCat, setTogCat] = useState(false)
-
-
-
     //TOGGLE POUR LA RECHERCHE DU TABLEAU
     const [toggleCat, setToggleCat] = useState(false)
     const [toggleTheme, setToggleTheme] = useState(false)
+    //PARAM POUR CREER THEME/CAT
+    const [param, setParam] = useState("")
 
-
+    useEffect(() => {
+        getCat()
+        // eslint-disable-next-line
+    }, [])
     //RECHERCHER TOUS LES PRODUITS
     async function getProducts() {
         var myHeaders = new Headers()
@@ -59,6 +62,35 @@ function AdminBoutique() {
         let result = await fetch("http://localhost:8000/categorie", requestOptions)
         let data = await result.json();
         setCategorie(data)
+        getTheme()
+    }
+
+    //AJOUTER UNE CATEGORIE
+    async function addCat() {
+        if (param === "") {
+            setMessage(<Alert type="error">
+            <p>Ajoutez du texte.</p>
+        </Alert>)
+        } else {
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            var body = JSON.stringify({
+                "title": param
+            })
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: body,
+                redirect: 'follow'
+            };
+            let data = await fetch("http://localhost:8000/create_product/categorie", requestOptions)
+            const result = await data.json()
+            if (result) {
+                setMessage(<Alert type="success">
+                <p>La catgéorie a été ajoutée.</p>
+            </Alert>)
+            }
+        }
     }
     //OBTENIR TOUS LES THEMES
     async function getTheme() {
@@ -73,6 +105,34 @@ function AdminBoutique() {
         let theme = await result.json();
         setTheme(theme)
     }
+    //AJOUTER UN THEME
+    async function addTheme() {
+        if (param === "") {
+            setMessage(<Alert type="error">
+            <p>Ajoutez du texte.</p>
+        </Alert>)
+        } else {
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            var body = JSON.stringify({
+                "title": param
+            })
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: body,
+                redirect: 'follow'
+            };
+            let data = await fetch("http://localhost:8000/create_product/theme", requestOptions)
+            const result = await data.json()
+            if (result) {
+                setMessage(<Alert type="success">
+                <p>Le thème a été ajoutée.</p>
+            </Alert>)
+            }
+        }
+    }
+
 
     //RECUPERER L'IMAGE
     const input = (file) => {
@@ -86,12 +146,16 @@ function AdminBoutique() {
     }
     //CREER LE PRODUIT
     async function createProduct() {
-        if (image.image1 === "" && image.image2 === "") {
-            setMessage("Ajouter une image !")
+        if (image.image1 === "" || image.image2 === "") {
+            setMessage(<Alert type="error">
+            <p>Ajoutez une image.</p>
+        </Alert>)
         }
         else {
             if (product.title === "" || product.ref === "" || product.description === "" || product.price === "" || product.categorie === "" || product.theme === "") {
-                setMessage("Champs manquants !")
+                setMessage(<Alert type="error">
+                <p>Champ(s) manquant(s).</p>
+            </Alert>)
             } else {
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
@@ -123,7 +187,9 @@ function AdminBoutique() {
                     redirect: 'follow'
                 };
                 await fetch("http://localhost:8000/image/" + Id, Options)
-                setMessage("Le produit a été ajouté")
+                setMessage(<Alert type="success">
+                <p>Le produit a été ajouté.</p>
+            </Alert>)
             }
         }
     }
@@ -146,7 +212,9 @@ function AdminBoutique() {
             redirect: 'follow'
         };
         await fetch("http://localhost:8000/create_product/" + id, requestOptions)
-        setMessage("Le produit a été mit à jour.")
+        setMessage(<Alert type="primary">
+        <p>Le produit a été modifié.</p>
+    </Alert>)
     }
     //SUPPRIMER UN PRODUIT
     async function Supprimer(id) {
@@ -170,7 +238,9 @@ function AdminBoutique() {
             };
             await fetch("http://localhost:8000/create_product/" + id, requestOption)
             setResult(old => old.filter(e => e.id !== id))
-            setMessage("Le produit a été supprimé.")
+            setMessage(<Alert type="error">
+            <p>Le produit a été supprimé.</p>
+        </Alert>)
         }
     }
     //RECHERCHER PAR THEME
@@ -185,10 +255,13 @@ function AdminBoutique() {
         let result = await fetch("http://localhost:8000/filter/theme/" + theme, requestOptions)
         let data = await result.json();
         if (data === "aucun produit") {
-            setMessage("Aucun produit !")
+            setMessage(<Alert type="error">
+            <p>Aucun produit.</p>
+        </Alert>)
         }
         else {
             setResult(data)
+            setMessage("")
         }
     }
     //RECHERCHER PAR CATEGORIE
@@ -203,10 +276,13 @@ function AdminBoutique() {
         let result = await fetch("http://localhost:8000/filter/categorie/" + categorie, requestOptions)
         let data = await result.json();
         if (data === "aucun produit") {
-            setMessage("Aucun produit !")
+            setMessage(<Alert type="error">
+            <p>Aucun produit.</p>
+        </Alert>)
         }
         else {
             setResult(data)
+            setMessage("")
         }
     }
     return (
@@ -214,10 +290,35 @@ function AdminBoutique() {
             <AdminNav />
             <div className={style.wrapper}>
                 <div className={style.container}>
+                    <div className={style.categorie}>
+                        <div className={style.create_theme}>
+                            <div className={style.create_title}>
+                                <u> Thèmes :</u>
+                            </div>
+                            {theme.map((value, key) =>
+                                <div className={style.teuteu} key={key} value={value.title}>{value.id} ) {value.title}</div>)}
+                            <div>
+                                <input onInput={(e) => setParam(e.target.value)}></input>
+                                <Popup trigger={<button>+</button>} position="bottom"><button onClick={() => addTheme(param)}>Confirmer la création</button></Popup>
+                            </div>
+                        </div>
+                        <div className={style.create_cat}>
+                            <div className={style.create_title}>
+                                <u>Catégories :</u>
+                            </div>
+                            {categorie.map((value, key) =>
+                                <div className={style.teuteu} key={key} value={value.title}>{value.id} ) {value.title}</div>)}
+                            <div>
+                                <input onInput={(e) => setParam(e.target.value)}></input>
+                                <Popup trigger={<button>+</button>} position="bottom"><button onClick={() => addCat(param)}>Confirmer la création</button></Popup>
+                            </div>
+                        </div>
+
+                    </div>
                     <div className={style.create}>
                         <div className={style.title}>Ajouter un article :</div>
                         <div className={style.theme}>
-                            <div onClick={() => { getTheme(); setTogTheme(true) }} >Thème :</div>
+                            <div onClick={() => { setTogTheme(true) }} >Thème :</div>
                             {togTheme === true ?
                                 <div className={style.map}>
                                     {theme.map((value, key) =>
@@ -225,7 +326,7 @@ function AdminBoutique() {
                                 </div> : <div></div>}
                         </div>
                         <div className={style.theme}>
-                            <div onClick={() => { getCat(); setTogCat(true) }}>Catégorie :</div>
+                            <div onClick={() => { setTogCat(true) }}>Catégorie :</div>
                             {togCat === true ?
                                 <div className={style.map}>
                                     {categorie.map((value, key) =>
@@ -276,7 +377,7 @@ function AdminBoutique() {
                             <label onClick={getProducts}>Tous les produits</label>
                         </div>
                         <div className={style.filter}>
-                            <label onClick={() => { getTheme(); setToggleTheme(prevtoggleTheme => !prevtoggleTheme); setToggleCat(false) }}>Rechercher par thème :</label>
+                            <label onClick={() => { setToggleTheme(prevtoggleTheme => !prevtoggleTheme); setToggleCat(false) }}>Rechercher par thème :</label>
                             {toggleTheme === true ? <div className={style.search_btn}>
                                 {theme.map((value, key) =>
                                     <button className={style.map_btn} key={key} value={value.title} onClick={(e) => searchTheme(e.target.value)}>{value.title}</button>)}
@@ -287,7 +388,7 @@ function AdminBoutique() {
                             </div> */}
                         </div>
                         <div className={style.filter}>
-                            <label onClick={() => { getCat(); setToggleCat(prevtoggleCat => !prevtoggleCat); setToggleTheme(false) }}>Rechercher par catégorie :</label>
+                            <label onClick={() => { setToggleCat(prevtoggleCat => !prevtoggleCat); setToggleTheme(false) }}>Rechercher par catégorie :</label>
                             {toggleCat === true ? <div className={style.search_btn}>
                                 {categorie.map((value, key) =>
                                     <button className={style.map_btn} key={key} value={value.title} onClick={(e) => searchCategorie(e.target.value)}>{value.title}</button>)}

@@ -1,6 +1,7 @@
 import style from '../style/login.module.css'
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Alert from '../composants/alert'
 
 function Register() {
     //STOCKER LES INPUT
@@ -20,16 +21,29 @@ function Register() {
     //FUNCTION POUR S'ENREGISTRER
     function Register() {
         if (user.nom === "" || user.prenom === "" || user.email === "" || user.password === "" || user.confirm_password === "") {
-            return setError("Champ(s) manquant(s).")
+            return setError(<Alert type="error">
+            <p>Champ(s) manquant(s).</p>
+        </Alert>)
         }
         if (user.password !== user.confirm_password) {
-            return setError("Les mots de passe ne correspondent pas.")
+            return setError(<Alert type="error">
+            <p>Les mots de passe ne correspondent pas.</p>
+        </Alert>)
         }
         if (user.password.length < 5 && user.confirm_password.length < 5) {
-            return setError("Mot de passe : 6 caractères min.")
+            return setError(<Alert type="error">
+            <p>Mot de passe : 6 caractères min.</p>
+        </Alert>)
         }
         if (user.phone.length !== 10) {
-            return setError("Téléphone invalide.")
+            return setError(<Alert type="error">
+            <p>La téléphone doit contenir 10 chiffres.</p>
+        </Alert>)
+        }
+        if(isNaN(user.phone)){
+            return setError(<Alert type="error">
+            <p>Format de téléphone incorrect.</p>
+        </Alert>)
         }
         else {
             var myHeaders = new Headers();
@@ -53,7 +67,9 @@ function Register() {
             fetch("http://localhost:8000/auth/register", requestOptions)
                 .then(response => response.json())
                 .then(result => {
-                    setError(result.message)
+                    setError(<Alert type="error">
+                    <p>Cette adresse email est déjà utilisée.</p>
+                </Alert>)
                     if (!result.message) {
                         navigate('/login')
                     }

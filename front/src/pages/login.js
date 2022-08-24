@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import style from "../style/login.module.css";
+import Alert from '../composants/alert'
 
 function Login() {
     //STATE DES INPUTS
@@ -20,7 +21,9 @@ function Login() {
     //SE CONNECTER
     function Login() {
         if (login.email === "" || login.password === "") {
-            setError("Merci de remplir tout les champs")
+            setError(<Alert type="error">
+            <p>Veillez a remplir tous les champs.</p>
+        </Alert>)
         }
         else {
             var myHeaders = new Headers();
@@ -46,7 +49,9 @@ function Login() {
                         navigate("/");
                     }
                     else if (result.message) {
-                        setError("Adresse e-mail ou mot de passe invalide")
+                        setError(<Alert type="error">
+                        <p>Mail ou mot de passe invalide.</p>
+                    </Alert>)
                     }
                 })
         }
@@ -79,8 +84,9 @@ function Login() {
                         name="password"
                         onInput={e => setLogin({ ...login, password: e.target.value })}
                     ></input>
-                    <div className={style.error}>{error}</div>
                     <button className={style.btn} onClick={Login}> Login </button>
+                    <div className={style.error}>{error}</div>
+
                     <div className={style.more}>
                         Besoin de créer votre compte ? Rendez-vous &nbsp;
                         <Link to="/register" className={style.link}>ICI</Link>

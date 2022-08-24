@@ -1,6 +1,7 @@
 import Navbar from "../composants/navbar"
 import { useEffect, useState } from "react";
 import style from '../style/product_id.module.css'
+import Alert from '../composants/alert'
 
 function Product() {
     const [product, setProduct] = useState([])
@@ -13,6 +14,7 @@ function Product() {
         // eslint-disable-next-line
     }, [])
 
+    //OBTENIR LES INFOS DU PRODUIT
     async function getProduct() {
         const id = (new URL(window.location.href).pathname).slice(10)
         var myHeaders = new Headers()
@@ -50,10 +52,14 @@ function Product() {
             setMessage(<a href='/login'>Vous devez vous connecter pour ajouter ce produit au panier.</a>)
         } else {
             if (product.quantity === "") {
-                setMessage("Veuillez séléctionner le nombre de produit")
+                setMessage(    <Alert type="error">
+                <p>Veuillez séléctionner le nombre de produit.</p>
+            </Alert>)
             } else {
                 if (isNaN(product.quantity)) {
-                    setMessage("Entrez une donnée valide.")
+                    setMessage(    <Alert type="error">
+                    <p>Veuillez entrer une donnée valide.</p>
+                </Alert>)
                 } else {
                     let panier = getPanier()
                     let foundProduct = panier.find(p => p.ref === product.ref)
@@ -63,7 +69,9 @@ function Product() {
                         panier.push(product)
                     }
                     savePanier(panier)
-                    alert("Article(s) ajouté(s) au panier ")
+                    setMessage(    <Alert type="success">
+                    <p>Le produit a été ajouté au panier.</p>
+                </Alert>)
                 }
             }
         }
@@ -76,7 +84,7 @@ function Product() {
                 {product.map((value, key) =>
                     <div key={key} className={style.container}>
                         <img className={style.image} src={`http://localhost:8000/static/images/${value.id}/image1.jpg`} alt=""
-                            onMouseOver={e => (e.currentTarget.src = `http://localhost:8000/static/images/${value.id}/image2.jpg`)}
+                            onClick={e => (e.currentTarget.src = `http://localhost:8000/static/images/${value.id}/image2.jpg`)}
                             onMouseOut={e => (e.currentTarget.src = `http://localhost:8000/static/images/${value.id}/image1.jpg`)} />
                         <div className={style.info}>
                             <div className={style.title}>{value.title}</div>
@@ -94,10 +102,11 @@ function Product() {
                                 <div>Nombre d'exemplaires :
                                     {/*eslint-disable-next-line*/}
                                     <input placeholder="?" onInput={(e) => { { setPanier({ ...panier, id: value.id, title: value.title, ref: value.ref, quantity: parseInt(e.target.value) }) }; setMessage("") }}></input>
-                                    &nbsp;&nbsp;&nbsp;<button onClick={() => {addProduct(panier)}}>Ajouter</button>
+                                    &nbsp;&nbsp;&nbsp;<button onClick={() => { addProduct(panier) }}>Ajouter</button>
                                 </div>
                             </div>
                             <div className={style.message}>{message}</div>
+                        
                         </div>
                         <div className={style.span}></div>
                     </div>

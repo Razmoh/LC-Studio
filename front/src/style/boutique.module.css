@@ -1,21 +1,25 @@
+.container {
+    display: flex;
+}
+
 .cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    margin: 0% 4% 0% 4%;
-    padding-left: 4%;
     width: 92%;
+    /* background-color: red; */
 }
 
 .filter {
-    display: flex;
+    /* display: flex; */
     margin: 1%;
 }
 
 .search {
-    width: 92%;
-    margin: 0% 2% 0% 6%;
+    width: 10%;
+    margin: 0% 0% 0% 1%;
     color: rgb(93, 88, 88);
+    /* background-color: blue; */
 }
 .label {
     width: 10%;
@@ -28,27 +32,23 @@
 }
 
 .filter_btn {
-    width: 80%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 }
 
 .button {
-    border: 1px solid rgb(223, 223, 223);
+    border: none;
     background-color: white;
     color: rgb(93, 88, 88);
-    padding: 2px 4px 2px 4px;
+    padding: 5px 0px 5px 10px;
     border-radius: 3px;
     font-size: 15px;
-}
-
-.button:active {
-    border: 1px solid black;
+    text-align: left;
 }
 
 .button:hover {
-    border: 1px solid black;
     cursor: pointer;
+    color: black;
 }
 
 .confirm {

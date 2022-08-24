@@ -2,6 +2,7 @@ import style from '../style/a_user.module.css'
 import AdminNav from '../composants/adminNav';
 import { useState } from "react";
 import Popup from 'reactjs-popup';
+import Alert from '../composants/alert'
 
 function Admin() {
     //STOCKER TOUS LES UTILISATEURS
@@ -14,6 +15,7 @@ function Admin() {
     const [message, setMessage] = useState("")
     //SET LE FILTRE
     const [filter, setFilter] = useState()
+    console.log(filter)
     //AVOIR LE TOKEN
     const token = localStorage.getItem("Token")
 
@@ -49,7 +51,9 @@ function Admin() {
             redirect: 'follow'
         };
         await fetch("http://localhost:8000/user/" + id, requestOptions)
-        setMessage("L'utilisateur a été mis à jour")
+        setMessage(<Alert type="primary">
+            <p>L'utilisateur a été mis a jour.</p>
+        </Alert>)
     }
     //SUPPRIMER UN UTILISATEUR
     async function Supprimer(id) {
@@ -68,12 +72,16 @@ function Admin() {
         };
         await fetch("http://localhost:8000/user/" + id, requestOptions)
         setUsers(old => old.filter(e => e.id !== id))
-        setMessage("L'utilisateur a été supprimé")
+        setMessage(<Alert type="error">
+            <p>L'utilisateur a été supprimé.</p>
+        </Alert>)
     }
     //RECHERCHER UN UTILISATEUR
     async function searchMail(param) {
-        if (filter === undefined) {
-            setMessage("aucune adresse email renseignée")
+        if (param === undefined) {
+            setMessage(<Alert type="error">
+                <p>Renseigner une adresse mail.</p>
+            </Alert>)
         }
         else {
             var myHeaders = new Headers()
@@ -87,7 +95,9 @@ function Admin() {
             let result = await fetch("http://localhost:8000/user/" + param, requestOptions)
             let data = await result.json();
             if (data === "Aucun utilisateur") {
-                setMessage("Aucun utilisateur !")
+                setMessage(<Alert type="error">
+                    <p>Aucun utilisateur.</p>
+                </Alert>)
                 setUsers([])
             }
             else {
@@ -100,8 +110,8 @@ function Admin() {
         <>
             <AdminNav />
             <div className={style.wrapper}>
-                <div className={style.message}>{message}</div>
                 <div className={style.tableau}>
+                    <div className={style.message}>{message}</div>
                     <div className={style.search}>
                         <button onClick={() => { (getUsers()); setMessage("") }}>Tous les utilisateurs</button>
                         <div className={style.filter}>

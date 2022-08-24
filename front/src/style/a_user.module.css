@@ -132,9 +132,8 @@
 }
 
 .message {
-  font-weight: 300;
-  font-style: italic;
-  color: rgb(194, 3, 3);
+width: 20%;
+margin-bottom: 2%;
 }
 
 .search {

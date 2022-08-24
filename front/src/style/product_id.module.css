@@ -16,6 +16,10 @@
     width: 35%;
 }
 
+.image:hover {
+    cursor: pointer;
+}
+
 .info {
     width: 30%;
     padding: 1%;
@@ -94,4 +98,14 @@
 .message a {
     color : red;
     font-weight: 500;
+}
+
+.popup {
+    background-color: white;
+    width: 25%;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 5px;
+    color: rgb(93, 88, 88);
+    font-weight: 300;
+    padding: 1%;
 }

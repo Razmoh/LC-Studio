@@ -14,6 +14,8 @@ function Boutique() {
     //STOCKER LES CATEGORIES
     const [categorie, setCategorie] = useState([])
     const [toggleCat, setToggleCat] = useState(false)
+    const [current, setCurrent] = useState("")
+    console.log(current)
     //OBTENIR TOUS LES PRODUITS AU CHARGEMENT DE LA PAGE
     useEffect(() => {
         getProducts()
@@ -112,7 +114,7 @@ function Boutique() {
                         <div className={style.label} onClick={() => { setToggleTheme(prevtoggleTheme => !prevtoggleTheme); setToggleCat(false) }}>THEME</div>
                         {toggleTheme === true ? <div className={style.filter_btn}>
                             {theme.map((value, key) =>
-                                <button className={style.button} key={key} value={value.title} onClick={() => searchTheme(value.title)}>{value.title}</button>)}
+                                <div className={style.button} key={key} value={value.title} onClick={() => {searchTheme(value.title); setCurrent(value.title)}}>{value.title}</div>)}
                         </div> : <div></div>}
                     </div>
                     <div className={style.filter}>
@@ -125,12 +127,14 @@ function Boutique() {
                     </div>
                     <div>{message}</div>
                 </div>
+                <div className={style.cards}>
+                    {current !== "" ? <div>Résultat :</div> : <div>Résultat : {current}</div>}
+                    {product.map((value, key) =>
+                        <Shop key={key} {...{ value: value }}></Shop>
+                    )}
+                </div>
             </div>
-            <div className={style.cards}>
-                {product.map((value, key) =>
-                    <Shop key={key} {...{ value: value }}></Shop>
-                )}
-            </div>
+
         </>
     )
 }

@@ -23,6 +23,17 @@ router.post('/', async function (req, res) {
     return res.status(200).json(result)
 })
 
+//AJOUTER UN THEME
+router.post('/theme', async function (req, res){
+  const [rows, field] = await con.promise().execute('INSERT INTO theme (`title`) VALUES (?)', [req.body.title])
+  return res.status(200).json("OK")
+})
+
+//AJOUTER UNE CATEGORIE 
+router.post('/categorie', async function (req, res){
+  const [rows, field] = await con.promise().execute('INSERT INTO categorie (`title`) VALUES (?)', [req.body.title])
+  return res.status(200).json("OK")
+})
 //METTRE UN PRODUIT A JOUR
 
 router.put('/:id', async function (req, res) {
