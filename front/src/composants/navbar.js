@@ -21,11 +21,14 @@ function Navbar() {
         <>
             <div className={style.wrapper}>
                 <div className={style.navbar}>
-                    <Link to={'/'}>
                         <img className={style.logo} src={'/images/logo.jpg'} alt="" />
-                    </Link>
                 </div>
                 <div className={style.container}>
+                <Link to={'/'}>
+                        <div className={style.btn}>
+                            Accueil
+                        </div>
+                    </Link>
                     <Link to={'/boutique'}>
                         <div className={style.btn}>
                             Boutique

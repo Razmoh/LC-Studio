@@ -38,15 +38,14 @@ a {
     padding: 5px;
     height: 20px;
     width: auto;
-    border-radius: 4px;
     margin-top: 5px;
     margin-bottom: 5px;
-    border: 1px solid white;
 }
 
 /*mettre le bouton en surbrillance*/
-.btn:hover, .btn_lc:hover {
-    font-weight: 500;
+.btn:hover,
+.btn_lc:hover {
+    color: black;
 }
 
 /*dimensionner les logos*/

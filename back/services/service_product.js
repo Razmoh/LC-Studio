@@ -14,8 +14,8 @@ async function getOne(id) {
 
 //AJOUTER UN PRODUIT
 async function createProduct(body, id) {
-    const [rows, field] = await con.promise().execute('INSERT INTO produits (`title`,`ref`, `description`, `price`, `categorie`, `theme`) VALUES (?, ?, ?, ?, ?, ?)',
-    [body.title,  body.ref, body.description, body.price, body.categorie, body.theme])
+    const [rows, field] = await con.promise().execute('INSERT INTO produits (`title`,`ref`, `description`, `price`, `categorie`, `theme`, `images`) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    [body.title,  body.ref, body.description, body.price, body.categorie, body.theme, body.images])
     .catch(err => {
         console.log("erreur", err)
     })

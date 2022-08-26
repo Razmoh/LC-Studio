@@ -58,6 +58,7 @@ CREATE TABLE `produits` (
   `price` varchar(255) NOT NULL,
   `categorie` varchar(255) NOT NULL,
   `theme` varchar(255) NOT NULL,
+  `images` int(11) NOT NULL,
   PRIMARY KEY(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -104,11 +105,11 @@ INSERT INTO `categorie`(`id`,`title`) VALUES (1,'Faire-part'), (2,'Save The Date
 
 TRUNCATE TABLE `produits`;
 
-INSERT INTO `produits` (`id`, `title`, `ref`, `description`, `price`, `categorie`, `theme`) VALUES
-(1, 'Faire-part World of Warcraft', '#FP001', 'Faire-part inspiré de la licence jeu vidéo World of Warcraft, au couleur de l\'Alliance. Si vous préférez la Horde, prenez le en rouge !', '1.09€', 'Faire-part', 'World of Warcraft'),
-(2, 'Faire-part Steampunk', '#FP002', 'Faire-part sur le thème Steampunk', '1.09€', 'Faire-part', 'World of Warcraft'),
-(3, 'Numéro de table', '#NT001', 'Pour numéroter les tables', '1.49€', 'Plan de table', 'Steampunk'),
-(4, 'Plan de table classique', '#PT001', 'Menu style classique pour le repas', '0.99€', 'Plan de table', 'Baroque');
+INSERT INTO `produits` (`id`, `title`, `ref`, `description`, `price`, `categorie`, `theme`, `images`) VALUES
+(1, 'Faire-part World of Warcraft', '#FP001', 'Faire-part inspiré de la licence jeu vidéo World of Warcraft, au couleur de l\'Alliance. Si vous préférez la Horde, prenez le en rouge !', '1.09€', 'Faire-part', 'World of Warcraft', 2),
+(2, 'Faire-part Steampunk', '#FP002', 'Faire-part sur le thème Steampunk', '1.09€', 'Faire-part', 'World of Warcraft', 2),
+(3, 'Numéro de table', '#NT001', 'Pour numéroter les tables', '1.49€', 'Plan de table', 'Steampunk', 2),
+(4, 'Plan de table classique', '#PT001', 'Menu style classique pour le repas', '0.99€', 'Plan de table', 'Baroque', 2);
 
 
 TRUNCATE TABLE `theme`;

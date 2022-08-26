@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import jwt_decode from "jwt-decode"
 import { Link } from 'react-router-dom'
 import Popup from 'reactjs-popup';
+import Alert from '../composants/alert'
 
 function Profil() {
     //STOCKER LES INFOS DE L'UTILISATEUR
@@ -30,7 +31,6 @@ function Profil() {
     const [wait, setWait] = useState([])
     const [progress, setProgress] = useState([])
     const [down, setDown] = useState([])
-    console.log(wait, progress, down)
 
     //OBTENIR LES INFOS VIA LE MAIL DANS LE TOKEN
     useEffect(() => {
@@ -57,11 +57,15 @@ function Profil() {
     //METTRE A JOUR SON PROFIL
     async function updateInfo(id) {
         if (user.nom === update.nom && user.prenom === update.prenom && user.phone === update.phone) {
-            setMessage("Aucune modification apportée.")
+            setMessage(<Alert type="primary">
+                <p>Aucune modification apportée.</p>
+            </Alert>)
             setUpdate({ ...update, nom: "", prenom: "", phone: "" })
         } else {
             if (update.phone.length !== 10) {
-                setMessage("Entrez des données valides")
+                setMessage(<Alert type="error">
+                    <p>Veuillez entrer une donnée valide.</p>
+                </Alert>)
             } else {
                 var myHeaders = new Headers()
                 myHeaders.append("Content-Type", "application/json");
@@ -77,7 +81,9 @@ function Profil() {
                     redirect: 'follow'
                 };
                 await fetch('http://localhost:8000/profil/' + id, requestOptions)
-                setMessage("Profil modifié avec succès !")
+                setMessage(<Alert type="success">
+                    <p>Profil modifié avec succès.</p>
+                </Alert>)
                 setUpdate({ ...update, nom: "", prenom: "", phone: "" })
             }
         }
@@ -114,7 +120,9 @@ function Profil() {
             redirect: 'follow'
         };
         await fetch('http://localhost:8000/devis', requestOptions)
-        setMessage("Le devis a été envoyé avec succès.")
+        setMessage(<Alert type="success">
+            <p>Devis envoyé avec succès.</p>
+        </Alert>)
         localStorage.removeItem('Panier')
     }
 
@@ -130,7 +138,9 @@ function Profil() {
             }
             else {
                 savePanier(n_panier)
-                setMessage("Le panier a été modifié.")
+                setMessage(<Alert type="primary">
+                    <p>Le panier a été modifié.</p>
+                </Alert>)
             }
         }
     }
@@ -142,7 +152,9 @@ function Profil() {
         if (panier.length <= 0) {
             localStorage.removeItem("Panier")
         }
-        setMessage("Article supprimé.")
+        setMessage(<Alert type="error">
+            <p>Article supprimé.</p>
+        </Alert>)
     }
     //SAUVEGARDER LE NOUVEAU PANIER
     async function savePanier(product) {
@@ -162,7 +174,7 @@ function Profil() {
         let w_result = await fetch("http://localhost:8000/profil/wait/" + email, requestOptions)
         let w_data = await w_result.json();
         setWait(w_data)
-        
+
         let p_result = await fetch("http://localhost:8000/profil/progress/" + email, requestOptions)
         let p_data = await p_result.json();
         setProgress(p_data)
@@ -206,15 +218,15 @@ function Profil() {
                         <div>
                             {panier.map((value, key) =>
                                 <div key={key} className={style.test}>
+                                    {modify === value.id ? <input onInput={(e) => setQuantity(e.target.value)}></input> : <div className={style.quantity}>{value.quantity} pièce(s)</div>}
                                     <div className={style.title}>{value.title}</div>
-                                    {modify === value.id ? <input onInput={(e) => setQuantity(e.target.value)}></input> : <div className={style.quantity}>{value.quantity}</div>}
-                                    {modify === value.id ? <button onClick={() => { changeQuantity(value.id, quantity); setModify() }}>V</button> : <Popup trigger={<button>Supprimer</button>} position="right"><button onClick={() => { Remove(value.id) }}>Cliquer ici pour confirmer la suppression</button></Popup>}
-                                    {modify === value.id ? <button onClick={() => setModify("un")}>Annuler</button> : <button onClick={() => setModify(value.id)}>Modif</button>}
+                                    {modify === value.id ? <button onClick={() => setModify("un")}>Annuler</button> : <button className={style.cart_update} onClick={() => setModify(value.id)}>Modif</button>}
+                                    {modify === value.id ? <button className={style.cart_delete} onClick={() => { changeQuantity(value.id, quantity); setModify() }}>V</button> : <Popup trigger={<button className={style.cart_delete}>Retirer</button>} position="right"><button className={style.cart_delete} onClick={() => { Remove(value.id) }}>Cliquer ici pour confirmer la suppression</button></Popup>}
                                 </div>
                             )
                             }
                             <div className={style.confirm}>
-                                <Popup trigger={<button>Envoyer le devis</button>} position="right"><button onClick={confirmPanier}> Confirmer l'envoi du devis</button></Popup>
+                                <Popup trigger={<button className={style.send}>Envoyer le devis</button>} position="right"><button className={style.send} onClick={confirmPanier}> Confirmer l'envoi du devis</button></Popup>
                             </div>
                         </div>
                     }
@@ -225,15 +237,15 @@ function Profil() {
                 <button onClick={() => checkDevis(email)}>Consulter l'avancement de mes devis :</button>
                 En attente :
                 {wait.map((value, key) =>
-                <div key={key}>Le devis n° {value.id} en date du {value.date} est en attente.</div>
+                    <div key={key}>Le devis n° {value.id} en date du {value.date} est en attente.</div>
                 )}
                 En cours :
-                  {progress.map((value, key) =>
-                <div key={key}>Le devis n° {value.id} en date du {value.date} est en cours de traitement.</div>
+                {progress.map((value, key) =>
+                    <div key={key}>Le devis n° {value.id} en date du {value.date} est en cours de traitement.</div>
                 )}
                 Terminé(s) :
-                  {down.map((value, key) =>
-                <div key={key}>Le devis n° {value.id} en date du {value.date} est terminé ! Pensez a consulter vos mails !</div>
+                {down.map((value, key) =>
+                    <div key={key}>Le devis n° {value.id} en date du {value.date} est terminé ! Pensez a consulter vos mails !</div>
                 )}
             </div>
         </>

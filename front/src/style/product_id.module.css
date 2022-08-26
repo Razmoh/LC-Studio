@@ -6,14 +6,14 @@
     width: 88%;
     height: 28em;
     margin-top: 3%;
-    margin-left: 6%;
+    margin-left: 10%;
     border-radius: 10px;
     display: flex;
 }
 
 .image {
     height: 100%;
-    width: 35%;
+    width: 30%;
 }
 
 .image:hover {
@@ -29,20 +29,19 @@
 }
 
 .title {
-    text-align: center;
+    /* text-align: center; */
     font-size: 22px;
-    margin-bottom: 5%;
+    margin-bottom: 0%;
 }
 
 .ref {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5%;
+    margin-bottom: 4%;
 }
 
 .description {
-    font-size: 19px;
+    font-size: 16px;
     height: 300px;
+    margin-top: 3%;
 }
 
 .theme {
@@ -70,37 +69,48 @@
 }
 
 .cart_devis {
-    margin-top: 5%;
+    margin-top: 3%;
+    display: flex;
+    justify-content: space-between;
     text-align: left;
-    width: 80%;
+    width: 100%;
     font-size: 16px;
+    margin-bottom: 3%;
 }
 
 .cart_devis input {
-    border: none;
+    border: 1px solid rgb(209, 209, 209);
     width: 50px;
     font-size: 18px;
     font-weight: 300;
     text-align: center;
+    width: 20%;
+    /* height: 100%; */
 }
 
 .cart_devis button {
-    background-color: white;
-    /* border: none; */
+    background-color: rgb(221, 198, 154);
+    border: none;
+    font-size: 16px;
+    color: rgb(85, 85, 85);
+    width: 70%;
+    text-align: center;
 }
 
 .message {
-    margin-top: 5%;
-    color: red;
-    font-weight: 500;
+    margin-top: 8%;
+    margin-left: 1%;
+    height: auto;
 }
 
-.message a {
-    color : red;
-    font-weight: 500;
+.error_msg {
+    display: flex;
+    z-index: 100;
 }
 
-.popup {
+
+
+/* .popup {
     background-color: white;
     width: 25%;
     border: 1px solid rgb(229, 229, 229);
@@ -108,4 +118,21 @@
     color: rgb(93, 88, 88);
     font-weight: 300;
     padding: 1%;
+} */
+
+.sup_images {
+    margin-top: 1%;
+    margin-left: 10%;
+    width: 26.4%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sup_image {
+    width: 100px;
+    height: 100px;
+}
+
+.sup_image:hover {
+    cursor: pointer;
 }

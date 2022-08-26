@@ -11,9 +11,10 @@ function AdminBoutique() {
 
     //CREER LE PRODUIT
     const [product, setProduct] = useState({ title: "", price: "", description: "", theme: "", categorie: "", ref: "" })
-    const [image, setImage] = useState({ image1: "", image2: "" })
+    const [image, setImage] = useState({ image1: "", image2: "", image3: "", image4: "", image5: "" })
+    const [count, setCount] = useState(0)
     //PREVIEW PRODUIT
-    const [preview, setPreview] = useState({ une: "", deux: "" })
+    const [preview, setPreview] = useState({ une: "", deux: "", trois: "", quatre: "", cinq: "" })
     //METTRE LE PRODUIT A JOUR
     const [update, setUpdate] = useState({})
     //TERNAIRE
@@ -33,6 +34,7 @@ function AdminBoutique() {
     //PARAM POUR CREER THEME/CAT
     const [param, setParam] = useState("")
 
+    console.log(count)
     useEffect(() => {
         getCat()
         // eslint-disable-next-line
@@ -49,6 +51,10 @@ function AdminBoutique() {
         let result = await fetch("http://localhost:8000/create_product", requestOptions)
         let data = await result.json();
         setResult(data)
+    }
+
+    function Count () {
+        setCount(count +1)
     }
     //OBTENIR TOUTES LES CATEGORIES
     async function getCat() {
@@ -69,8 +75,8 @@ function AdminBoutique() {
     async function addCat() {
         if (param === "") {
             setMessage(<Alert type="error">
-            <p>Ajoutez du texte.</p>
-        </Alert>)
+                <p>Ajoutez du texte.</p>
+            </Alert>)
         } else {
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
@@ -87,8 +93,8 @@ function AdminBoutique() {
             const result = await data.json()
             if (result) {
                 setMessage(<Alert type="success">
-                <p>La catgéorie a été ajoutée.</p>
-            </Alert>)
+                    <p>La catgéorie a été ajoutée.</p>
+                </Alert>)
             }
         }
     }
@@ -109,8 +115,8 @@ function AdminBoutique() {
     async function addTheme() {
         if (param === "") {
             setMessage(<Alert type="error">
-            <p>Ajoutez du texte.</p>
-        </Alert>)
+                <p>Ajoutez du texte.</p>
+            </Alert>)
         } else {
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
@@ -127,35 +133,54 @@ function AdminBoutique() {
             const result = await data.json()
             if (result) {
                 setMessage(<Alert type="success">
-                <p>Le thème a été ajoutée.</p>
-            </Alert>)
+                    <p>Le thème a été ajoutée.</p>
+                </Alert>)
             }
         }
     }
-
 
     //RECUPERER L'IMAGE
     const input = (file) => {
         setImage({ ...image, image1: file })
         setPreview({ ...preview, une: URL.createObjectURL(file) });
+        Count()
     }
 
     const input2 = (file) => {
         setImage({ ...image, image2: file })
         setPreview({ ...preview, deux: URL.createObjectURL(file) });
+        Count()
+    }
+
+    const input3 = (file) => {
+        setImage({ ...image, image3: file })
+        setPreview({ ...preview, trois: URL.createObjectURL(file) });
+        Count()
+    }
+
+    const input4 = (file) => {
+        setImage({ ...image, image4: file })
+        setPreview({ ...preview, quatre: URL.createObjectURL(file) });
+        Count()
+    }
+
+    const input5 = (file) => {
+        setImage({ ...image, image5: file })
+        setPreview({ ...preview, cinq: URL.createObjectURL(file) });
+        Count()
     }
     //CREER LE PRODUIT
     async function createProduct() {
         if (image.image1 === "" || image.image2 === "") {
             setMessage(<Alert type="error">
-            <p>Ajoutez une image.</p>
-        </Alert>)
+                <p>Ajoutez une image.</p>
+            </Alert>)
         }
         else {
             if (product.title === "" || product.ref === "" || product.description === "" || product.price === "" || product.categorie === "" || product.theme === "") {
                 setMessage(<Alert type="error">
-                <p>Champ(s) manquant(s).</p>
-            </Alert>)
+                    <p>Champ(s) manquant(s).</p>
+                </Alert>)
             } else {
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
@@ -165,7 +190,8 @@ function AdminBoutique() {
                     "description": product.description,
                     "price": product.price,
                     "categorie": product.categorie,
-                    "theme": product.theme
+                    "theme": product.theme,
+                    "images" : count
                 })
                 var requestOptions = {
                     method: 'POST',
@@ -180,6 +206,9 @@ function AdminBoutique() {
                 var formdata = new FormData();
                 formdata.append("image1", image.image1);
                 formdata.append("image2", image.image2);
+                formdata.append("image3", image.image3);
+                formdata.append("image4", image.image4);
+                formdata.append("image5", image.image5);
 
                 var Options = {
                     method: 'POST',
@@ -188,8 +217,8 @@ function AdminBoutique() {
                 };
                 await fetch("http://localhost:8000/image/" + Id, Options)
                 setMessage(<Alert type="success">
-                <p>Le produit a été ajouté.</p>
-            </Alert>)
+                    <p>Le produit a été ajouté.</p>
+                </Alert>)
             }
         }
     }
@@ -213,8 +242,8 @@ function AdminBoutique() {
         };
         await fetch("http://localhost:8000/create_product/" + id, requestOptions)
         setMessage(<Alert type="primary">
-        <p>Le produit a été modifié.</p>
-    </Alert>)
+            <p>Le produit a été modifié.</p>
+        </Alert>)
     }
     //SUPPRIMER UN PRODUIT
     async function Supprimer(id) {
@@ -239,8 +268,8 @@ function AdminBoutique() {
             await fetch("http://localhost:8000/create_product/" + id, requestOption)
             setResult(old => old.filter(e => e.id !== id))
             setMessage(<Alert type="error">
-            <p>Le produit a été supprimé.</p>
-        </Alert>)
+                <p>Le produit a été supprimé.</p>
+            </Alert>)
         }
     }
     //RECHERCHER PAR THEME
@@ -256,8 +285,8 @@ function AdminBoutique() {
         let data = await result.json();
         if (data === "aucun produit") {
             setMessage(<Alert type="error">
-            <p>Aucun produit.</p>
-        </Alert>)
+                <p>Aucun produit.</p>
+            </Alert>)
         }
         else {
             setResult(data)
@@ -277,8 +306,8 @@ function AdminBoutique() {
         let data = await result.json();
         if (data === "aucun produit") {
             setMessage(<Alert type="error">
-            <p>Aucun produit.</p>
-        </Alert>)
+                <p>Aucun produit.</p>
+            </Alert>)
         }
         else {
             setResult(data)
@@ -350,6 +379,9 @@ function AdminBoutique() {
                         <label className={style.titre}>Choisir une image :</label>
                         <input className={style.picture} type="file" onChange={(e) => input(e.target.files[0])} />
                         <input className={style.picture} type="file" onChange={(e) => input2(e.target.files[0])} />
+                        {image.image2 !== "" ? <input className={style.picture} type="file" onChange={(e) => input3(e.target.files[0])} /> : <div></div>}
+                        {image.image3 !== "" ?<input className={style.picture} type="file" onChange={(e) => input4(e.target.files[0])} /> : <div></div>}
+                        {image.image4 !== "" ?<input className={style.picture} type="file" onChange={(e) => input5(e.target.files[0])} /> : <div></div>}
                         <div className={style.map_create}>
                             <button onClick={createProduct}>Créer</button>
                         </div>

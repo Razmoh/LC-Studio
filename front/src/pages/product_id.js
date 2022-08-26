@@ -8,7 +8,7 @@ function Product() {
     const [panier, setPanier] = useState({ id: "", title: "", ref: "", quantity: "" })
     const [message, setMessage] = useState("")
     const token = localStorage.getItem("Token")
-
+    const [img, setImg] = useState()
     useEffect(() => {
         getProduct()
         // eslint-disable-next-line
@@ -28,6 +28,8 @@ function Product() {
         let result = await fetch("http://localhost:8000/create_product/" + id, requestOptions)
         let data = await result.json();
         setProduct(data)
+        let main = document.getElementById("one").src
+        setImg(main)
     }
 
     //GÉRER LE PANIER   
@@ -52,14 +54,14 @@ function Product() {
             setMessage(<a href='/login'>Vous devez vous connecter pour ajouter ce produit au panier.</a>)
         } else {
             if (product.quantity === "") {
-                setMessage(    <Alert type="error">
-                <p>Veuillez séléctionner le nombre de produit.</p>
-            </Alert>)
+                setMessage(<Alert type="error">
+                    <p>Veuillez séléctionner le nombre de produit.</p>
+                </Alert>)
             } else {
                 if (isNaN(product.quantity)) {
-                    setMessage(    <Alert type="error">
-                    <p>Veuillez entrer une donnée valide.</p>
-                </Alert>)
+                    setMessage(<Alert type="error">
+                        <p>Veuillez entrer une donnée valide.</p>
+                    </Alert>)
                 } else {
                     let panier = getPanier()
                     let foundProduct = panier.find(p => p.ref === product.ref)
@@ -69,12 +71,29 @@ function Product() {
                         panier.push(product)
                     }
                     savePanier(panier)
-                    setMessage(    <Alert type="success">
-                    <p>Le produit a été ajouté au panier.</p>
-                </Alert>)
+                    setMessage(<Alert type="success">
+                        <p>Le produit a été ajouté au panier.</p>
+                    </Alert>)
                 }
             }
         }
+    }
+
+    function switchImg2(param) {
+        setImg(param)
+        document.getElementById('one').src = param
+    }
+    function switchImg3(param) {
+        setImg(param)
+        document.getElementById('one').src = param
+    }
+    function switchImg4(param) {
+        setImg(param)
+        document.getElementById('one').src = param
+    }
+    function switchImg5(param) {
+        setImg(param)
+        document.getElementById('one').src = param
     }
 
     return (
@@ -82,39 +101,43 @@ function Product() {
             <Navbar />
             <div className={style.wrapper}>
                 {product.map((value, key) =>
-                    <div key={key} className={style.container}>
-                        <img className={style.image} src={`http://localhost:8000/static/images/${value.id}/image1.jpg`} alt=""
-                            onClick={e => (e.currentTarget.src = `http://localhost:8000/static/images/${value.id}/image2.jpg`)}
-                            onMouseOut={e => (e.currentTarget.src = `http://localhost:8000/static/images/${value.id}/image1.jpg`)} />
-                        <div className={style.info}>
-                            <div className={style.title}>{value.title}</div>
-                            <div className={style.ref}>
-                                <div><i>Référence n° {value.ref}</i></div>
-                                <div><i>A partir de <b>{value.price}</b> / pièce</i>.</div>
-                            </div>
-                            <div className={style.description}>{value.description}</div>
-                            <div className={style.theme}>{value.theme} / {value.categorie}</div>
-                        </div>
-                        <div className={style.span}></div>
-                        <div className={style.cart}>
-                            <div className={style.cart_title}>Ajouter cet élément au panier :</div>
-                            <div className={style.cart_devis}>
-                                <div>Nombre d'exemplaires :
+                    <>
+                        <div key={key} className={style.container}>
+                            <img id="one" className={style.image} src={`http://localhost:8000/static/images/${value.id}/image1.jpg`} alt="" />
+                            {/* onClick={e => (e.currentTarget.src = `http://localhost:8000/static/images/${value.id}/image2.jpg`)}
+                                onMouseOut={e => (e.currentTarget.src = `http://localhost:8000/static/images/${value.id}/image1.jpg`)} /> */}
+                            <div className={style.info}>
+                                <div className={style.title}>{value.title}</div>
+                                <div className={style.ref}>
+                                    <div className={style.ref}><i>Référence n° {value.ref}</i></div>
+                                    <div><i>A partir de <b>{value.price}</b> unitaire</i>.</div>
+                                </div>
+                                <div>Quantité :</div>
+                                <div className={style.cart_devis}>
                                     {/*eslint-disable-next-line*/}
                                     <input placeholder="?" onInput={(e) => { { setPanier({ ...panier, id: value.id, title: value.title, ref: value.ref, quantity: parseInt(e.target.value) }) }; setMessage("") }}></input>
-                                    &nbsp;&nbsp;&nbsp;<button onClick={() => { addProduct(panier) }}>Ajouter</button>
+                                    &nbsp;&nbsp;&nbsp;<button onClick={() => { addProduct(panier) }}>Ajouter au devis</button>
                                 </div>
+                                <div>Détails de l'article : </div>
+                                <div className={style.description}>{value.description}</div>
                             </div>
                             <div className={style.message}>{message}</div>
-                        
+
                         </div>
-                        <div className={style.span}></div>
-                    </div>
+
+                        <div className={style.sup_images}>
+                            <img id="two" className={style.sup_image} onClick={(e) => { switchImg2(e.currentTarget.src); e.currentTarget.src = img }} src={value.images >= 2 ? `http://localhost:8000/static/images/${value.id}/image2.jpg` : `http://localhost:8000/static/images/default.jpg`} alt="" />
+                            <img id="three" className={style.sup_image} onClick={(e) => { switchImg3(e.currentTarget.src); e.currentTarget.src = img }} src={value.images >= 3 ? `http://localhost:8000/static/images/${value.id}/image3.jpg` : `http://localhost:8000/static/images/default.jpg`} alt="" />
+                            <img id="four" className={style.sup_image} onClick={(e) => { switchImg4(e.currentTarget.src); e.currentTarget.src = img }} src={value.images >= 4 ? `http://localhost:8000/static/images/${value.id}/image4.jpg` : `http://localhost:8000/static/images/default.jpg`} alt="" />
+                          <img id="five" className={style.sup_image} onClick={(e) => { switchImg5(e.currentTarget.src); e.currentTarget.src = img }} src={value.images === 5 ? `http://localhost:8000/static/images/${value.id}/image5.jpg` : `http://localhost:8000/static/images/default.jpg`} alt="" />
+                        </div>
+                    </>
                 )}
 
             </div>
         </>
     )
 }
+
 
 export default Product

@@ -15,7 +15,7 @@ function ShopCard(prop) {
                     <div className={styles.info}>
                         <div className={styles.ref}>
                             <div>Reférence n° {data.ref}</div>
-                            <div className={styles.price}>A partir de {data.price}</div>
+                            <div className={styles.price}>A partir de {data.price} unitaire</div>
                         </div>
                         <div className={styles.title}>{data.title}</div>
                     </div>
