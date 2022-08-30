@@ -55,6 +55,12 @@ a {
     margin-top: 9px;
 }
 
+.images_lc {
+    height: 25px;
+    width: 25px;
+    margin-top: 9px;
+}
+
 /*ordonner les logos*/
 .logos {
     width: 180px;
@@ -66,8 +72,8 @@ a {
 
 @media screen and (max-width: 800px) {
 
-    .logos,
-    .btn_lc {
+    .btn_lc,
+    .images_lc {
         display: none
     }
 

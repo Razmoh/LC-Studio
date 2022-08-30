@@ -1,3 +1,4 @@
+/*Logo du site*/
 .jclogo {
   display: flex;
   justify-content: center;
@@ -8,7 +9,7 @@
     height: 180px;
     border-radius: 10px;
   }
-
+/*mise en page*/
   .bcontainer {
     display: flex;
     justify-content: center;

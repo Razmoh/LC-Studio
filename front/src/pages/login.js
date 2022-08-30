@@ -4,9 +4,9 @@ import style from "../style/login.module.css";
 import Alert from '../composants/alert'
 
 function Login() {
-    //STATE DES INPUTS
+    //Stocker les valeurs input pour le login
     const [login, setLogin] = useState({ email: "", password: "" })
-    //GERER LES ERREURS
+    //Gérer les messages d'erreur
     const [error, setError] = useState("")
     //NAVIGUER
     const navigate = useNavigate()

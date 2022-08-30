@@ -4,24 +4,24 @@ import style from '../style/boutique.module.css'
 import Shop from '../composants/shop_card'
 //PAGE BOUTIQUE
 function Boutique() {
-    //STOCKER TOUS LES PRODUITS
+    //Stocker tous les produits pour le map
     const [product, setProduct] = useState([])
-    //MESSAGE 
+    //Gérer le message d'erreur/succès
     const [message, setMessage] = useState()
-    //STOCKER LES THEMES
+    //Stocker les thèmes pour le map + toggle
     const [theme, setTheme] = useState([])
     const [toggleTheme, setToggleTheme] = useState(false)
-    //STOCKER LES CATEGORIES
+    //Stocker les catégories pour le map + toggle
     const [categorie, setCategorie] = useState([])
     const [toggleCat, setToggleCat] = useState(false)
+    //Stocker la catégorie actuelle choisie
     const [current, setCurrent] = useState("")
-    console.log(current)
-    //OBTENIR TOUS LES PRODUITS AU CHARGEMENT DE LA PAGE
+    //Obtenir les produits au chargement de la page
     useEffect(() => {
         getProducts()
         // eslint-disable-next-line
     }, [])
-    //OBTENIR TOUS LES PRODUITS
+
     async function getProducts() {
         var myHeaders = new Headers()
         // myHeaders.append("Authorization", "Bearer " + token);
@@ -37,7 +37,7 @@ function Boutique() {
         getTheme()
         getCat()
     }
-    //OBTENIR LES CATEGORIES
+    //Obtenir les catégories
     async function getCat() {
         var myHeaders = new Headers()
         myHeaders.append("Content-Type", "application/json");
@@ -50,7 +50,7 @@ function Boutique() {
         let data = await result.json();
         setCategorie(data)
     }
-    //OBTENIR TOUS LES THEMES
+    //Obtenir les thèmes
     async function getTheme() {
         var myHeaders = new Headers()
         myHeaders.append("Content-Type", "application/json");
@@ -63,7 +63,7 @@ function Boutique() {
         let theme = await result.json();
         setTheme(theme)
     }
-    //FAIRE UNE RECHERCHE DE PRODUIT PAR THEME
+    //Faire une recherche par thème
     async function searchTheme(theme) {
         setMessage("")
         setProduct([])
@@ -84,7 +84,7 @@ function Boutique() {
             setProduct(data)
         }
     }
-    //FAIRE UNE RECHERCHE DE PRODUIT PAR CATEGORIE
+    //Faire une recherche par catégorie
     async function searchCategorie(categorie) {
         setMessage("")
         setProduct([])
@@ -127,7 +127,7 @@ function Boutique() {
                     </div>
                 </div>
                 <div className={style.result}>
-                    {current !== "" ? <div>Résultat de la recherche pour {current} :</div> : <div></div>}
+                    {current !== "" ? <div>Résultat de la recherche pour <b>{current}</b> :</div> : <div></div>}
                     <div className={style.message}>{message}</div>
                     <div className={style.cards}>
                         {product.map((value, key) =>

@@ -4,11 +4,10 @@ import Navbar from '../composants/navbar'
 
 function Home() {
 
-    //DEFINIR LE TOKEN
+    //DEFINIR LE TOKEN POUR LOGIN/LOGOUT
     const token = localStorage.getItem('Token')
     //NAVIGUER ENTRE LES PAGES
     const navigate = useNavigate()
-
     //ALLER A LA BOUTIQUE
     const boutique = () => {
         navigate('/boutique')
@@ -17,7 +16,7 @@ function Home() {
     const login = () => {
         navigate('/login')
     }
-    //SE DECONNECTER
+    //SE DECONNECTER : supprime le token et la panier
     const logout = () => {
         localStorage.removeItem('Token')
         localStorage.removeItem('Panier')

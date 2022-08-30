@@ -21,10 +21,10 @@ function Navbar() {
         <>
             <div className={style.wrapper}>
                 <div className={style.navbar}>
-                        <img className={style.logo} src={'/images/logo.jpg'} alt="" />
+                    <img className={style.logo} src={'/images/logo.jpg'} alt="" />
                 </div>
                 <div className={style.container}>
-                <Link to={'/'}>
+                    <Link to={'/'}>
                         <div className={style.btn}>
                             Accueil
                         </div>
@@ -40,22 +40,22 @@ function Navbar() {
                         </div>
                     </Link>
                     <Link to={'/visuel'}>
-                        <div className={style.btn}>
+                        <div className={style.btn_lc}>
                             Mes  autres créations
                         </div>
                     </Link>
                     <div className={style.logos}>
-                        {token !== null ? <Popup trigger={<img className={style.images} src={'/images/cart.png'}alt="cart" />} position="bottom"><Cart /></Popup> : <div></div>}
                         <a target='blank' href='https://www.facebook.com/Laetitia.Chazot.Monnot'>
-                            <img className={style.images} src={'/images/fb.jpg'} alt="fb" />
+                            <img className={style.images_lc} src={'/images/fb.jpg'} alt="fb" />
                         </a>&nbsp;
                         <a target='blank' href='https://www.instagram.com/lc_studiographique/?hl=fr'>
-                            <img className={style.images} src={'/images/insta.jpg'} alt="insta" />
+                            <img className={style.images_lc} src={'/images/insta.jpg'} alt="insta" />
                         </a>&nbsp;
                         <a target="blank" href="mailto:lc.studiographique@gmail.com">
-                            <img className={style.images} src={'/images/mail.jpg'} alt="message" />
+                            <img className={style.images_lc} src={'/images/mail.jpg'} alt="message" />
                         </a>&nbsp;
                         <img className={style.images} src={'/images/profil.jpg'} alt="profil" onClick={profil} />
+                        {token !== null ? <Popup trigger={<img className={style.images} src={'/images/cart.png'} alt="cart" />} position="bottom"><Cart /></Popup> : <div></div>}
                     </div>
                 </div>
             </div>

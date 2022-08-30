@@ -4,9 +4,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import Alert from '../composants/alert'
 
 function Register() {
-    //STOCKER LES INPUT
+    //Stocker les valeurs pour le register
     const [user, setUser] = useState({ nom: "", prenom: "", phone: "", password: "", confirm_password: "", email: "" })
-    //GERER LES ERREURS
+    //Gérer les messages d'erreurs
     const [error, setError] = useState("")
     //NAVIGUER
     const navigate = useNavigate()
@@ -18,7 +18,7 @@ function Register() {
             navigate('/')
         }
     })
-    //FUNCTION POUR S'ENREGISTRER
+    
     function Register() {
         if (user.nom === "" || user.prenom === "" || user.email === "" || user.password === "" || user.confirm_password === "") {
             return setError(<Alert type="error">

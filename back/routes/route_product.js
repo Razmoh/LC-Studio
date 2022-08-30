@@ -11,8 +11,18 @@ router.get('/', async function (req, res) {
     return res.status(200).json(result)
 })
 
+router.get('/admin', async function (req, res) {
+  const result = await product.getAllAdmin()
+  return res.status(200).json(result)
+})
+
 router.get('/:id', async function(req, res){
   const result = await product.getOne(req.params.id)
+  return res.status(200).json(result)
+})
+
+router.get('/theme/:theme/:id', async function(req, res){
+  const result = await product.getOthers(req.params.theme, req.params.id)
   return res.status(200).json(result)
 })
 

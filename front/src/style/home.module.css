@@ -111,6 +111,7 @@
     color: rgb(93, 88, 88);
 }
 
+/*les trois petites images en dessous du bandeau*/
 .bloc {
     display: flex;
 }

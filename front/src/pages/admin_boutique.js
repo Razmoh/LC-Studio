@@ -34,7 +34,6 @@ function AdminBoutique() {
     //PARAM POUR CREER THEME/CAT
     const [param, setParam] = useState("")
 
-    console.log(count)
     useEffect(() => {
         getCat()
         // eslint-disable-next-line
@@ -48,13 +47,13 @@ function AdminBoutique() {
             headers: myHeaders,
             redirect: 'follow'
         };
-        let result = await fetch("http://localhost:8000/create_product", requestOptions)
+        let result = await fetch("http://localhost:8000/create_product/admin", requestOptions)
         let data = await result.json();
         setResult(data)
     }
 
-    function Count () {
-        setCount(count +1)
+    function Count() {
+        setCount(count + 1)
     }
     //OBTENIR TOUTES LES CATEGORIES
     async function getCat() {
@@ -191,7 +190,7 @@ function AdminBoutique() {
                     "price": product.price,
                     "categorie": product.categorie,
                     "theme": product.theme,
-                    "images" : count
+                    "images": count
                 })
                 var requestOptions = {
                     method: 'POST',
@@ -380,8 +379,8 @@ function AdminBoutique() {
                         <input className={style.picture} type="file" onChange={(e) => input(e.target.files[0])} />
                         <input className={style.picture} type="file" onChange={(e) => input2(e.target.files[0])} />
                         {image.image2 !== "" ? <input className={style.picture} type="file" onChange={(e) => input3(e.target.files[0])} /> : <div></div>}
-                        {image.image3 !== "" ?<input className={style.picture} type="file" onChange={(e) => input4(e.target.files[0])} /> : <div></div>}
-                        {image.image4 !== "" ?<input className={style.picture} type="file" onChange={(e) => input5(e.target.files[0])} /> : <div></div>}
+                        {image.image3 !== "" ? <input className={style.picture} type="file" onChange={(e) => input4(e.target.files[0])} /> : <div></div>}
+                        {image.image4 !== "" ? <input className={style.picture} type="file" onChange={(e) => input5(e.target.files[0])} /> : <div></div>}
                         <div className={style.map_create}>
                             <button onClick={createProduct}>Créer</button>
                         </div>
@@ -414,10 +413,6 @@ function AdminBoutique() {
                                 {theme.map((value, key) =>
                                     <button className={style.map_btn} key={key} value={value.title} onClick={(e) => searchTheme(e.target.value)}>{value.title}</button>)}
                             </div> : <div></div>}
-                            {/* <div>
-                                <input className={style.filter_input} onInput={(e) => setFilter(e.target.value)}></input>
-                                <button className={style.filter_btn} onClick={() => searchTheme(filter)}>Rechercher</button>
-                            </div> */}
                         </div>
                         <div className={style.filter}>
                             <label onClick={() => { setToggleCat(prevtoggleCat => !prevtoggleCat); setToggleTheme(false) }}>Rechercher par catégorie :</label>
@@ -425,10 +420,6 @@ function AdminBoutique() {
                                 {categorie.map((value, key) =>
                                     <button className={style.map_btn} key={key} value={value.title} onClick={(e) => searchCategorie(e.target.value)}>{value.title}</button>)}
                             </div> : <div></div>}
-                            {/* <div>
-                                <input className={style.filter_input} onInput={(e) => setFilter(e.target.value)}></input>
-                                <button className={style.filter_btn} onClick={() => searchCategorie(filter)}>Rechercher</button>
-                            </div> */}
                         </div>
                     </div>
                     <div className={style.tableau2}>

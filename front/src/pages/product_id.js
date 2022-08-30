@@ -2,6 +2,7 @@ import Navbar from "../composants/navbar"
 import { useEffect, useState } from "react";
 import style from '../style/product_id.module.css'
 import Alert from '../composants/alert'
+import { Link } from 'react-router-dom'
 
 function Product() {
     const [product, setProduct] = useState([])
@@ -9,10 +10,12 @@ function Product() {
     const [message, setMessage] = useState("")
     const token = localStorage.getItem("Token")
     const [img, setImg] = useState()
+    const [other, setOthers] = useState([])
+    const [toggle, setToggle] = useState(false)
+
     useEffect(() => {
         getProduct()
-        // eslint-disable-next-line
-    }, [])
+    }, [toggle])
 
     //OBTENIR LES INFOS DU PRODUIT
     async function getProduct() {
@@ -30,6 +33,21 @@ function Product() {
         setProduct(data)
         let main = document.getElementById("one").src
         setImg(main)
+    }
+
+    //OBTENIR LES AUTRES PRODUITS
+    async function getOthers(id, theme) {
+        console.log(theme)
+        var myHeaders = new Headers()
+        myHeaders.append("Content-Type", "application/json");
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        let result = await fetch("http://localhost:8000/create_product/theme/" + theme + "/" + id, requestOptions)
+        let data = await result.json();
+        setOthers(data)
     }
 
     //GÉRER LE PANIER   
@@ -58,7 +76,8 @@ function Product() {
                     <p>Veuillez séléctionner le nombre de produit.</p>
                 </Alert>)
             } else {
-                if (isNaN(product.quantity)) {
+
+                if (isNaN(product.quantity) || product.quantity === 0) {
                     setMessage(<Alert type="error">
                         <p>Veuillez entrer une donnée valide.</p>
                     </Alert>)
@@ -104,8 +123,6 @@ function Product() {
                     <>
                         <div key={key} className={style.container}>
                             <img id="one" className={style.image} src={`http://localhost:8000/static/images/${value.id}/image1.jpg`} alt="" />
-                            {/* onClick={e => (e.currentTarget.src = `http://localhost:8000/static/images/${value.id}/image2.jpg`)}
-                                onMouseOut={e => (e.currentTarget.src = `http://localhost:8000/static/images/${value.id}/image1.jpg`)} /> */}
                             <div className={style.info}>
                                 <div className={style.title}>{value.title}</div>
                                 <div className={style.ref}>
@@ -124,15 +141,30 @@ function Product() {
                             <div className={style.message}>{message}</div>
 
                         </div>
-
-                        <div className={style.sup_images}>
-                            <img id="two" className={style.sup_image} onClick={(e) => { switchImg2(e.currentTarget.src); e.currentTarget.src = img }} src={value.images >= 2 ? `http://localhost:8000/static/images/${value.id}/image2.jpg` : `http://localhost:8000/static/images/default.jpg`} alt="" />
-                            <img id="three" className={style.sup_image} onClick={(e) => { switchImg3(e.currentTarget.src); e.currentTarget.src = img }} src={value.images >= 3 ? `http://localhost:8000/static/images/${value.id}/image3.jpg` : `http://localhost:8000/static/images/default.jpg`} alt="" />
-                            <img id="four" className={style.sup_image} onClick={(e) => { switchImg4(e.currentTarget.src); e.currentTarget.src = img }} src={value.images >= 4 ? `http://localhost:8000/static/images/${value.id}/image4.jpg` : `http://localhost:8000/static/images/default.jpg`} alt="" />
-                          <img id="five" className={style.sup_image} onClick={(e) => { switchImg5(e.currentTarget.src); e.currentTarget.src = img }} src={value.images === 5 ? `http://localhost:8000/static/images/${value.id}/image5.jpg` : `http://localhost:8000/static/images/default.jpg`} alt="" />
+                        <div className={style.footer}>
+                            <div className={style.sup_images}>
+                                <img id="two" className={style.sup_image} onClick={(e) => { switchImg2(e.currentTarget.src); e.currentTarget.src = img }} src={value.images >= 2 ? `http://localhost:8000/static/images/${value.id}/image2.jpg` : `http://localhost:8000/static/images/default.jpg`} alt="" />
+                                <img id="three" className={style.sup_image} onClick={(e) => { switchImg3(e.currentTarget.src); e.currentTarget.src = img }} src={value.images >= 3 ? `http://localhost:8000/static/images/${value.id}/image3.jpg` : `http://localhost:8000/static/images/default.jpg`} alt="" />
+                                <img id="four" className={style.sup_image} onClick={(e) => { switchImg4(e.currentTarget.src); e.currentTarget.src = img }} src={value.images >= 4 ? `http://localhost:8000/static/images/${value.id}/image4.jpg` : `http://localhost:8000/static/images/default.jpg`} alt="" />
+                                <img id="five" className={style.sup_image} onClick={(e) => { switchImg5(e.currentTarget.src); e.currentTarget.src = img }} src={value.images === 5 ? `http://localhost:8000/static/images/${value.id}/image5.jpg` : `http://localhost:8000/static/images/default.jpg`} alt="" />
+                            </div>
+                            <div className={style.other} onClick={(e) => { getOthers(value.id, value.theme) }}>== Découvrir la gamme complète du thème == </div>
                         </div>
                     </>
                 )}
+                <div className={style.other_product}>
+                    {other.map((value, key) =>
+                        < >
+                            <Link to={`/boutique/${value.id}`} onClick={() => {getProduct(value.id); setToggle(prevtoggle => !prevtoggle)}}>
+                                <div className={style.wrap}>
+                                    <img key={key} className={style.other_img} src={`http://localhost:8000/static/images/${value.id}/image1.jpg`} alt="" />
+                                    <div>{value.title}</div>
+                                </div>
+                            </Link>
+                        </>
+                    )}
+                </div>
+
 
             </div>
         </>
